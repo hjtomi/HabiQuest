@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "896179023452",
+    "project_id": "habiquest-2638a",
+    "storage_bucket": "habiquest-2638a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896179023452:android:6c78add10af4271d1dc099",
+        "android_client_info": {
+          "package_name": "com.legionem.habiquest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVddECr1K7JEhDuR5VhSMmjZ3SeK7Uqq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
