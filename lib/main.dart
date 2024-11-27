@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habiquest/register.dart';
+import 'package:habiquest/skin.dart';
 import 'package:habiquest/utils/theme/AppColors.dart';
 import 'package:habiquest/utils/theme/AppTheme.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme, // Light theme
       darkTheme: AppTheme.darkTheme, // Dark theme
       themeMode: ThemeMode.dark, // Force dark theme
-      home: const MyHomePage(),
+      home: const CharacterMenuPage(),
     );
   }
 }
