@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme, // Light theme
       darkTheme: AppTheme.darkTheme, // Dark theme
       themeMode: ThemeMode.dark, // Force dark theme
-      home: const CharacterMenuPage(),
+      home: const CharacterSelector(),
     );
   }
 }

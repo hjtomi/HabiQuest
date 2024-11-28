@@ -56,6 +56,7 @@ dev_dependencies:
 flutter:
   assets:
     - lib/icons/google-brands-solid.svg
+    - lib/assets/skins/
 
   uses-material-design: true
 
