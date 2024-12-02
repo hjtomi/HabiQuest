@@ -1,9 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:habiquest/utils/theme/AppColors.dart';
+import 'package:habiquest/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String? errorMessage = '';
+
+  Future<void> signUpWithEmailAndPassword() async {
+    try {
+      await Auth().signInWithEmailAndPassword(
+        email: _usernameController.text,
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +43,7 @@ class RegisterPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextField(
+                  controller: _usernameController,
                   cursorColor: Theme.of(context).colorScheme.onPrimary,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
@@ -28,6 +54,7 @@ class RegisterPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextField(
+                  controller: _emailController,
                   cursorColor: Theme.of(context).colorScheme.onPrimary,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.email),
@@ -38,6 +65,7 @@ class RegisterPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextField(
+                  controller: _passwordController,
                   cursorColor: Theme.of(context).colorScheme.onPrimary,
                   obscureText: true,
                   decoration: const InputDecoration(
@@ -68,7 +96,7 @@ class RegisterPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  onPressed: () => {},
+                  onPressed: () => signUpWithEmailAndPassword(),
                   child: const Text("Regisztrálás"),
                 ),
               ),

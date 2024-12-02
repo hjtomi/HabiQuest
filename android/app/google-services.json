@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "131234491932",
+    "project_id": "habiquest-ec269",
+    "storage_bucket": "habiquest-ec269.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131234491932:android:ce2ff3b28ae2925a8839d9",
+        "android_client_info": {
+          "package_name": "com.example.habiquest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGXzAOZbPI-V0hZBy40n1phxOdNgvfqqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131234491932:android:e28c01cae13b39fb8839d9",
+        "android_client_info": {
+          "package_name": "com.habiquest.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGXzAOZbPI-V0hZBy40n1phxOdNgvfqqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
