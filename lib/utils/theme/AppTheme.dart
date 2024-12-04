@@ -10,7 +10,7 @@ class AppTheme {
       backgroundColor: AppColors.primary,
       foregroundColor: Colors.white,
     ),
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       surface: AppColors.accent,
@@ -27,44 +27,44 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: AppColors.primary,
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.primary,
-      foregroundColor: Colors.white,
-    ),
-    colorScheme: const ColorScheme.dark(
-      primary: AppColors.primary,
-      secondary: AppColors.secondary,
-      surface: AppColors.accent,
-      onPrimary: Color.fromARGB(255, 95, 89, 89),
-      onSecondary: Colors.white,
-      onSurface: Colors.white,
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        textStyle: TextStyle(
-          color: Colors.white,
-        ),
-        elevation: 0,
-        backgroundColor: AppColors.secondary,
+      brightness: Brightness.dark,
+      primaryColor: AppColors.primary,
+      scaffoldBackgroundColor: AppColors.primary,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
       ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      border: const OutlineInputBorder(
-          borderSide: BorderSide(
-        color: Color(0xFFBDBDBD),
-      )),
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(
-          color: AppColors.secondary, // Highlight color for focused borders
+      colorScheme: const ColorScheme.dark(
+        primary: AppColors.primary,
+        secondary: AppColors.secondary,
+        tertiary: AppColors.accent,
+        surface: AppColors.primary,
+        onPrimary: Color.fromARGB(255, 95, 89, 89),
+        onSecondary: Colors.white,
+        onSurface: Colors.white,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          textStyle: const TextStyle(
+            color: Colors.white,
+          ),
+          elevation: 0,
+          backgroundColor: AppColors.secondary,
+          foregroundColor: Colors.white,
         ),
       ),
-      hintStyle: TextStyle(
-        color: Colors.grey.shade400,
-      ),
-    ),
-  );
+      inputDecorationTheme: InputDecorationTheme(
+        border: const OutlineInputBorder(
+            borderSide: BorderSide(
+          color: Color(0xFFBDBDBD),
+        )),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.secondary, // Highlight color for focused borders
+          ),
+        ),
+        hintStyle: TextStyle(
+          color: Colors.grey.shade400,
+        ),
+      ));
 }
