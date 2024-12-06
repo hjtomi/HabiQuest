@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:habiquest/utils/theme/AppColors.dart';
 import 'package:habiquest/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
         RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     final isEmailValid = emailRegExp.hasMatch(email ?? '');
     if (!isEmailValid) {
-      return 'Adj meg valós email ciémet!';
+      return 'Adj meg valós email címet!';
     }
     return null;
   }
@@ -74,7 +73,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: _usernameController,
                       cursorColor: Theme.of(context).colorScheme.onPrimary,
                       decoration: const InputDecoration(
@@ -92,7 +90,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _emailController,
                     cursorColor: Theme.of(context).colorScheme.onPrimary,
                     decoration: const InputDecoration(
@@ -106,7 +103,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
                     keyboardType: TextInputType.visiblePassword,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _passwordController,
                     cursorColor: Theme.of(context).colorScheme.onPrimary,
                     obscureText: true,
@@ -127,7 +123,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _rePasswordController,
                     cursorColor: Theme.of(context).colorScheme.onPrimary,
                     obscureText: true,

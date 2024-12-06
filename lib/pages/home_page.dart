@@ -72,21 +72,21 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: _widgetOptions[_selectedIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).colorScheme.tertiary,
+      bottomNavigationBar: NavigationBar(
+        indicatorColor: Theme.of(context).colorScheme.secondary,
         backgroundColor: Colors.grey[900],
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        destinations: const <Widget>[
+          NavigationDestination(
             icon: Icon(Icons.toc),
             label: 'Habit',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.check_circle),
             label: 'Todo',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onItemTapped,
       ),
     );
   }

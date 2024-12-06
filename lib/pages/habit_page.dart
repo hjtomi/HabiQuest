@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:habiquest/components/HabitCard.dart';
 import 'package:habiquest/pages/habit-todo/habit-add.dart';
 import 'package:habiquest/pages/habit-todo/habit-edit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HabitPage extends StatefulWidget {
   const HabitPage({super.key});
@@ -11,6 +14,8 @@ class HabitPage extends StatefulWidget {
 
 class _HabitPageState extends State<HabitPage> {
   final List<Map<String, dynamic>> _teendok = [];
+
+  User? user = FirebaseAuth.instance.currentUser;
 
   void _hozzaadTeendo(
       String cim, String megjegyzes, int nehezseg, DateTime hatarido) {
@@ -64,46 +69,46 @@ class _HabitPageState extends State<HabitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: _teendok.length,
-        itemBuilder: (context, index) {
-          final teendo = _teendok[index];
-          return Card(
-            color: _nehezsegSzin(teendo['nehezseg']),
-            child: ListTile(
-              title: Text(
-                teendo['cim'],
-                style: const TextStyle(
-                    color: Colors.black), // Fekete szín a címhez
-              ),
-              subtitle: Text(
-                'Határidő: ${teendo['hatarido'].toLocal().toString().split(' ')[0]}',
-                style: const TextStyle(
-                    color: Colors.black), // Fekete szín a szöveghez
-              ),
-              trailing: Checkbox(
-                value: teendo['kesz'],
-                onChanged: (_) => _kijelolKeszre(index),
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => HabitEdit(
-                      teendo: teendo,
-                      index: index,
-                      mentTeendo: _szerkesztTeendo,
-                    ),
-                  ),
-                );
-              },
-            ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(user?.uid)
+            .collection('habits')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(child: Text('No habits found.'));
+          }
+
+          // Extract data from snapshot
+          final habits = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: habits.length,
+            itemBuilder: (context, index) {
+              final habitData = habits[index].data() as Map<String, dynamic>;
+              final habitTitle = habitData['cim'] ?? 'Untitled';
+              final frequency = habitData['gyakorisag'] ?? 'Unknown';
+              final notes = habitData['megjegyzes'] ?? 'No notes';
+              final difficulty = habitData['nehezseg']?.toString() ?? 'Unknown';
+
+              return HabitTile(title: habitTitle);
+            },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        foregroundColor: Theme.of(context).colorScheme.primary,
-        child: const Icon(Icons.add, size: 38),
+        foregroundColor: Theme.of(context).colorScheme.onSecondary,
+        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
