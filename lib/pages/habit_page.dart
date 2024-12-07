@@ -77,7 +77,7 @@ class _HabitPageState extends State<HabitPage> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -85,7 +85,7 @@ class _HabitPageState extends State<HabitPage> {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('No habits found.'));
+            return const Center(child: Text('No habits found.'));
           }
 
           // Extract data from snapshot

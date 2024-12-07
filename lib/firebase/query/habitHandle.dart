@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:habiquest/auth.dart';
 
 Future<void> firestoreAddHabit(Map<String, dynamic> formData) async {
   User? user = FirebaseAuth.instance.currentUser;

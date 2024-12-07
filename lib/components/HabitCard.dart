@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HabitTile extends StatefulWidget {
   final String title; // Add a final field for the title
 
-  HabitTile(
+  const HabitTile(
       {super.key, required this.title}); // Assign the title in the constructor
 
   @override
@@ -27,7 +27,7 @@ class _HabitTileState extends State<HabitTile> {
                 isOn = !isOn; // Toggle the state
               });
             },
-            icon: Icon(Icons.check), // Change icon
+            icon: const Icon(Icons.check), // Change icon
             style: IconButton.styleFrom(
               backgroundColor: isOn
                   ? Theme.of(context).colorScheme.secondary // On color

@@ -6,7 +6,7 @@ class AppTheme {
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: Color.fromRGBO(11, 3, 3, 1),
       foregroundColor: Colors.white,
     ),
@@ -43,6 +43,16 @@ class AppTheme {
         onSecondary: Colors.white,
         onSurface: Colors.white,
       ),
+      filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+        backgroundColor: AppColors.secondary,
+        foregroundColor: Colors.white,
+      )),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+        side: const BorderSide(color: AppColors.secondary),
+        foregroundColor: Colors.grey.shade400,
+      )),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           textStyle: const TextStyle(
