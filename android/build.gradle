@@ -2,15 +2,27 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        // Add this if needed:
+        maven { url 'https://jitpack.io' }
     }
 }
 
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
     project.evaluationDependsOn(":app")
+}
+
+// Include the required Google Maven repository
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.0' // Ensure this matches your Gradle version
+        classpath 'com.google.gms:google-services:4.3.15' // Google services plugin
+    }
 }
 
 tasks.register("clean", Delete) {
