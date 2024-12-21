@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habiquest/auth.dart';
@@ -14,11 +15,45 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final User? user = Auth().currentUser;
 
+  // State variables to hold username and character
+  String? _username;
+  String? _character; // Still String but converted from int
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData(); // Fetch both username and character when the widget is initialized
+  }
+
+  Future<void> _fetchUserData() async {
+    if (user != null) {
+      try {
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('users') // Main collection
+            .doc(user!.uid) // User's document by UID
+            .get();
+
+        if (userDoc.exists && userDoc.data() != null) {
+          Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>;
+          setState(() {
+            _username = data['username'] as String?;
+            // Convert character int to String
+            _character = (data['character'] as int?)?.toString();
+          });
+        } else {
+          print('User document does not exist or is empty');
+        }
+      } catch (e) {
+        print('Error fetching user data: $e');
+      }
+    }
+  }
+
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HabitPage(),
-    const TodoPage()
+    const TodoPage(),
   ];
   static final List<String> _pageTitles = <String>["Szokások", "Teendők"];
 
@@ -41,30 +76,43 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: signOut,
-          )
+          ),
         ],
       ),
       drawer: Drawer(
         child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.symmetric(vertical: 32),
           children: [
-            const DrawerHeader(
-              child: Text('Drawer Header'),
+            Flexible(
+              child: Card(
+                color: Colors.grey[900],
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(8),
+                  trailing: const Icon(Icons.logout_outlined),
+                  leading: _character != null
+                      ? Image(
+                          fit: BoxFit.cover,
+                          width: 80,
+                          height: 80,
+                          image: AssetImage(
+                              'lib/assets/skins/skin-$_character.png'),
+                        )
+                      : const Icon(
+                          Icons.person), // Fallback icon if character is null
+                  title: Text(
+                    "asjdlkjalskdjalksjdkjad" ?? '',
+                    overflow: TextOverflow.fade,
+                  ),
+                ),
+              ),
             ),
             ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              leading: const Icon(Icons.insert_chart_outlined_rounded),
+              title: const Text('Statisztikák'),
             ),
             ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              leading: const Icon(Icons.storefront),
+              title: const Text('Piactér'),
             ),
           ],
         ),
