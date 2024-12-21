@@ -103,14 +103,14 @@ class _CharacterSelectorState extends State<CharacterSelector> {
                           fit: BoxFit.contain,
                         ),
                         Text(
-                          "${charachterNames[index]}",
-                          style: TextStyle(
+                          charachterNames[index],
+                          style: const TextStyle(
                               fontSize: 32, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           textAlign: TextAlign.center,
-                          "${characterDescription[index]}",
-                          style: TextStyle(
+                          characterDescription[index],
+                          style: const TextStyle(
                               fontSize: 19, fontStyle: FontStyle.italic),
                         ),
                       ],
@@ -128,8 +128,8 @@ class _CharacterSelectorState extends State<CharacterSelector> {
               ),
               onPressed: () => updateCharacter(currentIndex + 1),
               child: isLoading
-                  ? CircularProgressIndicator()
-                  : Text(
+                  ? const CircularProgressIndicator()
+                  : const Text(
                       "Kiválasztás",
                       style: TextStyle(fontSize: 20),
                     ),

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/components/HabitCard.dart';
 import 'package:habiquest/pages/habit-todo/habit-add.dart';
-import 'package:habiquest/pages/habit-todo/habit-edit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HabitPage extends StatefulWidget {
