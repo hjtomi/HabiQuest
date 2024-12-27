@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "131234491932-ticn62p64noqlqttoorct85q0kod2hcm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.habiquest",
+            "certificate_hash": "33b6e1257ad7c62e004fa09708e9ccd1b92e9f9f"
+          }
+        },
+        {
           "client_id": "131234491932-ost21eeenmm81n8qht8jkv4gp7gt2ghd.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/habit_page.dart';
+import 'package:habiquest/pages/login_page.dart';
+import 'package:habiquest/pages/statistics_page.dart';
 import 'package:habiquest/pages/todo_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -109,6 +111,12 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: const Icon(Icons.insert_chart_outlined_rounded),
               title: const Text('Statisztikák'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const StatisticsPage()),
+                );
+              }
             ),
             ListTile(
               leading: const Icon(Icons.storefront),
