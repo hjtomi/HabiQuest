@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:habiquest/pages/home_page.dart';
-import 'package:habiquest/utils/theme/AppColors.dart';
-import 'package:habiquest/widget_tree.dart';
 
 class CharacterSelector extends StatefulWidget {
   const CharacterSelector({super.key});

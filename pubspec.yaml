@@ -42,6 +42,7 @@ dependencies:
   cloud_firestore: ^5.5.0
   toastification: ^2.3.0
   google_sign_in: ^6.2.2
+  slide_to_act: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,8 @@ flutter:
     - lib/assets/
     - lib/assets/icons/
     - lib/assets/skins/
+    - lib/assets/market_items/
+    - lib/assets/market.json
 
   uses-material-design: true
 

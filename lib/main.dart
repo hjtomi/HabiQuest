@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/firebase/firebase_options.dart';
-import 'package:habiquest/skin.dart';
 import 'package:habiquest/utils/theme/AppTheme.dart';
 import 'package:habiquest/widget_tree.dart';
 import 'package:toastification/toastification.dart';

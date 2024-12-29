@@ -326,6 +326,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "slide_to_act",
+      "rootUri": "file:///C:/Users/levai/AppData/Local/Pub/Cache/hosted/pub.dev/slide_to_act-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "source_span",
       "rootUri": "file:///C:/Users/levai/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
@@ -446,7 +452,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-15T06:08:52.821433Z",
+  "generated": "2024-12-25T14:57:34.094707Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///C:/Flutter%20SDK/flutter",
