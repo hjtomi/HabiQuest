@@ -548,7 +548,7 @@
         "name": "Arany pajzs",
         "image": "lib/assets/market_items/golden_shield.png",
         "description": "",
-        "price": 0,
+        "price": 650,
         "category": "armor"
     },
     {
@@ -756,7 +756,7 @@
         "name": "Vas fejsze",
         "image": "lib/assets/market_items/iron_axe.png",
         "description": "",
-        "price": 0,
+        "price": 400,
         "category": "weapon"
     },
     {
@@ -964,7 +964,7 @@
         "name": "Onüx fejsze",
         "image": "lib/assets/market_items/onyx_axe.png",
         "description": "",
-        "price": 0,
+        "price": 1000,
         "category": "weapon"
     },
     {
@@ -1355,7 +1355,7 @@
         "id": 173,
         "name": "Topáz csizma",
         "image": "lib/assets/market_items/topaz_boot_1.png",
-        "description": "",
+        "description": "800",
         "price": 0,
         "category": "armor"
     },
@@ -1419,120 +1419,120 @@
         "id": 181,
         "name": "Tribol",
         "image": "lib/assets/market_items/tribol.png",
-        "description": "",
-        "price": 0,
+        "description": "Mostmár nem mernek tribolt bányászni a bányákban történt démoni jelenségek miatt, ezért az ára folyton emelkedik.",
+        "price": 1500,
         "category": "ore"
     },
     {
         "id": 182,
         "name": "Tribol fejsze",
         "image": "lib/assets/market_items/tribol_axe.png",
-        "description": "",
-        "price": 0,
+        "description": "A tribol fejszét, mint egy mágnes, vonzza az ellenség testhője. Megállíthatatlan fegyver...",
+        "price": 1497,
         "category": "weapon"
     },
     {
         "id": 183,
         "name": "Tribol csizma",
         "image": "lib/assets/market_items/tribol_boot_1.png",
-        "description": "",
-        "price": 0,
+        "description": "Egy csizma tribolból. Semmi különös.",
+        "price": 1100,
         "category": "armor"
     },
     {
         "id": 184,
         "name": "Fejlesztett Tribol csizma",
         "image": "lib/assets/market_items/tribol_boot_2.png",
-        "description": "",
-        "price": 0,
+        "description": "Az ötvözött tribol csizma -10 killogrammot nyom, úgyhogy gyorsabban lehet benne futni. Vigyázz, nehogy elszáljon...",
+        "price": 1600,
         "category": "armor"
     },
     {
         "id": 185,
         "name": "Tribol mellvért",
         "image": "lib/assets/market_items/tribol_chestplate_1.png",
-        "description": "",
-        "price": 0,
+        "description": "Tribol önmagában nem egy ellenálló anyag. Jobb helyeken betiltották...",
+        "price": 1000,
         "category": "armor"
     },
     {
         "id": 186,
         "name": "Fejlesztett Tribol mellvért",
         "image": "lib/assets/market_items/tribol_chestplate_2.png",
-        "description": "",
-        "price": 0,
+        "description": "Keleti papok áldásával egy sokkal erősebb vértezetet kapunk.",
+        "price": 1333,
         "category": "armor"
     },
     {
         "id": 187,
         "name": "Tribol kesztyű",
         "image": "lib/assets/market_items/tribol_fist_1.png",
-        "description": "",
-        "price": 0,
+        "description": "Azoknak az uraknak, akik nem akarnak egy vagyont költeni a kesztűjükre.",
+        "price": 999,
         "category": "armor"
     },
     {
         "id": 188,
         "name": "Fejlesztett Tribol kesztyű",
         "image": "lib/assets/market_items/tribol_fist_2.png",
-        "description": "",
-        "price": 0,
+        "description": "Balesetveszélyes, ezért sokan be szeretnék tiltatni...",
+        "price": 1250,
         "category": "armor"
     },
     {
         "id": 189,
         "name": "Tribol kalapács",
         "image": "lib/assets/market_items/tribol_hammer.png",
-        "description": "",
-        "price": 0,
+        "description": "Másodpercenként akár 10x is lesúlythatsz.",
+        "price": 1467,
         "category": "weapon"
     },
     {
         "id": 190,
         "name": "Tribol sisak",
         "image": "lib/assets/market_items/tribol_helmet_1.png",
-        "description": "",
-        "price": 0,
+        "description": "Meglehetősen könnyű.",
+        "price": 1100,
         "category": "armor"
     },
     {
         "id": 191,
         "name": "Fejlesztett Tribol sisak",
         "image": "lib/assets/market_items/tribol_helmet_2.png",
-        "description": "",
-        "price": 0,
+        "description": "Olyan könnyű, hogy fel sem tűnik, ha valaki titokban a fejedre rakja.",
+        "price": 1350,
         "category": "armor"
     },
     {
         "id": 192,
         "name": "Topáz kard",
         "image": "lib/assets/market_items/tropaz_sword.png",
-        "description": "",
-        "price": 0,
+        "description": "Mestereink jelenleg is kutatják, hogy lehet topázból kardot készíteni... Ezt a pár darabor kerekedők hozták messzi földről.",
+        "price": 890,
         "category": "weapon"
     },
     {
         "id": 193,
         "name": "Voidrender Kard",
         "image": "lib/assets/market_items/voidrender_sword.png",
-        "description": "",
-        "price": 0,
+        "description": "Pontos eredete a feledés homályába vész, de szörnyű dolgokat suttognak róla...",
+        "price": 420,
         "category": "weapon"
     },
     {
         "id": 194,
         "name": "Fa pajzs",
         "image": "lib/assets/market_items/wooden_shield.png",
-        "description": "",
-        "price": 0,
+        "description": "Esetleges tyúktámadás ellen...",
+        "price": 100,
         "category": "armor"
     },
     {
         "id": 195,
         "name": "Írott papír",
         "image": "lib/assets/market_items/written_paper.png",
-        "description": "",
-        "price": 0,
+        "description": "Az öt bölcs elveszett próféciáival",
+        "price": 666,
         "category": "misc"
     },
     {
@@ -1611,8 +1611,8 @@
         "id": 205,
         "name": "Sárga csillag",
         "image": "lib/assets/market_items/yellow_star.png",
-        "description": "",
-        "price": 0,
+        "description": "A felkelő nap országából",
+        "price": 20,
         "category": "misc"
     }
 ]
