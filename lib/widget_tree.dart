@@ -1,3 +1,4 @@
+import 'package:habiquest/common.dart';
 import 'package:habiquest/skin.dart';
 import 'auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,7 @@ class _WidgetTreeState extends State<WidgetTree> {
 
   @override
   Widget build(BuildContext context) {
+    printError(Auth().currentUser!.uid);
     return StreamBuilder(
       stream: Auth().authStateChanges,
       builder: (context, snapshot) {
@@ -25,12 +27,12 @@ class _WidgetTreeState extends State<WidgetTree> {
 
           // Listen for real-time updates to the user's Firestore document
           return StreamBuilder<DocumentSnapshot>(
-            stream: _firestore.collection('users').doc(user!.uid).snapshots(),
+            stream: _firestore.collection('users').doc('fIShwjEObZZC55boDxBvoc7RUby1').snapshots(),
             builder: (context, docSnapshot) {
               if (docSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               }
-
+              printError(docSnapshot.data);
               if (docSnapshot.hasData && docSnapshot.data!.exists) {
                 final data = docSnapshot.data!.data()
                     as Map<String, dynamic>; //Itt megolom magam

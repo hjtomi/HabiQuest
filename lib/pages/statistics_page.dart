@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:habiquest/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:habiquest/common.dart';
@@ -54,7 +55,27 @@ class _StatisticsPageState extends State<StatisticsPage> {
       printMessage(value[0]['cim'])
     });
 
-    return Scaffold(
+    Future<QuerySnapshot<Map<String, dynamic>>> fetchHabits() async {
+      final String uid = Auth().currentUser!.uid;
+      CollectionReference users = FirebaseFirestore.instance.collection('users');
+      return users.doc(uid).collection('habits').get();
+    }
+    
+
+    return FutureBuilder(
+      future: fetchHabits(), 
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Text('There was an error');
+        } else if (snapshot.hasData) {
+          return const Text('Data recieved');
+        } else {
+          return const Text('No data yet');
+        }
+      }
+    );
+
+    /*return Scaffold(
       appBar: AppBar(
         leading: const BackButton(color: Colors.amber,),
         title: const Text("Statisztikák"),
@@ -85,6 +106,6 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ),
         ),
       )
-    );
+    );*/
   }
 }

@@ -6,6 +6,7 @@ import 'package:habiquest/pages/habit_page.dart';
 import 'package:habiquest/pages/login_page.dart';
 import 'package:habiquest/pages/statistics_page.dart';
 import 'package:habiquest/pages/todo_page.dart';
+import 'package:habiquest/common.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final User? user = Auth().currentUser;
-
+  
   // State variables to hold username and character
   String? _username;
   String? _character; // Still String but converted from int
