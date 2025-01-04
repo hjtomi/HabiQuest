@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/common.dart';
@@ -44,15 +47,59 @@ class _StatisticsPageState extends State<StatisticsPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final documents = snapshot.data!.docs; // List of documents in the QuerySnapshot
-            return ListView.builder(
-              itemCount: documents.length,
-              itemBuilder: (context, index) {
-                final data = documents[index].data(); // Extract document data as a Map
-                return ListTile(
-                  title: Text(data['cim'] ?? 'No Name'), // Example field access
-                  subtitle: Text(data['nehezseg'].toString()), // Example field access
-                );
-              },
+            List<int> difficulties = [0, 0, 0, 0];
+            for (int i = 0; i < documents.length; i++) {
+              difficulties[documents[i]['nehezseg'].round()]++;
+            }
+            return GridView.count(
+              childAspectRatio: 0.7,
+              crossAxisCount: 2,
+              crossAxisSpacing: 0,
+              mainAxisSpacing: 0,
+              children: [
+                HabitDifficulties(
+                  difficulties[0],
+                  difficulties[1],
+                  difficulties[2],
+                  difficulties[3]
+                ),
+                HabitDifficulties(
+                  difficulties[0],
+                  difficulties[1],
+                  difficulties[2],
+                  difficulties[3]
+                ),
+                HabitDifficulties(
+                  difficulties[0],
+                  difficulties[1],
+                  difficulties[2],
+                  difficulties[3]
+                ),
+                HabitDifficulties(
+                  difficulties[0],
+                  difficulties[1],
+                  difficulties[2],
+                  difficulties[3]
+                ),
+                HabitDifficulties(
+                  difficulties[0],
+                  difficulties[1],
+                  difficulties[2],
+                  difficulties[3]
+                ),
+                HabitDifficulties(
+                  difficulties[0],
+                  difficulties[1],
+                  difficulties[2],
+                  difficulties[3]
+                ),
+                HabitDifficulties(
+                  difficulties[0],
+                  difficulties[1],
+                  difficulties[2],
+                  difficulties[3]
+                ),
+              ],
             );
           } else if (snapshot.hasError) {
             // throw Exception(snapshot.error);
@@ -62,6 +109,86 @@ class _StatisticsPageState extends State<StatisticsPage> {
           }
         },
       )
+    );
+  }
+}
+
+class HabitDifficulties extends StatelessWidget {
+  final int d1;
+  final int d2;
+  final int d3;
+  final int d4;
+
+  HabitDifficulties(
+    this.d1,
+    this.d2,
+    this.d3,
+    this.d4, {
+      super.key
+    });
+
+  final double totalRadius = 80;
+  final Color randomColor = Color.fromRGBO(Random().nextInt(255), Random().nextInt(255), Random().nextInt(255), 1);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(
+            left: 8,
+            top: 8,
+            right: 8,
+          ),
+          child: Text(
+            'Szokások száma nehézség szerint',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              shadows: [
+                Shadow(
+                  color: Colors.black,
+                  offset: Offset(2.5, 2.5),
+                ),
+              ]
+            ),
+          ),
+        ),
+        Expanded(
+          child: PieChart(
+            PieChartData(
+              sections: [
+                PieChartSectionData(
+                  value: d1.toDouble(),
+                  color: Colors.green,
+                  radius: totalRadius * 0.75,
+                  title: d1.toString(),
+                ),
+                PieChartSectionData(
+                  value: d2.toDouble(),
+                  color: Colors.yellow,
+                  radius: totalRadius * 0.75,
+                  title: d2.toString(),
+                  titleStyle: const TextStyle(color: Colors.black),
+                ),
+                PieChartSectionData(
+                  value: d3.toDouble(),
+                  color: Colors.orange,
+                  radius: totalRadius * 0.75,
+                  title: d3.toString(),
+                ),
+                PieChartSectionData(
+                  value: d4.toDouble(),
+                  color: Colors.red,
+                  radius: totalRadius * 0.75,
+                  title: d4.toString(),
+                ),
+              ],
+              centerSpaceRadius: totalRadius * 0.25,
+            )
+          ),
+        ),
+      ],
     );
   }
 }
