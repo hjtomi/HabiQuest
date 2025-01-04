@@ -1347,72 +1347,72 @@
         "id": 172,
         "name": "Topáz",
         "image": "lib/assets/market_items/topaz.png",
-        "description": "",
-        "price": 0,
+        "description": "(Előállításának publikációs jogáért jelenleg is küzd csapatunk.)",
+        "price": 850,
         "category": "ore"
     },
     {
         "id": 173,
         "name": "Topáz csizma",
         "image": "lib/assets/market_items/topaz_boot_1.png",
-        "description": "800",
-        "price": 0,
+        "description": "Ha el is üt egy autóbusz, ebben a talpad biztonságban van, az fix.",
+        "price": 800,
         "category": "armor"
     },
     {
         "id": 174,
         "name": "Fejlesztett Topáz csizma",
         "image": "lib/assets/market_items/topaz_boot_2.png",
-        "description": "",
-        "price": 0,
+        "description": "Ellítólag a közmondásban ilyen cipőt húz a nyúl.",
+        "price": 850,
         "category": "armor"
     },
     {
         "id": 175,
         "name": "Topáz mellvért",
         "image": "lib/assets/market_items/topaz_chestplate_1.png",
-        "description": "",
-        "price": 0,
+        "description": "Másodpercek alatt megolvad rajta a támadó fegyver.",
+        "price": 870,
         "category": "armor"
     },
     {
         "id": 176,
         "name": "Fejlesztett Topáz mellvért",
         "image": "lib/assets/market_items/topaz_chestplate_2.png",
-        "description": "",
-        "price": 0,
+        "description": "A szupertopadilis-surlódásnak köszönhetően, azelött megolvad a legtöbb fegyver, hogy érintkezésbe lépne vele.",
+        "price": 970,
         "category": "armor"
     },
     {
         "id": 177,
         "name": "Topáz kesztyű",
         "image": "lib/assets/market_items/topaz_fist_1.png",
-        "description": "",
-        "price": 0,
+        "description": "Ezzel a kezeden senki sem mer visszaszólni.",
+        "price": 840,
         "category": "armor"
     },
     {
         "id": 178,
         "name": "Fejlesztett Topáz kesztyű",
         "image": "lib/assets/market_items/topaz_fist_2.png",
-        "description": "",
-        "price": 0,
+        "description": "Ezzel a kezeden még Keanu Reeves sem mer visszaszólni.",
+        "price": 875,
         "category": "armor"
     },
     {
         "id": 179,
         "name": "Topáz sisak",
         "image": "lib/assets/market_items/topaz_helmet_1.png",
-        "description": "",
-        "price": 0,
+        "description": "Aki ránéz, látás károsulást szenvedhet.",
+        "price": 850,
         "category": "armor"
     },
     {
         "id": 180,
         "name": "Fejlesztett Topáz sisak",
         "image": "lib/assets/market_items/topaz_helmet_2.png",
-        "description": "",
-        "price": 0,
+        "description": "Számos magánhadseregben az előírt felszerelés része.",
+        "price": 901,
         "category": "armor"
     },
     {
