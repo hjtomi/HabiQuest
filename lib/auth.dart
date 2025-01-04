@@ -42,7 +42,13 @@ class Auth {
           await _firebaseAuth.signInWithCredential(credential);
 
       // Step 3: Create a Firestore document for the user if it's a new user
-      if (userCredential.additionalUserInfo!.isNewUser) {
+      String? userIdInFirestore;
+      await _firestore.collection('users').doc(userCredential.user!.uid).get().then((value) {
+        // printError(value.data().toString());
+        userIdInFirestore = value.data().toString(); // If 'null' then the google user is not in the database
+      });
+
+      if (userCredential.additionalUserInfo!.isNewUser || userIdInFirestore == 'null') {
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
           'username': googleUser.displayName ??
               'New User', // Set a default username if available
@@ -77,6 +83,7 @@ class Auth {
   }
 
   Future<void> signOut() async {
+    await GoogleSignIn().signOut();
     await _firebaseAuth.signOut();
   }
 }

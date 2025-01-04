@@ -90,7 +90,10 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.grey[900],
                 child: ListTile(
                   contentPadding: EdgeInsets.all(8),
-                  trailing: const Icon(Icons.logout_outlined),
+                  trailing: IconButton(
+                    icon: Icon(Icons.logout_outlined),
+                    onPressed: signOut,
+                  ),
                   leading: _character != null
                       ? Image(
                           fit: BoxFit.cover,
@@ -102,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       : const Icon(
                           Icons.person), // Fallback icon if character is null
                   title: Text(
-                    "asjdlkjalskdjalksjdkjad" ?? '',
+                    _username ?? 'Unknown',
                     overflow: TextOverflow.fade,
                   ),
                 ),
