@@ -1131,7 +1131,7 @@
         "id": 145,
         "name": "Tojás",
         "image": "lib/assets/market_items/regular_egg.png",
-        "description": "",
+        "description": "Egy csirke adományozta.",
         "price": 0,
         "category": "food"
     },
@@ -1147,24 +1147,24 @@
         "id": 147,
         "name": "Leárazó bájital (nagy)",
         "image": "lib/assets/market_items/salesoff_large.png",
-        "description": "",
-        "price": 0,
+        "description": "24 órán át 30%-kal olcsóbban tudsz vásárolni.",
+        "price": 808,
         "category": "potion"
     },
     {
         "id": 148,
         "name": "Leárazó bájital (közepes)",
         "image": "lib/assets/market_items/salesoff_medium.png",
-        "description": "",
-        "price": 0,
+        "description": "24 órán át 20%-kal olcsóbban tudsz vásárolni.",
+        "price": 510,
         "category": "potion"
     },
     {
         "id": 149,
         "name": "Leárazó bájital (kicsi)",
         "image": "lib/assets/market_items/salesoff_small.png",
-        "description": "",
-        "price": 0,
+        "description": "24 órán át 10%-kal olcsóbban tudsz vásárolni.",
+        "price": 210,
         "category": "potion"
     },
     {
@@ -1211,8 +1211,8 @@
         "id": 155,
         "name": "Eper",
         "image": "lib/assets/market_items/strawberry.png",
-        "description": "",
-        "price": 0,
+        "description": "1 gyümölcs",
+        "price": 20,
         "category": "food"
     },
     {
@@ -1340,7 +1340,7 @@
         "name": "Technorite talizmán",
         "image": "lib/assets/market_items/technorite_talisman.png",
         "description": "",
-        "price": 0,
+        "price": 1666,
         "category": "loot"
     },
     {
@@ -1467,7 +1467,7 @@
         "id": 187,
         "name": "Tribol kesztyű",
         "image": "lib/assets/market_items/tribol_fist_1.png",
-        "description": "Azoknak az uraknak, akik nem akarnak egy vagyont költeni a kesztűjükre.",
+        "description": "Azoknak az uraknak, akik nem akarnak egy vagyont költeni a kesztyűjükre.",
         "price": 999,
         "category": "armor"
     },
