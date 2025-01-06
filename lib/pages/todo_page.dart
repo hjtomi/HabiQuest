@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habiquest/pages/habit-todo/todo-add.dart';
 import 'package:habiquest/pages/habit-todo/todo-edit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -10,93 +12,84 @@ class TodoPage extends StatefulWidget {
 }
 
 class _TodoPageState extends State<TodoPage> {
-  final List<Map<String, dynamic>> _teendok = [];
-
-  void _hozzaadTeendo(
-      String cim, String megjegyzes, int nehezseg, DateTime hatarido) {
-    setState(() {
-      _teendok.add({
-        'cim': cim,
-        'megjegyzes': megjegyzes,
-        'nehezseg': nehezseg,
-        'hatarido': hatarido,
-        'kesz': false,
-      });
-    });
-  }
-
-  void _szerkesztTeendo(int index, String cim, String megjegyzes, int nehezseg,
-      DateTime hatarido) {
-    setState(() {
-      _teendok[index] = {
-        'cim': cim,
-        'megjegyzes': megjegyzes,
-        'nehezseg': nehezseg,
-        'hatarido': hatarido,
-        'kesz': false,
-      };
-    });
-  }
-
-  void _kijelolKeszre(int index) {
-    setState(() {
-      _teendok.removeAt(index);
-    });
-  }
-
-  Color _nehezsegSzin(int nehezseg) {
-    switch (nehezseg) {
-      case 1:
-        return Colors.blue;
-      case 2:
-        return Colors.green;
-      case 3:
-        return Colors.yellow;
-      case 4:
-        return Colors.orange;
-      case 5:
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
-  }
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: _teendok.length,
-        itemBuilder: (context, index) {
-          final teendo = _teendok[index];
-          return Card(
-            color: _nehezsegSzin(teendo['nehezseg']),
-            child: ListTile(
-              title: Text(
-                teendo['cim'],
-                style: const TextStyle(
-                    color: Colors.black), // Fekete szín a címhez
-              ),
-              subtitle: Text(
-                'Határidő: ${teendo['hatarido'].toLocal().toString().split(' ')[0]}',
-                style: const TextStyle(
-                    color: Colors.black), // Fekete szín a szöveghez
-              ),
-              trailing: Checkbox(
-                value: teendo['kesz'],
-                onChanged: (_) => _kijelolKeszre(index),
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => TodoEdit(
-                      teendo: teendo,
-                      index: index,
-                      mentTeendo: _szerkesztTeendo,
-                    ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(user?.uid ?? 'anonymous')
+            .collection('todos')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('No todos found.'));
+          }
+
+          final todos = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: todos.length,
+            itemBuilder: (context, index) {
+              final todoData = todos[index].data() as Map<String, dynamic>;
+              final todoTitle = todoData['cim'] ?? 'Untitled';
+              return Card(
+                child: ListTile(
+                  title: Text(todoTitle),
+                  subtitle: Text('Határidő: ${todoData['hatarido'].toDate().toLocal().toString().split(' ')[0]}'),
+                  trailing: Checkbox(
+                    value: todoData['kesz'],
+                    onChanged: (value) {
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user?.uid ?? 'anonymous')
+                          .collection('todos')
+                          .doc(todos[index].id)
+                          .update({'kesz': value});
+                      if (value == true) {
+                        // Remove from the list if checked
+                        setState(() {
+                          todos.removeAt(index);
+                        });
+                      }
+                    },
                   ),
-                );
-              },
-            ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => TodoEdit(
+                          teendo: todoData,
+                          index: index,
+                          mentTeendo: (index, cim, megjegyzes, nehezseg, hatarido) {
+                            FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(user?.uid ?? 'anonymous')
+                                .collection('todos')
+                                .doc(todos[index].id)
+                                .update({
+                              'cim': cim,
+                              'megjegyzes': megjegyzes,
+                              'nehezseg': nehezseg,
+                              'hatarido': hatarido,
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
           );
         },
       ),
@@ -111,7 +104,19 @@ class _TodoPageState extends State<TodoPage> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => TodoAdd(
-                hozzaadTeendo: _hozzaadTeendo,
+                hozzaadTeendo: (cim, megjegyzes, nehezseg, hatarido) {
+                  FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(user?.uid ?? 'anonymous')
+                      .collection('todos')
+                      .add({
+                    'cim': cim,
+                    'megjegyzes': megjegyzes,
+                    'nehezseg': nehezseg,
+                    'hatarido': hatarido,
+                    'kesz': false,
+                  });
+                },
               ),
             ),
           );

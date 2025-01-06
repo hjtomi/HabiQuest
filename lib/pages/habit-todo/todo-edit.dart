@@ -28,7 +28,7 @@ class _TodoEditState extends State<TodoEdit> {
     _megjegyzesController =
         TextEditingController(text: widget.teendo['megjegyzes']);
     _kivalasztottNehezseg = widget.teendo['nehezseg'];
-    _kivalasztottHatarido = widget.teendo['hatarido'];
+    _kivalasztottHatarido = widget.teendo['hatarido'].toDate();
   }
 
   void _mentes() {

@@ -17,29 +17,27 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final User? user = Auth().currentUser;
 
-  // State variables to hold username and character
   String? _username;
-  String? _character; // Still String but converted from int
+  String? _character;
 
   @override
   void initState() {
     super.initState();
-    _fetchUserData(); // Fetch both username and character when the widget is initialized
+    _fetchUserData();
   }
 
   Future<void> _fetchUserData() async {
     if (user != null) {
       try {
         DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users') // Main collection
-            .doc(user!.uid) // User's document by UID
+            .collection('users')
+            .doc(user!.uid)
             .get();
 
         if (userDoc.exists && userDoc.data() != null) {
           Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>;
           setState(() {
             _username = data['username'] as String?;
-            // Convert character int to String
             _character = (data['character'] as int?)?.toString();
           });
         } else {
@@ -103,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                               'lib/assets/skins/skin-$_character.png'),
                         )
                       : const Icon(
-                          Icons.person), // Fallback icon if character is null
+                          Icons.person),
                   title: Text(
                     _username ?? 'Unknown',
                     overflow: TextOverflow.fade,

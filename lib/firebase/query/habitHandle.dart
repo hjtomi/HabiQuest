@@ -1,19 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<void> firestoreAddHabit(Map<String, dynamic> formData) async {
+Future<void> firestoreAddOrUpdateHabit(String habitId, Map<String, dynamic> formData) async {
   User? user = FirebaseAuth.instance.currentUser;
 
+  String userId = user?.uid ?? 'anonymous';
   try {
     CollectionReference collection = FirebaseFirestore.instance
         .collection('users')
-        .doc(user?.uid)
+        .doc(userId)
         .collection('habits');
 
-    await collection.add(formData);
-
-    print('Form data added to Firestore successfully!');
+    if (habitId.isEmpty) {
+      await collection.add(formData);
+      print('Form data added to Firestore successfully!');
+    } else {
+      await collection.doc(habitId).update(formData);
+      print('Form data updated in Firestore successfully!');
+    }
   } catch (e) {
-    print('Error adding form data to Firestore: $e');
+    print('Error adding or updating form data in Firestore: $e');
   }
 }
