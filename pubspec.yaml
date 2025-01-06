@@ -43,6 +43,7 @@ dependencies:
   toastification: ^2.3.0
   google_sign_in: ^6.2.2
   fl_chart: ^0.70.0
+  loading_animation_widget: ^1.3.0
 
 dev_dependencies:
   flutter_test:

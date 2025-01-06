@@ -36,8 +36,10 @@ class _WidgetTreeState extends State<WidgetTree> {
                     as Map<String, dynamic>; //Itt megolom magam
 
                 if (data.containsKey('character') &&
-                    data['character'] != null) {
-                  return const HomePage();
+                  data['character'] != null) {
+                    currentUser = Auth().currentUser;
+                    characterId = data['character'];
+                    return const HomePage();
                 } else {
                   return const CharacterSelector();
                 }
