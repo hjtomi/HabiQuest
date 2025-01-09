@@ -15,8 +15,8 @@ class _HabitAddState extends State<HabitAdd> {
   final TextEditingController _cimController = TextEditingController();
   final TextEditingController _megjegyzesController = TextEditingController();
   double _kivalasztottNehezseg = 1;
-  int _kivalasztottGyakorisag = 1; 
-  int _kivalasztottIsmetles = 1; 
+  int _kivalasztottGyakorisag = 1;
+  int _kivalasztottIsmetles = 1;
   Calendar calendarView = Calendar.daily;
   DateTime? _kezdesIdo;
   bool _kesz = false;
@@ -33,7 +33,7 @@ class _HabitAddState extends State<HabitAdd> {
           TextButton(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                await firestoreAddHabit({
+                await firestoreAddOrUpdateHabit({
                   'cim': _cimController.text,
                   'megjegyzes': _megjegyzesController.text,
                   'nehezseg': _kivalasztottNehezseg,
@@ -41,7 +41,7 @@ class _HabitAddState extends State<HabitAdd> {
                   'ismetles': _kivalasztottIsmetles,
                   'kezdes': _kezdesIdo,
                   'kesz': _kesz,
-                  'streak': _streak,
+                  'streak': _streak
                 });
                 Navigator.of(context).pop();
               }
@@ -64,7 +64,8 @@ class _HabitAddState extends State<HabitAdd> {
               children: [
                 _buildInputField(_cimController, 'Cím'),
                 const SizedBox(height: 16),
-                _buildInputField(_megjegyzesController, 'Megjegyzés', maxLines: 5),
+                _buildInputField(_megjegyzesController, 'Megjegyzés',
+                    maxLines: 5),
                 const SizedBox(height: 16),
                 _buildNehezsegValaszto(),
                 const SizedBox(height: 16),
@@ -117,8 +118,18 @@ class _HabitAddState extends State<HabitAdd> {
 
   int _daysInMonth(int month) {
     const daysInMonth = {
-      1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-      7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31
+      1: 31,
+      2: 28,
+      3: 31,
+      4: 30,
+      5: 31,
+      6: 30,
+      7: 31,
+      8: 31,
+      9: 30,
+      10: 31,
+      11: 30,
+      12: 31
     };
     return daysInMonth[month] ?? 30;
   }
@@ -172,7 +183,8 @@ class _HabitAddState extends State<HabitAdd> {
       segments: const <ButtonSegment<Calendar>>[
         ButtonSegment<Calendar>(value: Calendar.daily, label: Text('Naponta')),
         ButtonSegment<Calendar>(value: Calendar.weekly, label: Text('Hetente')),
-        ButtonSegment<Calendar>(value: Calendar.monthly, label: Text('Havonta')),
+        ButtonSegment<Calendar>(
+            value: Calendar.monthly, label: Text('Havonta')),
       ],
       selected: <Calendar>{calendarView},
       onSelectionChanged: (Set<Calendar> newSelection) {
@@ -190,7 +202,8 @@ class _HabitAddState extends State<HabitAdd> {
         const Text("Ismétlődés (Hány alkalom):"),
         TextField(
           keyboardType: TextInputType.number,
-          controller: TextEditingController(text: _kivalasztottIsmetles.toString()),
+          controller:
+              TextEditingController(text: _kivalasztottIsmetles.toString()),
           onChanged: (value) {
             setState(() {
               _kivalasztottIsmetles = int.tryParse(value) ?? 1;
