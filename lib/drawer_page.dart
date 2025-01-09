@@ -1,0 +1,318 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:habiquest/auth.dart';
+import 'package:habiquest/pages/home_page.dart'; // Your Dashboard Page
+import 'package:habiquest/pages/market_page.dart';
+import 'package:linear_progress_bar/linear_progress_bar.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
+enum PageType { dashboard, market, statistics }
+
+class HoldingPage extends StatefulWidget {
+  const HoldingPage({super.key});
+
+  @override
+  State<HoldingPage> createState() => _HoldingPageState();
+}
+
+class _HoldingPageState extends State<HoldingPage> {
+  PageType _selectedPage = PageType.dashboard;
+
+  // Map PageType to Widgets
+  Widget _getPage(PageType page) {
+    switch (page) {
+      case PageType.dashboard:
+        return const HomePage();
+      case PageType.market:
+        return const MarketPage();
+      default:
+        return const Center(child: Text("Page not found"));
+    }
+  }
+
+  // Map PageType to Titles
+  String _getPageTitle(PageType page) {
+    switch (page) {
+      case PageType.dashboard:
+        return "Dashboard";
+      case PageType.market:
+        return "Piactér";
+      case PageType.statistics:
+        return "Statisztikák";
+      default:
+        return "App";
+    }
+  }
+
+  final User? user = Auth().currentUser;
+
+  String? _username;
+  String? _character;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+  }
+
+  Future<void> _fetchUserData() async {
+    if (user != null) {
+      try {
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid)
+            .get();
+
+        if (userDoc.exists && userDoc.data() != null) {
+          Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>;
+          setState(() {
+            _username = data['username'] as String?;
+            _character = (data['character'] as int?)?.toString();
+          });
+        }
+      } catch (e) {
+        print('Error fetching user data: $e');
+      }
+    }
+  }
+
+  Stream<int?> _userBalanceStream() {
+    final userId = Auth().currentUser?.uid;
+    if (userId == null) {
+      return const Stream<int?>.empty();
+    }
+
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .snapshots()
+        .map((snapshot) => snapshot.data()?['balance'] as int?);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_getPageTitle(_selectedPage)),
+        actions: [
+          StreamBuilder<int?>(
+            stream: _userBalanceStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              } else if (snapshot.hasError || !snapshot.hasData) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Center(
+                    child: Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                  ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.paid,
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      Text(
+                        '${snapshot.data!}',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 32),
+          children: [
+            Card(
+              color: Colors.grey[900],
+              child: ListTile(
+                contentPadding: const EdgeInsets.all(8),
+                trailing: IconButton(
+                    onPressed: () => Auth().signOut(),
+                    icon: const Icon(Icons.logout_outlined)),
+                leading: _character != null
+                    ? Image(
+                        fit: BoxFit.cover,
+                        width: 60,
+                        height: 60,
+                        image:
+                            AssetImage('lib/assets/skins/skin-$_character.png'),
+                      )
+                    : const Icon(Icons.person),
+                title: Text(
+                  _username ?? '',
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
+                ),
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                setState(() {
+                  _selectedPage = PageType.dashboard;
+                });
+                Navigator.pop(context); // Close the drawer
+              },
+              selected: _selectedPage == PageType.dashboard,
+              selectedColor: Theme.of(context).colorScheme.secondary,
+              leading: const Icon(LucideIcons.layoutDashboard),
+              title: const Text("Dashboard"),
+            ),
+            ListTile(
+              onTap: () {
+                setState(() {
+                  _selectedPage = PageType.market;
+                });
+                Navigator.pop(context);
+              },
+              selected: _selectedPage == PageType.market,
+              selectedColor: Theme.of(context).colorScheme.secondary,
+              leading: const Icon(LucideIcons.store),
+              title: const Text("Piactér"),
+            ),
+            ListTile(
+              onTap: () {
+                setState(() {
+                  _selectedPage = PageType.statistics;
+                });
+                Navigator.pop(context);
+              },
+              selected: _selectedPage == PageType.statistics,
+              selectedColor: Theme.of(context).colorScheme.secondary,
+              leading: const Icon(LucideIcons.areaChart),
+              title: const Text("Statistics"),
+            ),
+          ],
+        ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+            child: Card(
+              color: Colors.grey[900],
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _character != null
+                      ? Image(
+                          fit: BoxFit.contain,
+                          width: 150,
+                          height: 150,
+                          image: AssetImage(
+                              'lib/assets/skins/skin-$_character.png'),
+                        )
+                      : const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.person, size: 100),
+                        ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text(
+                                      "Életerő",
+                                    ),
+                                  ],
+                                ),
+                                LinearProgressIndicator(
+                                  minHeight: 6,
+                                  value: 0.5, // Must be between 0.0 and 1.0
+                                  backgroundColor: Colors.black12,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text(
+                                      "Védelem",
+                                    ),
+                                  ],
+                                ),
+                                LinearProgressIndicator(
+                                  minHeight: 6,
+                                  value: 0.3, // Must be between 0.0 and 1.0
+                                  backgroundColor: Colors.black12,
+                                  color: Colors.green,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text(
+                                      "TP",
+                                    ),
+                                  ],
+                                ),
+                                LinearProgressIndicator(
+                                    minHeight: 6,
+                                    value: 0.7, // Must be between 0.0 and 1.0
+                                    backgroundColor: Colors.black12,
+                                    color: Colors.blue),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: _getPage(_selectedPage),
+          ),
+        ],
+      ),
+
+      // Load the selected page dynamically
+    );
+  }
+}

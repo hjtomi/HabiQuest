@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habiquest/pages/habit-todo/habit-edit.dart';
 import 'package:habiquest/components/HabitCard.dart';
 import 'package:habiquest/pages/habit-todo/habit-add.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class HabitPage extends StatefulWidget {
   const HabitPage({super.key});
@@ -81,7 +83,7 @@ class _HabitPageState extends State<HabitPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
-        child: const Icon(Icons.add),
+        child: const Icon(LucideIcons.plus),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

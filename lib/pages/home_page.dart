@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/habit_page.dart';
 import 'package:habiquest/pages/login_page.dart';
 import 'package:habiquest/pages/statistics_page.dart';
 import 'package:habiquest/pages/todo_page.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,135 +16,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final User? user = Auth().currentUser;
+  int _dashboardSelectedIndex = 0;
 
-  String? _username;
-  String? _character;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchUserData();
-  }
-
-  Future<void> _fetchUserData() async {
-    if (user != null) {
-      try {
-        DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(user!.uid)
-            .get();
-
-        if (userDoc.exists && userDoc.data() != null) {
-          Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>;
-          setState(() {
-            _username = data['username'] as String?;
-            _character = (data['character'] as int?)?.toString();
-          });
-        } else {
-          print('User document does not exist or is empty');
-        }
-      } catch (e) {
-        print('Error fetching user data: $e');
-      }
-    }
-  }
-
-  int _selectedIndex = 0;
-
-  static final List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _dashboardPages = <Widget>[
     const HabitPage(),
     const TodoPage(),
   ];
-  static final List<String> _pageTitles = <String>["Szokások", "Teendők"];
+
+  static final List<String> _dashboardPagesNames = <String>[
+    "Szokások",
+    "Teendők",
+  ];
+
+  void _onDashboardItemTapped(int index) {
+    setState(() {
+      _dashboardSelectedIndex = index;
+    });
+  }
 
   Future<void> signOut() async {
     await Auth().signOut();
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_pageTitles[_selectedIndex]),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: signOut,
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.symmetric(vertical: 32),
-          children: [
-            Flexible(
-              child: Card(
-                color: Colors.grey[900],
-                child: ListTile(
-                  contentPadding: EdgeInsets.all(8),
-                  trailing: IconButton(
-                    icon: Icon(Icons.logout_outlined),
-                    onPressed: signOut,
-                  ),
-                  leading: _character != null
-                      ? Image(
-                          fit: BoxFit.cover,
-                          width: 80,
-                          height: 80,
-                          image: AssetImage(
-                              'lib/assets/skins/skin-$_character.png'),
-                        )
-                      : const Icon(
-                          Icons.person),
-                  title: Text(
-                    _username ?? 'Unknown',
-                    overflow: TextOverflow.fade,
-                  ),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.insert_chart_outlined_rounded),
-              title: const Text('Statisztikák'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const StatisticsPage()),
-                );
-              }
-            ),
-            ListTile(
-              leading: const Icon(Icons.storefront),
-              title: const Text('Piactér'),
-            ),
-          ],
-        ),
-      ),
       body: Center(
-        child: _widgetOptions[_selectedIndex],
+        child: _dashboardPages[_dashboardSelectedIndex],
       ),
       bottomNavigationBar: NavigationBar(
         indicatorColor: Theme.of(context).colorScheme.secondary,
         backgroundColor: Colors.grey[900],
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.toc),
+            icon: Icon(LucideIcons.listChecks),
             label: 'Habit',
           ),
           NavigationDestination(
-            icon: Icon(Icons.check_circle),
+            icon: Icon(LucideIcons.checkCircle2),
             label: 'Todo',
           ),
         ],
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
+        selectedIndex: _dashboardSelectedIndex,
+        onDestinationSelected: _onDashboardItemTapped,
       ),
     );
   }

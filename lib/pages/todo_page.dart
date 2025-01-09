@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habiquest/pages/habit-todo/todo-add.dart';
 import 'package:habiquest/pages/habit-todo/todo-edit.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -95,11 +94,8 @@ class _TodoPageState extends State<TodoPage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        foregroundColor: Theme.of(context).colorScheme.primary,
-        child: const Icon(
-          Icons.add,
-          size: 38,
-        ),
+        foregroundColor: Theme.of(context).colorScheme.onSecondary,
+        child: Icon(LucideIcons.plus),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

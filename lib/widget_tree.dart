@@ -1,8 +1,8 @@
+import 'package:habiquest/drawer_page.dart';
 import 'package:habiquest/skin.dart';
 import 'auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:habiquest/pages/home_page.dart';
 import 'package:habiquest/pages/login_page.dart';
 
 class WidgetTree extends StatefulWidget {
@@ -36,10 +36,8 @@ class _WidgetTreeState extends State<WidgetTree> {
                     as Map<String, dynamic>; //Itt megolom magam
 
                 if (data.containsKey('character') &&
-                  data['character'] != null) {
-                    currentUser = Auth().currentUser;
-                    characterId = data['character'];
-                    return const HomePage();
+                    data['character'] != null) {
+                  return const HoldingPage();
                 } else {
                   return const CharacterSelector();
                 }

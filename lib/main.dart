@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/firebase/firebase_options.dart';
-import 'package:habiquest/pages/home_page.dart';
-import 'package:habiquest/skin.dart';
 import 'package:habiquest/utils/theme/AppTheme.dart';
 import 'package:habiquest/widget_tree.dart';
 import 'package:toastification/toastification.dart';
@@ -29,7 +27,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme, // Light theme
         darkTheme: AppTheme.darkTheme, // Dark theme
         themeMode: ThemeMode.dark, // Force dark theme
-        home: const HomePage(),
+        home: const WidgetTree(),
       ),
     );
   }

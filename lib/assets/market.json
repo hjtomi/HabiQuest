@@ -1,0 +1,1618 @@
+[
+    {
+        "id": 1,
+        "name": "Bacon",
+        "image": "lib/assets/market_items/bacon.png",
+        "description": "Ínycsiklandó proteinforrás",
+        "price": 20,
+        "category": "food"
+    },
+    {
+        "id": 2,
+        "name": "Banán",
+        "image": "lib/assets/market_items/banane.png",
+        "description": "Egyenesen a jó meleg trópusokról",
+        "price": 15,
+        "category": "food"
+    },
+    {
+        "id": 3,
+        "name": "Kötszer",
+        "image": "lib/assets/market_items/bandage.png",
+        "description": "Katona dolog...",
+        "price": 40,
+        "category": "heal"
+    },
+    {
+        "id": 4,
+        "name": "Cékla",
+        "image": "lib/assets/market_items/beetroot.png",
+        "description": "Elvileg tele van vitaminokkal...",
+        "price": 15,
+        "category": "food"
+    },
+    {
+        "id": 5,
+        "name": "Blazeguard Kard",
+        "image": "lib/assets/market_items/blazeguard_sword.png",
+        "description": "A legenda szerint a kard nem egyszerűen egy fegyver, hanem egy próba: csak az igazság lángját hordozó harcosok képesek megidézni teljes erejét. Azok számára, akik nem méltók, Blazeguard csupán egy kihűlt acélmaradvány marad – de a méltók számára a világot átalakító hatalom forrása.",
+        "price": 500,
+        "category": "weapon"
+    },
+    {
+        "id": 6,
+        "name": "Kékfejű",
+        "image": "lib/assets/market_items/blue_drill.png",
+        "description": "Közepes ritkaságú ércek kibányászására alkalmas",
+        "price": 600,
+        "category": "tool"
+    },
+    {
+        "id": 7,
+        "name": "Kékcsillag",
+        "image": "lib/assets/market_items/blue_star.png",
+        "description": "Garantált +1 szintlépés",
+        "price": 800,
+        "category": "xp"
+    },
+    {
+        "id": 8,
+        "name": "Csont",
+        "image": "lib/assets/market_items/bone.png",
+        "description": "Ellenfeleid mementója",
+        "price": 10,
+        "category": "misc"
+    },
+    {
+        "id": 9,
+        "name": "Brokkoli",
+        "image": "lib/assets/market_items/broccoli.png",
+        "description": "Nincs kifogás, meg kell enned!",
+        "price": 12,
+        "category": "food"
+    },
+    {
+        "id": 10,
+        "name": "Barna Varázsgomba",
+        "image": "lib/assets/market_items/brown_fungus.png",
+        "description": "Hatása nem tart sokáig, de azt a kis időt nem bánod meg",
+        "price": 48,
+        "category": "food"
+    },
+    {
+        "id": 11,
+        "name": "Egy vödör arany",
+        "image": "lib/assets/market_items/bucket_of_gold.png",
+        "description": "Nem tanácsos meginni, viszont az ékszerészek egy vagyont adnának érte",
+        "price": 860,
+        "category": "ore"
+    },
+    {
+        "id": 12,
+        "name": "Egy vödör selenite",
+        "image": "lib/assets/market_items/bucket_of_selenite.png",
+        "description": "Selenit megolvasztása nem egy könnyű feladat ezért nem sokan vállalkoznak rá",
+        "price": 1550,
+        "category": "ore"
+    },
+    {
+        "id": 13,
+        "name": "Egy vödör sötétanyag",
+        "image": "lib/assets/market_items/bucket_of_void.png",
+        "description": "Az univerzum legértékesebb anyaga, létrehozása még a tudósok számára is fejfájást és súlyos pénzeket jelent",
+        "price": 10000,
+        "category": "misc"
+    },
+    {
+        "id": 14,
+        "name": "Répa",
+        "image": "lib/assets/market_items/carrot.png",
+        "description": "Nem fogsz tőle jobban fütyülni...",
+        "price": 12,
+        "category": "food"
+    },
+    {
+        "id": 15,
+        "name": "Kék lovagrendi pajzs",
+        "image": "lib/assets/market_items/chechkered_blue_shield.png",
+        "description": "A kék lovagrend harcosait megválogatja, nem minden halandó alkalmas a feladatokra",
+        "price": 600,
+        "category": "armor"
+    },
+    {
+        "id": 16,
+        "name": "Zöld lovagrendi pajzs",
+        "image": "lib/assets/market_items/chechkered_green_shield.png",
+        "description": "A zöld a halhatatlanság szimbóluma, ami elvárt ebben a lovagrendben",
+        "price": 600,
+        "category": "armor"
+    },
+    {
+        "id": 17,
+        "name": "Piros lovagrendi pajzs",
+        "image": "lib/assets/market_items/chechkered_red_shield.png",
+        "description": "Vérengzés és öldöklés. Nem akárki birná ezt...",
+        "price": 600,
+        "category": "armor"
+    },
+    {
+        "id": 18,
+        "name": "Sajt",
+        "image": "lib/assets/market_items/cheese.png",
+        "description": "Belegondoltál már hogy több sajt az több lyuk tehát kevesebb sajt?...",
+        "price": 30,
+        "category": "food"
+    },
+    {
+        "id": 19,
+        "name": "Cseresznye",
+        "image": "lib/assets/market_items/cherry.png",
+        "description": "Ínyenceknek",
+        "price": 8,
+        "category": "food"
+    },
+    {
+        "id": 20,
+        "name": "Láda",
+        "image": "lib/assets/market_items/chest.png",
+        "description": "Értékes értékeket rejthet",
+        "price": 500,
+        "category": "loot"
+    },
+    {
+        "id": 21,
+        "name": "Dobverő",
+        "image": "lib/assets/market_items/chicken.png",
+        "description": "Nincs is jobb egy kis sültcsirkénél",
+        "price": 20,
+        "category": "food"
+    },
+    {
+        "id": 22,
+        "name": "Kék köppeny",
+        "image": "lib/assets/market_items/coat_blue.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 23,
+        "name": "Barna köppeny",
+        "image": "lib/assets/market_items/coat_brown.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 24,
+        "name": "Zöld köppeny",
+        "image": "lib/assets/market_items/coat_green.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 25,
+        "name": "Rózsaszín köppeny",
+        "image": "lib/assets/market_items/coat_pink.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 26,
+        "name": "Lila köppeny",
+        "image": "lib/assets/market_items/coat_purple.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 27,
+        "name": "Piros köppeny",
+        "image": "lib/assets/market_items/coat_red.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 28,
+        "name": "Fehér köppeny",
+        "image": "lib/assets/market_items/coat_white.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 29,
+        "name": "Sárga köppeny",
+        "image": "lib/assets/market_items/coat_yellow.png",
+        "description": "",
+        "price": 90,
+        "category": "cosmetic"
+    },
+    {
+        "id": 30,
+        "name": "Nagy mindenes bájital",
+        "image": "lib/assets/market_items/comb_large.png",
+        "description": "A tapasztalati pontod és az életerődet is növeli",
+        "price": 250,
+        "category": "potion"
+    },
+    {
+        "id": 31,
+        "name": "Közepes mindenes bájital",
+        "image": "lib/assets/market_items/comb_medium.png",
+        "description": "A tapasztalati pontod és az életerődet is növeli",
+        "price": 230,
+        "category": "potion"
+    },
+    {
+        "id": 32,
+        "name": "Kicsi mindenes bájital",
+        "image": "lib/assets/market_items/comb_small.png",
+        "description": "A tapasztalati pontod és az életerődet is növeli",
+        "price": 210,
+        "category": "potion"
+    },
+    {
+        "id": 33,
+        "name": "Bronz fejsze",
+        "image": "lib/assets/market_items/copper_axe.png",
+        "description": "Fegyvernek nem a legerősebb de kezdésnek megteszi",
+        "price": 120,
+        "category": "weapon"
+    },
+    {
+        "id": 34,
+        "name": "Bronz csizma",
+        "image": "lib/assets/market_items/copper_boot_1.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 250,
+        "category": "armor"
+    },
+    {
+        "id": 35,
+        "name": "Fejlesztett bronz csizma",
+        "image": "lib/assets/market_items/copper_boot_2.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 300,
+        "category": "armor"
+    },
+    {
+        "id": 36,
+        "name": "Bronz mellvért",
+        "image": "lib/assets/market_items/copper_chestplate_1.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 280,
+        "category": "armor"
+    },
+    {
+        "id": 37,
+        "name": "Fejlesztett bronz mellvért",
+        "image": "lib/assets/market_items/copper_chestplate_2.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 330,
+        "category": ""
+    },
+    {
+        "id": 38,
+        "name": "Bronz kesztyű",
+        "image": "lib/assets/market_items/copper_fist_1.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 240,
+        "category": "armor"
+    },
+    {
+        "id": 39,
+        "name": "Fejlesztett bronz kesztyű",
+        "image": "lib/assets/market_items/copper_fist_2.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 290,
+        "category": "armor"
+    },
+    {
+        "id": 40,
+        "name": "Bronz kalapács",
+        "image": "lib/assets/market_items/copper_hammer.png",
+        "description": "A bronz kalapács a gyengébb elenfelek ellen hatásos",
+        "price": 330,
+        "category": "weapon"
+    },
+    {
+        "id": 41,
+        "name": "Bronz sisak",
+        "image": "lib/assets/market_items/copper_helmet_1.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 275,
+        "category": "armor"
+    },
+    {
+        "id": 42,
+        "name": "Fejlezstett bronz sisak",
+        "image": "lib/assets/market_items/copper_helmet_2.png",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
+        "price": 235,
+        "category": "armor"
+    },
+    {
+        "id": 43,
+        "name": "Bronz rúd",
+        "image": "lib/assets/market_items/copper_ingot.png",
+        "description": "A bronz a réz különféle ötvözeteinek általános elnevezése",
+        "price": 35,
+        "category": "ore"
+    },
+    {
+        "id": 44,
+        "name": "Isolda rúnája",
+        "image": "lib/assets/market_items/copper_necklace.png",
+        "description": "Isolda rúnája egy ősi nyaklánc, melyet a legendák szerint az Északi Fény papnője alkotott, hogy védelmet és bölcsességet nyújtson viselőjének. A benne rejlő rúna az elveszett királyságok titkait őrzi, és csak azok számára fedi fel hatalmát, akiknek szíve tiszta és célja nemes.",
+        "price": 690,
+        "category": "loot"
+    },
+    {
+        "id": 45,
+        "name": "Bronz rög",
+        "image": "lib/assets/market_items/copper_rod.png",
+        "description": "Egy darabka bronz rög",
+        "price": 20,
+        "category": "ore"
+    },
+    {
+        "id": 46,
+        "name": "Bronz Pajzs",
+        "image": "lib/assets/market_items/copper_shield.png",
+        "description": "Kezdésnek a kisebb találatok ellen tökéletesen megvéd",
+        "price": 300,
+        "category": "armor"
+    },
+    {
+        "id": 47,
+        "name": "Bronz talizmán",
+        "image": "lib/assets/market_items/copper_talisman.png",
+        "description": "",
+        "price": 300,
+        "category": "loot"
+    },
+    {
+        "id": 48,
+        "name": "Kukorica",
+        "image": "lib/assets/market_items/corn.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 49,
+        "name": "Croissant",
+        "image": "lib/assets/market_items/croissant.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 50,
+        "name": "Defector Kardja",
+        "image": "lib/assets/market_items/deflector_sword.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 51,
+        "name": "Elektron Blade Kard",
+        "image": "lib/assets/market_items/electron_blade_sword.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 52,
+        "name": "Etcher Kard",
+        "image": "lib/assets/market_items/etcher_sword.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 53,
+        "name": "Ezüst rög",
+        "image": "lib/assets/market_items/ezust_rogok.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 54,
+        "name": "Bolyhos penna",
+        "image": "lib/assets/market_items/feather.png",
+        "description": "",
+        "price": 0,
+        "category": "misc"
+    },
+    {
+        "id": 55,
+        "name": "Hal",
+        "image": "lib/assets/market_items/fish.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 59,
+        "name": "Szenecse Bájital (nagy)",
+        "image": "lib/assets/market_items/fortune_large.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 60,
+        "name": "Szenecse Bájital (közepes)",
+        "image": "lib/assets/market_items/fortune_medium.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 61,
+        "name": "Szenecse Bájital (kicsi)",
+        "image": "lib/assets/market_items/fortune_small.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 62,
+        "name": "Francia zászló",
+        "image": "lib/assets/market_items/french_flag.png",
+        "description": "",
+        "price": 0,
+        "category": "misc"
+    },
+    {
+        "id": 63,
+        "name": "Aranyalma",
+        "image": "lib/assets/market_items/golden_apple.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 64,
+        "name": "Arany fejsze",
+        "image": "lib/assets/market_items/golden_axe.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 65,
+        "name": "Arany tojás",
+        "image": "lib/assets/market_items/golden_egg.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 66,
+        "name": "Arany kalapács",
+        "image": "lib/assets/market_items/golden_hammer.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 67,
+        "name": "Aranyszív",
+        "image": "lib/assets/market_items/golden_heart.png",
+        "description": "",
+        "price": 0,
+        "category": "heal"
+    },
+    {
+        "id": 68,
+        "name": "Aranyrög",
+        "image": "lib/assets/market_items/golden_ingot.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 69,
+        "name": "Aranykulcs",
+        "image": "lib/assets/market_items/golden_key.png",
+        "description": "",
+        "price": 0,
+        "category": "loot"
+    },
+    {
+        "id": 70,
+        "name": "Arany nyaklánc",
+        "image": "lib/assets/market_items/golden_necklace.png",
+        "description": "",
+        "price": 0,
+        "category": "loot"
+    },
+    {
+        "id": 71,
+        "name": "Arany gyűrű",
+        "image": "lib/assets/market_items/golden_ring.png",
+        "description": "",
+        "price": 0,
+        "category": "loot"
+    },
+    {
+        "id": 72,
+        "name": "Arany pajzs",
+        "image": "lib/assets/market_items/golden_shield.png",
+        "description": "",
+        "price": 650,
+        "category": "armor"
+    },
+    {
+        "id": 73,
+        "name": "Arany koponya",
+        "image": "lib/assets/market_items/golden_skull.png",
+        "description": "",
+        "price": 0,
+        "category": "misc"
+    },
+    {
+        "id": 74,
+        "name": "Arany kard",
+        "image": "lib/assets/market_items/golden_sword.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 75,
+        "name": "Arany csizma",
+        "image": "lib/assets/market_items/gold_boot_1.png",
+        "description": "",
+        "price": 0,
+        "category": "boot"
+    },
+    {
+        "id": 76,
+        "name": "Fejleszett arany csizma",
+        "image": "lib/assets/market_items/gold_boot_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 77,
+        "name": "Arany mellvért",
+        "image": "lib/assets/market_items/gold_chestplate_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 78,
+        "name": "Fejleszett arany mellvért",
+        "image": "lib/assets/market_items/gold_chestplate_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 79,
+        "name": "Arany kesztyű",
+        "image": "lib/assets/market_items/gold_fist_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 80,
+        "name": "Fejleszett arany kesztyű",
+        "image": "lib/assets/market_items/gold_fist_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 81,
+        "name": "Arany sisak",
+        "image": "lib/assets/market_items/gold_helmet_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 82,
+        "name": "Fejlesztett Arany sisak",
+        "image": "lib/assets/market_items/gold_helmet_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 83,
+        "name": "Arany rúd",
+        "image": "lib/assets/market_items/gold_rod.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 84,
+        "name": "Aranyalma",
+        "image": "lib/assets/market_items/green_apple.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 85,
+        "name": "Kék kalap",
+        "image": "lib/assets/market_items/hat_blue.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 86,
+        "name": "Barna kalap",
+        "image": "lib/assets/market_items/hat_brown.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 87,
+        "name": "Zöld Kalap",
+        "image": "lib/assets/market_items/hat_green.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 88,
+        "name": "Rózsaszín kalap",
+        "image": "lib/assets/market_items/hat_pink.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 89,
+        "name": "Lila kalap",
+        "image": "lib/assets/market_items/hat_purple.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 90,
+        "name": "Piros kalap",
+        "image": "lib/assets/market_items/hat_red.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 91,
+        "name": "Fehér kalap",
+        "image": "lib/assets/market_items/hat_white.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 92,
+        "name": "Sárga kalap",
+        "image": "lib/assets/market_items/hat_yellow.png",
+        "description": "",
+        "price": 0,
+        "category": "cosmetic"
+    },
+    {
+        "id": 93,
+        "name": "Életerő bájital (nagy)",
+        "image": "lib/assets/market_items/health_large.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 94,
+        "name": "Életerő bájital (közepes)",
+        "image": "lib/assets/market_items/health_medium.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 95,
+        "name": "Életerő bájital (kicsi)",
+        "image": "lib/assets/market_items/health_small.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 96,
+        "name": "Szív",
+        "image": "lib/assets/market_items/heart.png",
+        "description": "",
+        "price": 0,
+        "category": "heal"
+    },
+    {
+        "id": 97,
+        "name": "Méz",
+        "image": "lib/assets/market_items/honey.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 98,
+        "name": "Vas fejsze",
+        "image": "lib/assets/market_items/iron_axe.png",
+        "description": "",
+        "price": 400,
+        "category": "weapon"
+    },
+    {
+        "id": 99,
+        "name": "Vas csizma",
+        "image": "lib/assets/market_items/iron_boot_1.png",
+        "description": "",
+        "price": 0,
+        "category": "boot"
+    },
+    {
+        "id": 100,
+        "name": "Fejlesztett Vas csizma",
+        "image": "lib/assets/market_items/iron_boot_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 101,
+        "name": "Vas mellvért",
+        "image": "lib/assets/market_items/iron_chestplate_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 102,
+        "name": "Fejlesztet vas mellvért",
+        "image": "lib/assets/market_items/iron_chestplate_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 103,
+        "name": "Vas kesztyű",
+        "image": "lib/assets/market_items/iron_fist_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 104,
+        "name": "Fejleszett vas kesztyű",
+        "image": "lib/assets/market_items/iron_fist_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 105,
+        "name": "Vas kalapács",
+        "image": "lib/assets/market_items/iron_hammer.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 106,
+        "name": "Vas sisak",
+        "image": "lib/assets/market_items/iron_helmet_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 107,
+        "name": "Fejleszett vas sisak",
+        "image": "lib/assets/market_items/iron_helmet_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 108,
+        "name": "Vas nyaklánc",
+        "image": "lib/assets/market_items/iron_necklace.png",
+        "description": "",
+        "price": 0,
+        "category": "loot"
+    },
+    {
+        "id": 109,
+        "name": "Vasrúd",
+        "image": "lib/assets/market_items/iron_rod.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 110,
+        "name": "Sarló",
+        "image": "lib/assets/market_items/iron_saber.png",
+        "description": "",
+        "price": 0,
+        "category": "tool"
+    },
+    {
+        "id": 111,
+        "name": "Vas pajzs",
+        "image": "lib/assets/market_items/iron_shield.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 112,
+        "name": "Vastalizmán",
+        "image": "lib/assets/market_items/iron_talisman.png",
+        "description": "",
+        "price": 0,
+        "category": "loot"
+    },
+    {
+        "id": 113,
+        "name": "Levél",
+        "image": "lib/assets/market_items/letter.png",
+        "description": "",
+        "price": 0,
+        "category": "misc"
+    },
+    {
+        "id": 114,
+        "name": "Lucius mágikus könyve",
+        "image": "lib/assets/market_items/lucius_magical_grimoire.png",
+        "description": "",
+        "price": 0,
+        "category": "magic"
+    },
+    {
+        "id": 115,
+        "name": "Mágiamagazin",
+        "image": "lib/assets/market_items/magia_magazin.png",
+        "description": "",
+        "price": 0,
+        "category": "magic"
+    },
+    {
+        "id": 116,
+        "name": "Magnus Ősi Kódexe",
+        "image": "lib/assets/market_items/magnus_ancient_codex.png",
+        "description": "",
+        "price": 0,
+        "category": "magic"
+    },
+    {
+        "id": 117,
+        "name": "Marhahús",
+        "image": "lib/assets/market_items/meat.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 118,
+        "name": "Elsősegély csomag",
+        "image": "lib/assets/market_items/medkit.png",
+        "description": "",
+        "price": 0,
+        "category": "heal"
+    },
+    {
+        "id": 119,
+        "name": "Nebulon",
+        "image": "lib/assets/market_items/nebulon.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 120,
+        "name": "Nebulon fejsze",
+        "image": "lib/assets/market_items/nebulon_axe.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 121,
+        "name": "Hírviveny",
+        "image": "lib/assets/market_items/news_letter.png",
+        "description": "",
+        "price": 0,
+        "category": "misc"
+    },
+    {
+        "id": 122,
+        "name": "Makk",
+        "image": "lib/assets/market_items/nut.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 123,
+        "name": "Onüx",
+        "image": "lib/assets/market_items/onyx.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 124,
+        "name": "Onüx fejsze",
+        "image": "lib/assets/market_items/onyx_axe.png",
+        "description": "",
+        "price": 1000,
+        "category": "weapon"
+    },
+    {
+        "id": 125,
+        "name": "Onüx csizma",
+        "image": "lib/assets/market_items/onyx_boot_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 126,
+        "name": "Fejleszett Onüx csizma",
+        "image": "lib/assets/market_items/onyx_boot_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 127,
+        "name": "Onüx mellvért",
+        "image": "lib/assets/market_items/onyx_chestplate_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 128,
+        "name": "Fejlesztet Onüx mellvért",
+        "image": "lib/assets/market_items/onyx_chestplate_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 129,
+        "name": "Onüx kesztyű",
+        "image": "lib/assets/market_items/onyx_fist_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 130,
+        "name": "Fejlesztett onüx kesztyű",
+        "image": "lib/assets/market_items/onyx_fist_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 131,
+        "name": "Onüx kalapács",
+        "image": "lib/assets/market_items/onyx_hammer.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 132,
+        "name": "Onüx sisak",
+        "image": "lib/assets/market_items/onyx_helmet_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 133,
+        "name": "Fejlesztett Onüx sisak",
+        "image": "lib/assets/market_items/onyx_helmet_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 134,
+        "name": "Onüx kard",
+        "image": "lib/assets/market_items/onyx_sword.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 135,
+        "name": "Orion",
+        "image": "lib/assets/market_items/orion.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 136,
+        "name": "Papírdarab",
+        "image": "lib/assets/market_items/paper_piece.png",
+        "description": "",
+        "price": 0,
+        "category": "misc"
+    },
+    {
+        "id": 137,
+        "name": "Méreg bájital (nagy)",
+        "image": "lib/assets/market_items/poison_large.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 138,
+        "name": "Méreg bájital (közepes)",
+        "image": "lib/assets/market_items/poison_medium.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 139,
+        "name": "Méreg bájital (kicsi)",
+        "image": "lib/assets/market_items/poison_small.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 140,
+        "name": "Pityóka",
+        "image": "lib/assets/market_items/potato.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 141,
+        "name": "Razor kardja",
+        "image": "lib/assets/market_items/razor_sword.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 142,
+        "name": "Piros alma",
+        "image": "lib/assets/market_items/red_apple.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 143,
+        "name": "Piros fúró",
+        "image": "lib/assets/market_items/red_drill.png",
+        "description": "",
+        "price": 0,
+        "category": "tool"
+    },
+    {
+        "id": 144,
+        "name": "Piros gomba",
+        "image": "lib/assets/market_items/red_fungus.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 145,
+        "name": "Tojás",
+        "image": "lib/assets/market_items/regular_egg.png",
+        "description": "Egy csirke adományozta.",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 146,
+        "name": "Sima kulcs",
+        "image": "lib/assets/market_items/regular_key.png",
+        "description": "",
+        "price": 0,
+        "category": "loot"
+    },
+    {
+        "id": 147,
+        "name": "Leárazó bájital (nagy)",
+        "image": "lib/assets/market_items/salesoff_large.png",
+        "description": "24 órán át 30%-kal olcsóbban tudsz vásárolni.",
+        "price": 808,
+        "category": "potion"
+    },
+    {
+        "id": 148,
+        "name": "Leárazó bájital (közepes)",
+        "image": "lib/assets/market_items/salesoff_medium.png",
+        "description": "24 órán át 20%-kal olcsóbban tudsz vásárolni.",
+        "price": 510,
+        "category": "potion"
+    },
+    {
+        "id": 149,
+        "name": "Leárazó bájital (kicsi)",
+        "image": "lib/assets/market_items/salesoff_small.png",
+        "description": "24 órán át 10%-kal olcsóbban tudsz vásárolni.",
+        "price": 210,
+        "category": "potion"
+    },
+    {
+        "id": 150,
+        "name": "Só",
+        "image": "lib/assets/market_items/salt.png",
+        "description": "",
+        "price": 0,
+        "category": "food"
+    },
+    {
+        "id": 151,
+        "name": "Szelenit",
+        "image": "lib/assets/market_items/selenite.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 152,
+        "name": "Koponya",
+        "image": "lib/assets/market_items/skull.png",
+        "description": "",
+        "price": 0,
+        "category": "misc"
+    },
+    {
+        "id": 153,
+        "name": "Havas golyó",
+        "image": "lib/assets/market_items/snowy_ball.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 154,
+        "name": "Starshatter Kard",
+        "image": "lib/assets/market_items/starshatter_sword.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 155,
+        "name": "Eper",
+        "image": "lib/assets/market_items/strawberry.png",
+        "description": "1 gyümölcs",
+        "price": 20,
+        "category": "food"
+    },
+    {
+        "id": 156,
+        "name": "Technorite",
+        "image": "lib/assets/market_items/technorite.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 157,
+        "name": "Technorite fejsze",
+        "image": "lib/assets/market_items/technorite_axe.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 158,
+        "name": "Technorite csizma",
+        "image": "lib/assets/market_items/technorite_boot_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 159,
+        "name": "Fejlesztett Technorite csizma",
+        "image": "lib/assets/market_items/technorite_boot_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 160,
+        "name": "Technorite íjj",
+        "image": "lib/assets/market_items/technorite_bow.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 161,
+        "name": "Technorite mellvért",
+        "image": "lib/assets/market_items/technorite_chestplate_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 162,
+        "name": "Fejlesztet Technorite mellvért",
+        "image": "lib/assets/market_items/technorite_chestplate_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 163,
+        "name": "Technorite kesztyű",
+        "image": "lib/assets/market_items/technorite_fist_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 164,
+        "name": "Fejlesztett Technorite kesztyű",
+        "image": "lib/assets/market_items/technorite_fist_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 165,
+        "name": "Technorite kalapács",
+        "image": "lib/assets/market_items/technorite_hammer.png",
+        "description": "",
+        "price": 0,
+        "category": "weapon"
+    },
+    {
+        "id": 166,
+        "name": "Technorite sisak",
+        "image": "lib/assets/market_items/technorite_helmet_1.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 167,
+        "name": "Fejlesztett Technorite sisak",
+        "image": "lib/assets/market_items/technorite_helmet_2.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 168,
+        "name": "Technorite nyaklánc",
+        "image": "lib/assets/market_items/technorite_necklace.png",
+        "description": "",
+        "price": 0,
+        "category": "loot"
+    },
+    {
+        "id": 169,
+        "name": "Technorite rúd",
+        "image": "lib/assets/market_items/technorite_rod.png",
+        "description": "",
+        "price": 0,
+        "category": "ore"
+    },
+    {
+        "id": 170,
+        "name": "Technorite pajzs",
+        "image": "lib/assets/market_items/technorite_shield.png",
+        "description": "",
+        "price": 0,
+        "category": "armor"
+    },
+    {
+        "id": 171,
+        "name": "Technorite talizmán",
+        "image": "lib/assets/market_items/technorite_talisman.png",
+        "description": "",
+        "price": 1666,
+        "category": "loot"
+    },
+    {
+        "id": 172,
+        "name": "Topáz",
+        "image": "lib/assets/market_items/topaz.png",
+        "description": "(Előállításának publikációs jogáért jelenleg is küzd csapatunk.)",
+        "price": 850,
+        "category": "ore"
+    },
+    {
+        "id": 173,
+        "name": "Topáz csizma",
+        "image": "lib/assets/market_items/topaz_boot_1.png",
+        "description": "Ha el is üt egy autóbusz, ebben a talpad biztonságban van, az fix.",
+        "price": 800,
+        "category": "armor"
+    },
+    {
+        "id": 174,
+        "name": "Fejlesztett Topáz csizma",
+        "image": "lib/assets/market_items/topaz_boot_2.png",
+        "description": "Ellítólag a közmondásban ilyen cipőt húz a nyúl.",
+        "price": 850,
+        "category": "armor"
+    },
+    {
+        "id": 175,
+        "name": "Topáz mellvért",
+        "image": "lib/assets/market_items/topaz_chestplate_1.png",
+        "description": "Másodpercek alatt megolvad rajta a támadó fegyver.",
+        "price": 870,
+        "category": "armor"
+    },
+    {
+        "id": 176,
+        "name": "Fejlesztett Topáz mellvért",
+        "image": "lib/assets/market_items/topaz_chestplate_2.png",
+        "description": "A szupertopadilis-surlódásnak köszönhetően, azelött megolvad a legtöbb fegyver, hogy érintkezésbe lépne vele.",
+        "price": 970,
+        "category": "armor"
+    },
+    {
+        "id": 177,
+        "name": "Topáz kesztyű",
+        "image": "lib/assets/market_items/topaz_fist_1.png",
+        "description": "Ezzel a kezeden senki sem mer visszaszólni.",
+        "price": 840,
+        "category": "armor"
+    },
+    {
+        "id": 178,
+        "name": "Fejlesztett Topáz kesztyű",
+        "image": "lib/assets/market_items/topaz_fist_2.png",
+        "description": "Ezzel a kezeden még Keanu Reeves sem mer visszaszólni.",
+        "price": 875,
+        "category": "armor"
+    },
+    {
+        "id": 179,
+        "name": "Topáz sisak",
+        "image": "lib/assets/market_items/topaz_helmet_1.png",
+        "description": "Aki ránéz, látás károsulást szenvedhet.",
+        "price": 850,
+        "category": "armor"
+    },
+    {
+        "id": 180,
+        "name": "Fejlesztett Topáz sisak",
+        "image": "lib/assets/market_items/topaz_helmet_2.png",
+        "description": "Számos magánhadseregben az előírt felszerelés része.",
+        "price": 901,
+        "category": "armor"
+    },
+    {
+        "id": 181,
+        "name": "Tribol",
+        "image": "lib/assets/market_items/tribol.png",
+        "description": "Mostmár nem mernek tribolt bányászni a bányákban történt démoni jelenségek miatt, ezért az ára folyton emelkedik.",
+        "price": 1500,
+        "category": "ore"
+    },
+    {
+        "id": 182,
+        "name": "Tribol fejsze",
+        "image": "lib/assets/market_items/tribol_axe.png",
+        "description": "A tribol fejszét, mint egy mágnes, vonzza az ellenség testhője. Megállíthatatlan fegyver...",
+        "price": 1497,
+        "category": "weapon"
+    },
+    {
+        "id": 183,
+        "name": "Tribol csizma",
+        "image": "lib/assets/market_items/tribol_boot_1.png",
+        "description": "Egy csizma tribolból. Semmi különös.",
+        "price": 1100,
+        "category": "armor"
+    },
+    {
+        "id": 184,
+        "name": "Fejlesztett Tribol csizma",
+        "image": "lib/assets/market_items/tribol_boot_2.png",
+        "description": "Az ötvözött tribol csizma -10 killogrammot nyom, úgyhogy gyorsabban lehet benne futni. Vigyázz, nehogy elszáljon...",
+        "price": 1600,
+        "category": "armor"
+    },
+    {
+        "id": 185,
+        "name": "Tribol mellvért",
+        "image": "lib/assets/market_items/tribol_chestplate_1.png",
+        "description": "Tribol önmagában nem egy ellenálló anyag. Jobb helyeken betiltották...",
+        "price": 1000,
+        "category": "armor"
+    },
+    {
+        "id": 186,
+        "name": "Fejlesztett Tribol mellvért",
+        "image": "lib/assets/market_items/tribol_chestplate_2.png",
+        "description": "Keleti papok áldásával egy sokkal erősebb vértezetet kapunk.",
+        "price": 1333,
+        "category": "armor"
+    },
+    {
+        "id": 187,
+        "name": "Tribol kesztyű",
+        "image": "lib/assets/market_items/tribol_fist_1.png",
+        "description": "Azoknak az uraknak, akik nem akarnak egy vagyont költeni a kesztyűjükre.",
+        "price": 999,
+        "category": "armor"
+    },
+    {
+        "id": 188,
+        "name": "Fejlesztett Tribol kesztyű",
+        "image": "lib/assets/market_items/tribol_fist_2.png",
+        "description": "Balesetveszélyes, ezért sokan be szeretnék tiltatni...",
+        "price": 1250,
+        "category": "armor"
+    },
+    {
+        "id": 189,
+        "name": "Tribol kalapács",
+        "image": "lib/assets/market_items/tribol_hammer.png",
+        "description": "Másodpercenként akár 10x is lesúlythatsz.",
+        "price": 1467,
+        "category": "weapon"
+    },
+    {
+        "id": 190,
+        "name": "Tribol sisak",
+        "image": "lib/assets/market_items/tribol_helmet_1.png",
+        "description": "Meglehetősen könnyű.",
+        "price": 1100,
+        "category": "armor"
+    },
+    {
+        "id": 191,
+        "name": "Fejlesztett Tribol sisak",
+        "image": "lib/assets/market_items/tribol_helmet_2.png",
+        "description": "Olyan könnyű, hogy fel sem tűnik, ha valaki titokban a fejedre rakja.",
+        "price": 1350,
+        "category": "armor"
+    },
+    {
+        "id": 192,
+        "name": "Topáz kard",
+        "image": "lib/assets/market_items/tropaz_sword.png",
+        "description": "Mestereink jelenleg is kutatják, hogy lehet topázból kardot készíteni... Ezt a pár darabor kerekedők hozták messzi földről.",
+        "price": 890,
+        "category": "weapon"
+    },
+    {
+        "id": 193,
+        "name": "Voidrender Kard",
+        "image": "lib/assets/market_items/voidrender_sword.png",
+        "description": "Pontos eredete a feledés homályába vész, de szörnyű dolgokat suttognak róla...",
+        "price": 420,
+        "category": "weapon"
+    },
+    {
+        "id": 194,
+        "name": "Fa pajzs",
+        "image": "lib/assets/market_items/wooden_shield.png",
+        "description": "Esetleges tyúktámadás ellen...",
+        "price": 100,
+        "category": "armor"
+    },
+    {
+        "id": 195,
+        "name": "Írott papír",
+        "image": "lib/assets/market_items/written_paper.png",
+        "description": "Az öt bölcs elveszett próféciáival",
+        "price": 666,
+        "category": "misc"
+    },
+    {
+        "id": 196,
+        "name": "XP Könyv 30",
+        "image": "lib/assets/market_items/xpbook-30.png",
+        "description": "",
+        "price": 0,
+        "category": "xp"
+    },
+    {
+        "id": 197,
+        "name": "XP Könyv 50",
+        "image": "lib/assets/market_items/xpbook50.png",
+        "description": "",
+        "price": 0,
+        "category": "xp"
+    },
+    {
+        "id": 198,
+        "name": "XP Könyv 10",
+        "image": "lib/assets/market_items/xpbook_10.png",
+        "description": "",
+        "price": 0,
+        "category": "xp"
+    },
+    {
+        "id": 199,
+        "name": "XP Könyv 100",
+        "image": "lib/assets/market_items/xpbook_100.png",
+        "description": "",
+        "price": 0,
+        "category": "xp"
+    },
+    {
+        "id": 200,
+        "name": "XP Könyv 20",
+        "image": "lib/assets/market_items/xpbook_20.png",
+        "description": "",
+        "price": 0,
+        "category": "xp"
+    },
+    {
+        "id": 201,
+        "name": "XP Könyv 40",
+        "image": "lib/assets/market_items/xpbook_40.png",
+        "description": "",
+        "price": 0,
+        "category": "xp"
+    },
+    {
+        "id": 202,
+        "name": "XP Bájital (nagy)",
+        "image": "lib/assets/market_items/xp_large.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 203,
+        "name": "XP Bájital (közepes)",
+        "image": "lib/assets/market_items/xp_medium.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 204,
+        "name": "XP Bájital (kicsi)",
+        "image": "lib/assets/market_items/xp_small.png",
+        "description": "",
+        "price": 0,
+        "category": "potion"
+    },
+    {
+        "id": 205,
+        "name": "Sárga csillag",
+        "image": "lib/assets/market_items/yellow_star.png",
+        "description": "A felkelő nap országából",
+        "price": 20,
+        "category": "misc"
+    }
+]
