@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/home_page.dart'; // Your Dashboard Page
 import 'package:habiquest/pages/market_page.dart';
+import 'package:habiquest/pages/statistics_page.dart';
 import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -26,9 +27,9 @@ class _HoldingPageState extends State<HoldingPage> {
         return const HomePage();
       case PageType.market:
         return const MarketPage();
-      default:
-        return const Center(child: Text("Page not found"));
-    }
+      case PageType.statistics:
+        return const StatisticsPage();
+      }
   }
 
   // Map PageType to Titles

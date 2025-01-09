@@ -31,10 +31,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: const Text('Statisztikák'),
-      ),
+      
       body: FutureBuilder(
         future: getUserHabits(),
         builder: (context, snapshot) {
