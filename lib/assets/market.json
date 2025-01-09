@@ -267,7 +267,7 @@
         "id": 34,
         "name": "Bronz csizma",
         "image": "lib/assets/market_items/copper_boot_1.png",
-        "description": "A bronz páncélzat kezdésnek jó védelmet biztosí",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
         "price": 250,
         "category": "armor"
     },
@@ -275,7 +275,7 @@
         "id": 35,
         "name": "Fejlesztett bronz csizma",
         "image": "lib/assets/market_items/copper_boot_2.png",
-        "description": "A bronz páncélzat kezdésnek jó védelmet biztosí",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
         "price": 300,
         "category": "armor"
     },
@@ -283,7 +283,7 @@
         "id": 36,
         "name": "Bronz mellvért",
         "image": "lib/assets/market_items/copper_chestplate_1.png",
-        "description": "A bronz páncélzat kezdésnek jó védelmet biztosí",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
         "price": 280,
         "category": "armor"
     },
@@ -291,7 +291,7 @@
         "id": 37,
         "name": "Fejlesztett bronz mellvért",
         "image": "lib/assets/market_items/copper_chestplate_2.png",
-        "description": "A bronz páncélzat kezdésnek jó védelmet biztosí",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
         "price": 330,
         "category": ""
     },
@@ -299,7 +299,7 @@
         "id": 38,
         "name": "Bronz kesztyű",
         "image": "lib/assets/market_items/copper_fist_1.png",
-        "description": "A bronz páncélzat kezdésnek jó védelmet biztosí",
+        "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
         "price": 240,
         "category": "armor"
     },

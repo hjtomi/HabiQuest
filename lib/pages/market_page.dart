@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:habiquest/components/MarketHolder.dart';
 import 'package:habiquest/components/MarketItem.dart';
 import 'package:habiquest/utils/MarketJSONConverter.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class MarketPage extends StatefulWidget {
   const MarketPage({super.key});
@@ -29,13 +31,29 @@ class _MarketPageState extends State<MarketPage> {
                 labelColor: Theme.of(context).colorScheme.secondary,
                 indicatorColor: Theme.of(context).colorScheme.secondary,
                 isScrollable: true,
+                tabAlignment: TabAlignment.start,
                 tabs: [
-                  Tab(icon: Text("Fegyverek")),
-                  Tab(icon: Text("Páncélok")),
-                  Tab(icon: Text("Ételek")),
-                  Tab(icon: Text("Bájitalok")),
-                  Tab(icon: Text("Kozmetikák")),
-                  Tab(icon: Text("Egyebek")),
+                  Tab(text: "Fegyverek", icon: Icon(LucideIcons.sword)),
+                  Tab(
+                    text: "Páncélok",
+                    icon: Icon(LucideIcons.shield),
+                  ),
+                  Tab(
+                    text: "Ételek",
+                    icon: Icon(LucideIcons.beef),
+                  ),
+                  Tab(
+                    text: "Bájitalok",
+                    icon: Icon(LucideIcons.flaskConical),
+                  ),
+                  Tab(
+                    text: "Kozmetikák",
+                    icon: Icon(LucideIcons.shirt),
+                  ),
+                  Tab(
+                    text: "Egyébb",
+                    icon: Icon(LucideIcons.circleEllipsis),
+                  ),
                 ]),
             body: TabBarView(children: [
               CategoryHolder(category: "weapon"),

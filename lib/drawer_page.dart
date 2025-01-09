@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/home_page.dart'; // Your Dashboard Page
 import 'package:habiquest/pages/market_page.dart';
+import 'package:linear_progress_bar/linear_progress_bar.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 enum PageType { dashboard, market, statistics }
 
@@ -15,13 +17,13 @@ class HoldingPage extends StatefulWidget {
 }
 
 class _HoldingPageState extends State<HoldingPage> {
-  PageType _selectedPage = PageType.market;
+  PageType _selectedPage = PageType.dashboard;
 
   // Map PageType to Widgets
   Widget _getPage(PageType page) {
     switch (page) {
       case PageType.dashboard:
-        return const HomePage(); // Replace with your Dashboard page
+        return const HomePage();
       case PageType.market:
         return const MarketPage();
       default:
@@ -75,11 +77,69 @@ class _HoldingPageState extends State<HoldingPage> {
     }
   }
 
+  Stream<int?> _userBalanceStream() {
+    final userId = Auth().currentUser?.uid;
+    if (userId == null) {
+      return const Stream<int?>.empty();
+    }
+
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .snapshots()
+        .map((snapshot) => snapshot.data()?['balance'] as int?);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(_getPageTitle(_selectedPage)),
+        actions: [
+          StreamBuilder<int?>(
+            stream: _userBalanceStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              } else if (snapshot.hasError || !snapshot.hasData) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Center(
+                    child: Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                  ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.paid,
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      Text(
+                        '${snapshot.data!}',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -118,7 +178,7 @@ class _HoldingPageState extends State<HoldingPage> {
               },
               selected: _selectedPage == PageType.dashboard,
               selectedColor: Theme.of(context).colorScheme.secondary,
-              leading: const Icon(Icons.dashboard),
+              leading: const Icon(LucideIcons.layoutDashboard),
               title: const Text("Dashboard"),
             ),
             ListTile(
@@ -130,7 +190,7 @@ class _HoldingPageState extends State<HoldingPage> {
               },
               selected: _selectedPage == PageType.market,
               selectedColor: Theme.of(context).colorScheme.secondary,
-              leading: const Icon(Icons.storefront),
+              leading: const Icon(LucideIcons.store),
               title: const Text("Piactér"),
             ),
             ListTile(
@@ -142,13 +202,117 @@ class _HoldingPageState extends State<HoldingPage> {
               },
               selected: _selectedPage == PageType.statistics,
               selectedColor: Theme.of(context).colorScheme.secondary,
-              leading: const Icon(Icons.insert_chart_outlined_rounded),
+              leading: const Icon(LucideIcons.areaChart),
               title: const Text("Statistics"),
             ),
           ],
         ),
       ),
-      body: _getPage(_selectedPage), // Load the selected page dynamically
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+            child: Card(
+              color: Colors.grey[900],
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _character != null
+                      ? Image(
+                          fit: BoxFit.contain,
+                          width: 150,
+                          height: 150,
+                          image: AssetImage(
+                              'lib/assets/skins/skin-$_character.png'),
+                        )
+                      : const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.person, size: 100),
+                        ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text(
+                                      "Életerő",
+                                    ),
+                                  ],
+                                ),
+                                LinearProgressIndicator(
+                                  minHeight: 6,
+                                  value: 0.5, // Must be between 0.0 and 1.0
+                                  backgroundColor: Colors.black12,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text(
+                                      "Védelem",
+                                    ),
+                                  ],
+                                ),
+                                LinearProgressIndicator(
+                                  minHeight: 6,
+                                  value: 0.3, // Must be between 0.0 and 1.0
+                                  backgroundColor: Colors.black12,
+                                  color: Colors.green,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text(
+                                      "TP",
+                                    ),
+                                  ],
+                                ),
+                                LinearProgressIndicator(
+                                    minHeight: 6,
+                                    value: 0.7, // Must be between 0.0 and 1.0
+                                    backgroundColor: Colors.black12,
+                                    color: Colors.blue),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: _getPage(_selectedPage),
+          ),
+        ],
+      ),
+
+      // Load the selected page dynamically
     );
   }
 }

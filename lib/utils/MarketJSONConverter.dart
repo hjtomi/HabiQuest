@@ -6,7 +6,7 @@ class Item {
   final String name;
   final String image;
   final String description;
-  final double price;
+  final int price;
   final String category;
 
   Item({
@@ -24,7 +24,7 @@ class Item {
       name: json['name'],
       image: json['image'],
       description: json['description'],
-      price: json['price'].toDouble(),
+      price: json['price'],
       category: json['category'],
     );
   }
