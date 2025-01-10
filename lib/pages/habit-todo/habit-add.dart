@@ -78,33 +78,27 @@ class _HabitAddState extends State<HabitAdd> {
                 const SizedBox(height: 16),
                 _buildFrequencySelector(),
                 const SizedBox(height: 16),
-                _buildRepetitionField(),
-                const SizedBox(height: 16),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.blue),
-                  ),
+                FilledButton(
                   onPressed: () async {
-                    DateTime? date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                    );
-                    if (date != null) {
-                      setState(() {
-                        _startDate = date;
+                    if (_formKey.currentState!.validate()) {
+                      await firestoreAddOrUpdateHabit({
+                        'cim': _cimController.text,
+                        'megjegyzes': _megjegyzesController.text,
+                        'nehezseg': _selectedDifficulty.index,
+                        'gyakorisag': _convertFrequency(_selectedFrequency),
+                        'ismetles': _repetitions,
+                        'kezdes': _startDate,
+                        'kesz': _isComplete,
+                        'streak': _streak,
                       });
+                      Navigator.of(context).pop();
                     }
                   },
-                  child: Text(
-                    _startDate == null
-                        ? 'Kezdés idejének kiválasztása'
-                        : 'Kezdés ideje: ${_startDate!.toLocal().toString().split(' ')[0]}',
-                    style: const TextStyle(fontSize: 16),
+                  child: const Text(
+                    'Hozzáadás',
+                    style: TextStyle(color: AppColors.white),
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -212,34 +206,6 @@ class _HabitAddState extends State<HabitAdd> {
               _selectedFrequency = newSelection.first;
             });
           },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRepetitionField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Ismétlődés (Hány alkalom):"),
-        TextField(
-          keyboardType: TextInputType.number,
-          controller: TextEditingController(text: _repetitions.toString()),
-          onChanged: (value) {
-            setState(() {
-              _repetitions = int.tryParse(value) ?? 1;
-            });
-          },
-          decoration: const InputDecoration(
-            labelText: "Ismétlődés",
-            labelStyle: TextStyle(color: AppColors.white),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.secondary),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.secondary),
-            ),
-          ),
         ),
       ],
     );
