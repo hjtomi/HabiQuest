@@ -30,7 +30,7 @@ Drawer drawer(BuildContext context) {
           child: Card(
             color: Colors.grey[900],
             child: ListTile(
-              contentPadding: EdgeInsets.all(8),
+              contentPadding: const EdgeInsets.all(8),
               trailing: IconButton(
                 icon: const Icon(Icons.logout_outlined),
                 onPressed: Auth().signOut,
@@ -40,8 +40,8 @@ Drawer drawer(BuildContext context) {
                       fit: BoxFit.cover,
                       width: 80,
                       height: 80,
-                      image: AssetImage(
-                          'lib/assets/skins/skin-$characterId.png'),
+                      image:
+                          AssetImage('lib/assets/skins/skin-$characterId.png'),
                     )
                   : const Icon(
                       Icons.person), // Fallback icon if character is null
@@ -53,15 +53,14 @@ Drawer drawer(BuildContext context) {
           ),
         ),
         ListTile(
-          leading: const Icon(Icons.insert_chart_outlined_rounded),
-          title: const Text('Statisztikák'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const StatisticsPage()),
-            );
-          }
-        ),
+            leading: const Icon(Icons.insert_chart_outlined_rounded),
+            title: const Text('Statisztikák'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const StatisticsPage()),
+              );
+            }),
         const ListTile(
           leading: Icon(Icons.storefront),
           title: Text('Piactér'),

@@ -5,7 +5,6 @@ import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/home_page.dart'; // Your Dashboard Page
 import 'package:habiquest/pages/market_page.dart';
 import 'package:habiquest/pages/statistics_page.dart';
-import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 enum PageType { dashboard, market, statistics }
@@ -29,7 +28,7 @@ class _HoldingPageState extends State<HoldingPage> {
         return const MarketPage();
       case PageType.statistics:
         return const StatisticsPage();
-      }
+    }
   }
 
   // Map PageType to Titles
@@ -260,11 +259,11 @@ class _HoldingPageState extends State<HoldingPage> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
                             child: Column(
                               children: [
-                                const Row(
+                                Row(
                                   children: [
                                     Text(
                                       "Védelem",
@@ -280,11 +279,11 @@ class _HoldingPageState extends State<HoldingPage> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
                             child: Column(
                               children: [
-                                const Row(
+                                Row(
                                   children: [
                                     Text(
                                       "TP",

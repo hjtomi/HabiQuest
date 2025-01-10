@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/utils/MarketJSONConverter.dart';
-import 'package:habiquest/utils/theme/AppColors.dart';
-import 'package:habiquest/utils/theme/AppTheme.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 class MarketItem extends StatelessWidget {
@@ -90,6 +88,7 @@ class MarketItem extends StatelessWidget {
                         onSubmit: () {
                           Navigator.of(context).pop();
                           _updateBalance(item.price);
+                          return null;
                         },
                         outerColor: Theme.of(context).colorScheme.secondary,
                         text: item.price.toString(),

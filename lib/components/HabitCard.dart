@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:habiquest/firebase/query/habitHandle.dart';
 
 class HabitTile extends StatefulWidget {
   final String title; // Add a final field for the title
+  final bool state;
+  final String id;
 
   const HabitTile(
-      {super.key, required this.title}); // Assign the title in the constructor
+      {super.key,
+      required this.title,
+      required this.state,
+      required this.id}); // Assign the title in the constructor
 
   @override
   State<HabitTile> createState() => _HabitTileState();
 }
 
 class _HabitTileState extends State<HabitTile> {
-  bool isOn = false; // State variable to track on/off status
+  late bool isOn; // State variable to track on/off status
+  void initState() {
+    super.initState();
+    isOn = widget.state; // Initialize the variable in initState
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +36,7 @@ class _HabitTileState extends State<HabitTile> {
               setState(() {
                 isOn = !isOn; // Toggle the state
               });
+              firestoreCompleteHabit(habitId: widget.id, updatedState: isOn);
             },
             icon: const Icon(Icons.check), // Change icon
             style: IconButton.styleFrom(

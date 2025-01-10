@@ -1,10 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/habit_page.dart';
-import 'package:habiquest/pages/login_page.dart';
-import 'package:habiquest/pages/statistics_page.dart';
 import 'package:habiquest/pages/todo_page.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 

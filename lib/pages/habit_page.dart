@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habiquest/pages/habit-todo/habit-edit.dart';
 import 'package:habiquest/components/HabitCard.dart';
 import 'package:habiquest/pages/habit-todo/habit-add.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class HabitPage extends StatefulWidget {
@@ -46,36 +45,10 @@ class _HabitPageState extends State<HabitPage> {
             itemBuilder: (context, index) {
               final habitData = habits[index].data() as Map<String, dynamic>;
               final habitTitle = habitData['cim'] ?? 'Untitled';
-              return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => HabitEdit(
-                        teendo: habitData,
-                        index: index,
-                        mentTeendo: (index, cim, megjegyzes, nehezseg, gyakorisag, ismetles, kezdIdo, kesz, streak) {
-                          FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(user?.uid ?? 'anonymous')
-                              .collection('habits')
-                              .doc(habits[index].id)
-                              .update({
-                            'cim': cim,
-                            'megjegyzes': megjegyzes,
-                            'nehezseg': nehezseg,
-                            'gyakorisag': gyakorisag,
-                            'ismetles': ismetles,
-                            'kezdes': kezdIdo,
-                            'kesz': kesz,
-                            'streak': streak,
-                          });
-                        },
-                      ),
-                    ),
-                  );
-                },
-                child: HabitTile(title: habitTitle),
-              );
+              final habitId = habits[index].id;
+              final habitState = habitData['kesz'];
+              return HabitTile(
+                  title: habitTitle, id: habitId, state: habitState);
             },
           );
         },

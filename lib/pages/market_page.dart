@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:habiquest/components/MarketHolder.dart';
-import 'package:habiquest/components/MarketItem.dart';
 import 'package:habiquest/utils/MarketJSONConverter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -32,7 +30,7 @@ class _MarketPageState extends State<MarketPage> {
                 indicatorColor: Theme.of(context).colorScheme.secondary,
                 isScrollable: true,
                 tabAlignment: TabAlignment.start,
-                tabs: [
+                tabs: const [
                   Tab(text: "Fegyverek", icon: Icon(LucideIcons.sword)),
                   Tab(
                     text: "Páncélok",
@@ -55,7 +53,7 @@ class _MarketPageState extends State<MarketPage> {
                     icon: Icon(LucideIcons.circleEllipsis),
                   ),
                 ]),
-            body: TabBarView(children: [
+            body: const TabBarView(children: [
               CategoryHolder(category: "weapon"),
               CategoryHolder(category: "armor"),
               CategoryHolder(category: "food"),

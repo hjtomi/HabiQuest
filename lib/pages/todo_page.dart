@@ -47,7 +47,8 @@ class _TodoPageState extends State<TodoPage> {
               return Card(
                 child: ListTile(
                   title: Text(todoTitle),
-                  subtitle: Text('Határidő: ${todoData['hatarido'].toDate().toLocal().toString().split(' ')[0]}'),
+                  subtitle: Text(
+                      'Határidő: ${todoData['hatarido'].toDate().toLocal().toString().split(' ')[0]}'),
                   trailing: Checkbox(
                     value: todoData['kesz'],
                     onChanged: (value) {
@@ -71,7 +72,8 @@ class _TodoPageState extends State<TodoPage> {
                         builder: (context) => TodoEdit(
                           teendo: todoData,
                           index: index,
-                          mentTeendo: (index, cim, megjegyzes, nehezseg, hatarido) {
+                          mentTeendo:
+                              (index, cim, megjegyzes, nehezseg, hatarido) {
                             FirebaseFirestore.instance
                                 .collection('users')
                                 .doc(user?.uid ?? 'anonymous')
@@ -97,7 +99,7 @@ class _TodoPageState extends State<TodoPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
-        child: Icon(LucideIcons.plus),
+        child: const Icon(LucideIcons.plus),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

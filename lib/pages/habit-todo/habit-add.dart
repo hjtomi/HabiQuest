@@ -4,6 +4,14 @@ import 'package:habiquest/utils/theme/AppColors.dart';
 
 enum Calendar { daily, weekly, monthly }
 
+enum Difficulties { easy, moderate, hard }
+
+const List<(Difficulties, String)> difficultyOptions = <(Difficulties, String)>[
+  (Difficulties.easy, 'Könnyű'),
+  (Difficulties.moderate, 'Mérsékelt'),
+  (Difficulties.hard, 'Nehéz'),
+];
+
 class HabitAdd extends StatefulWidget {
   const HabitAdd({super.key});
 
@@ -14,13 +22,12 @@ class HabitAdd extends StatefulWidget {
 class _HabitAddState extends State<HabitAdd> {
   final TextEditingController _cimController = TextEditingController();
   final TextEditingController _megjegyzesController = TextEditingController();
-  double _kivalasztottNehezseg = 1;
-  int _kivalasztottGyakorisag = 1;
-  int _kivalasztottIsmetles = 1;
-  Calendar calendarView = Calendar.daily;
-  DateTime? _kezdesIdo;
-  bool _kesz = false;
-  int _streak = 0;
+  Difficulties _selectedDifficulty = Difficulties.moderate;
+  Calendar _selectedFrequency = Calendar.daily;
+  int _repetitions = 1;
+  DateTime? _startDate;
+  final bool _isComplete = false;
+  final int _streak = 0;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -36,12 +43,12 @@ class _HabitAddState extends State<HabitAdd> {
                 await firestoreAddOrUpdateHabit({
                   'cim': _cimController.text,
                   'megjegyzes': _megjegyzesController.text,
-                  'nehezseg': _kivalasztottNehezseg,
-                  'gyakorisag': _convertGyakorisag(_kivalasztottGyakorisag),
-                  'ismetles': _kivalasztottIsmetles,
-                  'kezdes': _kezdesIdo,
-                  'kesz': _kesz,
-                  'streak': _streak
+                  'nehezseg': _selectedDifficulty.index,
+                  'gyakorisag': _convertFrequency(_selectedFrequency),
+                  'ismetles': _repetitions,
+                  'kezdes': _startDate,
+                  'kesz': _isComplete,
+                  'streak': _streak,
                 });
                 Navigator.of(context).pop();
               }
@@ -67,30 +74,34 @@ class _HabitAddState extends State<HabitAdd> {
                 _buildInputField(_megjegyzesController, 'Megjegyzés',
                     maxLines: 5),
                 const SizedBox(height: 16),
-                _buildNehezsegValaszto(),
+                _buildDifficultySelector(),
                 const SizedBox(height: 16),
-                _buildGyakorisagValaszto(),
+                _buildFrequencySelector(),
                 const SizedBox(height: 16),
-                _buildIsmetlesValaszto(),
+                _buildRepetitionField(),
                 const SizedBox(height: 16),
                 TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.blue),
+                  ),
                   onPressed: () async {
-                    DateTime? datum = await showDatePicker(
+                    DateTime? date = await showDatePicker(
                       context: context,
                       initialDate: DateTime.now(),
                       firstDate: DateTime.now(),
                       lastDate: DateTime(2100),
                     );
-                    if (datum != null) {
+                    if (date != null) {
                       setState(() {
-                        _kezdesIdo = datum;
+                        _startDate = date;
                       });
                     }
                   },
                   child: Text(
-                    _kezdesIdo == null
+                    _startDate == null
                         ? 'Kezdés idejének kiválasztása'
-                        : 'Kezdés ideje: ${_kezdesIdo!.toLocal().toString().split(' ')[0]}',
+                        : 'Kezdés ideje: ${_startDate!.toLocal().toString().split(' ')[0]}',
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),
@@ -102,17 +113,14 @@ class _HabitAddState extends State<HabitAdd> {
     );
   }
 
-  int _convertGyakorisag(int gyakorisag) {
-    switch (gyakorisag) {
-      case 0:
+  int _convertFrequency(Calendar frequency) {
+    switch (frequency) {
+      case Calendar.daily:
         return 1;
-      case 1:
+      case Calendar.weekly:
         return 7;
-      case 2:
-        final month = DateTime.now().month;
-        return _daysInMonth(month);
-      default:
-        return 1;
+      case Calendar.monthly:
+        return _daysInMonth(DateTime.now().month);
     }
   }
 
@@ -129,7 +137,7 @@ class _HabitAddState extends State<HabitAdd> {
       9: 30,
       10: 31,
       11: 30,
-      12: 31
+      12: 31,
     };
     return daysInMonth[month] ?? 30;
   }
@@ -151,65 +159,78 @@ class _HabitAddState extends State<HabitAdd> {
     );
   }
 
-  Widget _buildNehezsegValaszto() {
+  Widget _buildDifficultySelector() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch, // Ensure full width
+      mainAxisAlignment: MainAxisAlignment.center, // Center vertically
       children: [
         Text(
-          _nehezsegSzoveg(_kivalasztottNehezseg.round()),
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          "Nehézség kiválasztása",
+          textAlign: TextAlign.start, // Center-align the text
         ),
-        SizedBox(
-          width: double.infinity,
-          child: Slider(
-            inactiveColor: AppColors.white,
-            activeColor: AppColors.secondary,
-            value: _kivalasztottNehezseg,
-            min: 1,
-            max: 4,
-            divisions: 3,
-            onChanged: (double value) {
-              setState(() {
-                _kivalasztottNehezseg = value;
-              });
-            },
-          ),
+        SegmentedButton<Difficulties>(
+          showSelectedIcon: false,
+          segments: difficultyOptions
+              .map((option) => ButtonSegment<Difficulties>(
+                    value: option.$1,
+                    label: Text(option.$2),
+                  ))
+              .toList(),
+          selected: <Difficulties>{_selectedDifficulty},
+          onSelectionChanged: (Set<Difficulties> newSelection) {
+            setState(() {
+              _selectedDifficulty = newSelection.first;
+            });
+          },
         ),
       ],
     );
   }
 
-  Widget _buildGyakorisagValaszto() {
-    return SegmentedButton<Calendar>(
-      segments: const <ButtonSegment<Calendar>>[
-        ButtonSegment<Calendar>(value: Calendar.daily, label: Text('Naponta')),
-        ButtonSegment<Calendar>(value: Calendar.weekly, label: Text('Hetente')),
-        ButtonSegment<Calendar>(
-            value: Calendar.monthly, label: Text('Havonta')),
+  Widget _buildFrequencySelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch, // Ensure full width
+      mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+      children: [
+        Text(
+          "Gyakorsiág kiválasztása",
+          textAlign: TextAlign.start, // Center-align the text
+        ),
+        SegmentedButton<Calendar>(
+          showSelectedIcon: false,
+          segments: const <ButtonSegment<Calendar>>[
+            ButtonSegment<Calendar>(
+                value: Calendar.daily, label: Text('Naponta')),
+            ButtonSegment<Calendar>(
+                value: Calendar.weekly, label: Text('Hetente')),
+            ButtonSegment<Calendar>(
+                value: Calendar.monthly, label: Text('Havonta')),
+          ],
+          selected: <Calendar>{_selectedFrequency},
+          onSelectionChanged: (Set<Calendar> newSelection) {
+            setState(() {
+              _selectedFrequency = newSelection.first;
+            });
+          },
+        ),
       ],
-      selected: <Calendar>{calendarView},
-      onSelectionChanged: (Set<Calendar> newSelection) {
-        setState(() {
-          calendarView = newSelection.first;
-        });
-      },
     );
   }
 
-  Widget _buildIsmetlesValaszto() {
+  Widget _buildRepetitionField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text("Ismétlődés (Hány alkalom):"),
         TextField(
           keyboardType: TextInputType.number,
-          controller:
-              TextEditingController(text: _kivalasztottIsmetles.toString()),
+          controller: TextEditingController(text: _repetitions.toString()),
           onChanged: (value) {
             setState(() {
-              _kivalasztottIsmetles = int.tryParse(value) ?? 1;
+              _repetitions = int.tryParse(value) ?? 1;
             });
           },
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: "Ismétlődés",
             labelStyle: TextStyle(color: AppColors.white),
             focusedBorder: OutlineInputBorder(
@@ -222,20 +243,5 @@ class _HabitAddState extends State<HabitAdd> {
         ),
       ],
     );
-  }
-
-  String _nehezsegSzoveg(int nehezseg) {
-    switch (nehezseg) {
-      case 0:
-        return "Nagyon könnyű";
-      case 1:
-        return "Nem olyan nehéz";
-      case 2:
-        return "Megeröltető";
-      case 3:
-        return "Komfort zónán kívüli";
-      default:
-        return "";
-    }
   }
 }

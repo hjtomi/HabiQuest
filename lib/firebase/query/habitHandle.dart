@@ -25,3 +25,20 @@ Future<void> firestoreAddOrUpdateHabit(Map<String, dynamic> formData) async {
     print('Error adding or updating form data in Firestore: $e');
   }
 }
+
+Future<void> firestoreCompleteHabit(
+    {required String habitId, required bool updatedState}) async {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  String userId = user?.uid ?? 'anonymous';
+  try {
+    CollectionReference collection = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('habits');
+
+    await collection.doc(habitId).update({'kesz': updatedState});
+  } catch (e) {
+    print('Error adding or updating form data in Firestore: $e');
+  }
+}

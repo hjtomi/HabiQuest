@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/utils/theme/AppColors.dart';
 
@@ -7,7 +6,8 @@ enum Calendar { daily, weekly, monthly }
 class HabitEdit extends StatefulWidget {
   final Map<String, dynamic> teendo;
   final int index;
-  final Function(int, String, String, int, int, int, DateTime?, bool, int) mentTeendo;
+  final Function(int, String, String, int, int, int, DateTime?, bool, int)
+      mentTeendo;
 
   const HabitEdit({
     super.key,
@@ -35,7 +35,8 @@ class _HabitEditState extends State<HabitEdit> {
   void initState() {
     super.initState();
     _cimController = TextEditingController(text: widget.teendo['cim']);
-    _megjegyzesController = TextEditingController(text: widget.teendo['megjegyzes']);
+    _megjegyzesController =
+        TextEditingController(text: widget.teendo['megjegyzes']);
     _kivalasztottNehezseg = widget.teendo['nehezseg'].toDouble();
     _kivalasztottGyakorisag = widget.teendo['gyakorisag'];
     _kivalasztottIsmetles = widget.teendo['ismetles'];
@@ -83,11 +84,11 @@ class _HabitEditState extends State<HabitEdit> {
           children: [
             TextFormField(
               controller: _cimController,
-              decoration: InputDecoration(labelText: 'Cím'),
+              decoration: const InputDecoration(labelText: 'Cím'),
             ),
             TextFormField(
               controller: _megjegyzesController,
-              decoration: InputDecoration(labelText: 'Megjegyzés'),
+              decoration: const InputDecoration(labelText: 'Megjegyzés'),
               maxLines: 5,
             ),
             const SizedBox(height: 16),
@@ -140,8 +141,18 @@ class _HabitEditState extends State<HabitEdit> {
 
   int _daysInMonth(int month) {
     const daysInMonth = {
-      1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-      7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31
+      1: 31,
+      2: 28,
+      3: 31,
+      4: 30,
+      5: 31,
+      6: 30,
+      7: 31,
+      8: 31,
+      9: 30,
+      10: 31,
+      11: 30,
+      12: 31
     };
     return daysInMonth[month] ?? 30;
   }
@@ -173,7 +184,8 @@ class _HabitEditState extends State<HabitEdit> {
       segments: const <ButtonSegment<Calendar>>[
         ButtonSegment<Calendar>(value: Calendar.daily, label: Text('Naponta')),
         ButtonSegment<Calendar>(value: Calendar.weekly, label: Text('Hetente')),
-        ButtonSegment<Calendar>(value: Calendar.monthly, label: Text('Havonta')),
+        ButtonSegment<Calendar>(
+            value: Calendar.monthly, label: Text('Havonta')),
       ],
       selected: <Calendar>{calendarView},
       onSelectionChanged: (Set<Calendar> newSelection) {
@@ -190,13 +202,14 @@ class _HabitEditState extends State<HabitEdit> {
         const Text("Ismétlődés (Hány alkalom):"),
         TextField(
           keyboardType: TextInputType.number,
-          controller: TextEditingController(text: _kivalasztottIsmetles.toString()),
+          controller:
+              TextEditingController(text: _kivalasztottIsmetles.toString()),
           onChanged: (value) {
             setState(() {
               _kivalasztottIsmetles = int.tryParse(value) ?? 1;
             });
           },
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: "Ismétlődés",
             labelStyle: TextStyle(color: AppColors.white),
             focusedBorder: OutlineInputBorder(
