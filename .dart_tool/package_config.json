@@ -194,6 +194,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "gif",
+      "rootUri": "file:///C:/Users/levai/AppData/Local/Pub/Cache/hosted/pub.dev/gif-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "google_identity_services_web",
       "rootUri": "file:///C:/Users/levai/AppData/Local/Pub/Cache/hosted/pub.dev/google_identity_services_web-0.3.3",
       "packageUri": "lib/",
@@ -488,7 +494,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-01-10T05:51:53.888578Z",
+  "generated": "2025-01-10T19:50:39.097783Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/Flutter%20SDK/flutter",

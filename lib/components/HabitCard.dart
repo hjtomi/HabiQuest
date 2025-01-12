@@ -5,12 +5,14 @@ class HabitTile extends StatefulWidget {
   final String title; // Add a final field for the title
   final bool state;
   final String id;
+  final int difficulty;
 
   const HabitTile(
       {super.key,
       required this.title,
       required this.state,
-      required this.id}); // Assign the title in the constructor
+      required this.id,
+      required this.difficulty}); // Assign the title in the constructor
 
   @override
   State<HabitTile> createState() => _HabitTileState();
@@ -36,7 +38,10 @@ class _HabitTileState extends State<HabitTile> {
               setState(() {
                 isOn = !isOn; // Toggle the state
               });
-              firestoreCompleteHabit(habitId: widget.id, updatedState: isOn);
+              firestoreCompleteHabit(
+                  habitId: widget.id,
+                  updatedState: isOn,
+                  difficulty: widget.difficulty);
             },
             icon: const Icon(Icons.check), // Change icon
             style: IconButton.styleFrom(

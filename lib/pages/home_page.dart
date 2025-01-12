@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Habit',
           ),
           NavigationDestination(
-            icon: Icon(LucideIcons.checkCircle2),
+            icon: Icon(LucideIcons.checkCircle),
             label: 'Todo',
           ),
         ],

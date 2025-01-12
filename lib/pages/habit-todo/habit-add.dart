@@ -36,29 +36,6 @@ class _HabitAddState extends State<HabitAdd> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        actions: [
-          TextButton(
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                await firestoreAddOrUpdateHabit({
-                  'cim': _cimController.text,
-                  'megjegyzes': _megjegyzesController.text,
-                  'nehezseg': _selectedDifficulty.index,
-                  'gyakorisag': _convertFrequency(_selectedFrequency),
-                  'ismetles': _repetitions,
-                  'kezdes': _startDate,
-                  'kesz': _isComplete,
-                  'streak': _streak,
-                });
-                Navigator.of(context).pop();
-              }
-            },
-            child: const Text(
-              'Hozzáadás',
-              style: TextStyle(color: AppColors.white),
-            ),
-          ),
-        ],
         title: const Text('Szokás hozzáadása'),
       ),
       body: SingleChildScrollView(
@@ -78,28 +55,33 @@ class _HabitAddState extends State<HabitAdd> {
                 const SizedBox(height: 16),
                 _buildFrequencySelector(),
                 const SizedBox(height: 16),
-                FilledButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await firestoreAddOrUpdateHabit({
-                        'cim': _cimController.text,
-                        'megjegyzes': _megjegyzesController.text,
-                        'nehezseg': _selectedDifficulty.index,
-                        'gyakorisag': _convertFrequency(_selectedFrequency),
-                        'ismetles': _repetitions,
-                        'kezdes': _startDate,
-                        'kesz': _isComplete,
-                        'streak': _streak,
-                      });
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  child: const Text(
-                    'Hozzáadás',
-                    style: TextStyle(color: AppColors.white),
-                  ),
-                )
               ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: BottomAppBar(
+          child: FilledButton(
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                await firestoreAddOrUpdateHabit({
+                  'cim': _cimController.text,
+                  'megjegyzes': _megjegyzesController.text,
+                  'nehezseg': _selectedDifficulty.index,
+                  'gyakorisag': _convertFrequency(_selectedFrequency),
+                  'ismetles': _repetitions,
+                  'kezdes': _startDate,
+                  'kesz': _isComplete,
+                  'streak': _streak,
+                });
+                Navigator.of(context).pop();
+              }
+            },
+            child: const Text(
+              'Hozzáadás',
+              style: TextStyle(color: AppColors.white),
             ),
           ),
         ),

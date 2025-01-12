@@ -46,12 +46,19 @@ class Auth {
 
       // Step 3: Create a Firestore document for the user if it's a new user
       String? userIdInFirestore;
-      await _firestore.collection('users').doc(userCredential.user!.uid).get().then((value) {
+      await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .get()
+          .then((value) {
         // printError(value.data().toString());
-        userIdInFirestore = value.data().toString(); // If 'null' then the google user is not in the database
+        userIdInFirestore = value
+            .data()
+            .toString(); // If 'null' then the google user is not in the database
       });
 
-      if (userCredential.additionalUserInfo!.isNewUser || userIdInFirestore == 'null') {
+      if (userCredential.additionalUserInfo!.isNewUser ||
+          userIdInFirestore == 'null') {
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
           'username': googleUser.displayName ??
               'New User', // Set a default username if available
@@ -82,6 +89,7 @@ class Auth {
       'username': username,
       'email': email,
       'createdAt': FieldValue.serverTimestamp(),
+      'balance': 0,
     });
   }
 

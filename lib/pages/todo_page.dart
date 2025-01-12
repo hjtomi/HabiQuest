@@ -34,7 +34,25 @@ class _TodoPageState extends State<TodoPage> {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No todos found.'));
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  LucideIcons.checkCircle,
+                  color: Theme.of(context).colorScheme.tertiary,
+                  size: 100,
+                ),
+                const SizedBox(height: 16),
+                Text('Minden kész!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.tertiary)),
+              ],
+            ));
           }
 
           final todos = snapshot.data!.docs;
@@ -47,9 +65,9 @@ class _TodoPageState extends State<TodoPage> {
               return Card(
                 child: ListTile(
                   title: Text(todoTitle),
-                  subtitle: Text(
-                      'Határidő: ${todoData['hatarido'].toDate().toLocal().toString().split(' ')[0]}'),
-                  trailing: Checkbox(
+                  leading: Checkbox(
+                    activeColor: Theme.of(context).colorScheme.secondary,
+                    checkColor: Theme.of(context).colorScheme.onSecondary,
                     value: todoData['kesz'],
                     onChanged: (value) {
                       FirebaseFirestore.instance
@@ -58,38 +76,22 @@ class _TodoPageState extends State<TodoPage> {
                           .collection('todos')
                           .doc(todos[index].id)
                           .update({'kesz': value});
-                      if (value == true) {
-                        // Remove from the list if checked
-                        setState(() {
-                          todos.removeAt(index);
-                        });
-                      }
                     },
                   ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TodoEdit(
-                          teendo: todoData,
-                          index: index,
-                          mentTeendo:
-                              (index, cim, megjegyzes, nehezseg, hatarido) {
+                  trailing: todoData['kesz']
+                      ? IconButton(
+                          onPressed: () {
                             FirebaseFirestore.instance
                                 .collection('users')
                                 .doc(user?.uid ?? 'anonymous')
                                 .collection('todos')
                                 .doc(todos[index].id)
-                                .update({
-                              'cim': cim,
-                              'megjegyzes': megjegyzes,
-                              'nehezseg': nehezseg,
-                              'hatarido': hatarido,
-                            });
+                                .delete();
                           },
-                        ),
-                      ),
-                    );
-                  },
+                          icon: const Icon(LucideIcons.trash),
+                          color: Theme.of(context).colorScheme.secondary,
+                        )
+                      : null,
                 ),
               );
             },
@@ -101,24 +103,70 @@ class _TodoPageState extends State<TodoPage> {
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
         child: const Icon(LucideIcons.plus),
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => TodoAdd(
-                hozzaadTeendo: (cim, megjegyzes, nehezseg, hatarido) {
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(user?.uid ?? 'anonymous')
-                      .collection('todos')
-                      .add({
-                    'cim': cim,
-                    'megjegyzes': megjegyzes,
-                    'nehezseg': nehezseg,
-                    'hatarido': hatarido,
-                    'kesz': false,
-                  });
-                },
-              ),
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true, // Adjusts height based on content
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
             ),
+            builder: (BuildContext context) {
+              final TextEditingController taskController =
+                  TextEditingController();
+
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Adjust height dynamically
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 16.0),
+                    TextFormField(
+                      controller: taskController,
+                      cursorColor: Theme.of(context).colorScheme.secondary,
+                      decoration: InputDecoration(
+                        hintText: "Add meg az új feladatot",
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: const EdgeInsets.all(12.0),
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          final String taskText = taskController.text.trim();
+                          if (taskText.isNotEmpty) {
+                            FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(user?.uid ?? 'anonymous')
+                                .collection('todos')
+                                .add({
+                              'cim': taskText,
+                              'kesz': false,
+                            }).then((value) {
+                              Navigator.pop(context);
+                            });
+                          }
+                        },
+                        child: const Text("Mentés"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onSecondary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                  ],
+                ),
+              );
+            },
           );
         },
       ),

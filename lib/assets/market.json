@@ -380,7 +380,7 @@
         "name": "Kukorica",
         "image": "lib/assets/market_items/corn.png",
         "description": "",
-        "price": 0,
+        "price": 15,
         "category": "food"
     },
     {
@@ -388,7 +388,7 @@
         "name": "Croissant",
         "image": "lib/assets/market_items/croissant.png",
         "description": "",
-        "price": 0,
+        "price": 15,
         "category": "food"
     },
     {
@@ -396,7 +396,7 @@
         "name": "Defector Kardja",
         "image": "lib/assets/market_items/deflector_sword.png",
         "description": "",
-        "price": 0,
+        "price": 850,
         "category": "weapon"
     },
     {
@@ -404,7 +404,7 @@
         "name": "Elektron Blade Kard",
         "image": "lib/assets/market_items/electron_blade_sword.png",
         "description": "",
-        "price": 0,
+        "price": 650,
         "category": "weapon"
     },
     {
@@ -412,7 +412,7 @@
         "name": "Etcher Kard",
         "image": "lib/assets/market_items/etcher_sword.png",
         "description": "",
-        "price": 0,
+        "price": 1000,
         "category": "weapon"
     },
     {
@@ -420,7 +420,7 @@
         "name": "Ezüst rög",
         "image": "lib/assets/market_items/ezust_rogok.png",
         "description": "",
-        "price": 0,
+        "price": 50,
         "category": "ore"
     },
     {
@@ -428,7 +428,7 @@
         "name": "Bolyhos penna",
         "image": "lib/assets/market_items/feather.png",
         "description": "",
-        "price": 0,
+        "price": 15,
         "category": "misc"
     },
     {
@@ -436,7 +436,7 @@
         "name": "Hal",
         "image": "lib/assets/market_items/fish.png",
         "description": "",
-        "price": 0,
+        "price": 10,
         "category": "food"
     },
     {
@@ -444,7 +444,7 @@
         "name": "Szenecse Bájital (nagy)",
         "image": "lib/assets/market_items/fortune_large.png",
         "description": "",
-        "price": 0,
+        "price": 90,
         "category": "potion"
     },
     {
@@ -452,7 +452,7 @@
         "name": "Szenecse Bájital (közepes)",
         "image": "lib/assets/market_items/fortune_medium.png",
         "description": "",
-        "price": 0,
+        "price": 80,
         "category": "potion"
     },
     {
@@ -460,7 +460,7 @@
         "name": "Szenecse Bájital (kicsi)",
         "image": "lib/assets/market_items/fortune_small.png",
         "description": "",
-        "price": 0,
+        "price": 70,
         "category": "potion"
     },
     {
@@ -476,7 +476,7 @@
         "name": "Aranyalma",
         "image": "lib/assets/market_items/golden_apple.png",
         "description": "",
-        "price": 0,
+        "price": 2000,
         "category": "food"
     },
     {
@@ -484,7 +484,7 @@
         "name": "Arany fejsze",
         "image": "lib/assets/market_items/golden_axe.png",
         "description": "",
-        "price": 0,
+        "price": 1400,
         "category": "weapon"
     },
     {
@@ -492,7 +492,7 @@
         "name": "Arany tojás",
         "image": "lib/assets/market_items/golden_egg.png",
         "description": "",
-        "price": 0,
+        "price": 1500,
         "category": "food"
     },
     {
@@ -500,7 +500,7 @@
         "name": "Arany kalapács",
         "image": "lib/assets/market_items/golden_hammer.png",
         "description": "",
-        "price": 0,
+        "price": 2000,
         "category": "weapon"
     },
     {
@@ -508,7 +508,7 @@
         "name": "Aranyszív",
         "image": "lib/assets/market_items/golden_heart.png",
         "description": "",
-        "price": 0,
+        "price": 5000,
         "category": "heal"
     },
     {
@@ -516,7 +516,7 @@
         "name": "Aranyrög",
         "image": "lib/assets/market_items/golden_ingot.png",
         "description": "",
-        "price": 0,
+        "price": 700,
         "category": "ore"
     },
     {
@@ -524,7 +524,7 @@
         "name": "Aranykulcs",
         "image": "lib/assets/market_items/golden_key.png",
         "description": "",
-        "price": 0,
+        "price": 600,
         "category": "loot"
     },
     {
@@ -532,7 +532,7 @@
         "name": "Arany nyaklánc",
         "image": "lib/assets/market_items/golden_necklace.png",
         "description": "",
-        "price": 0,
+        "price": 900,
         "category": "loot"
     },
     {
@@ -540,7 +540,7 @@
         "name": "Arany gyűrű",
         "image": "lib/assets/market_items/golden_ring.png",
         "description": "",
-        "price": 0,
+        "price": 600,
         "category": "loot"
     },
     {
@@ -556,7 +556,7 @@
         "name": "Arany koponya",
         "image": "lib/assets/market_items/golden_skull.png",
         "description": "",
-        "price": 0,
+        "price": 240,
         "category": "misc"
     },
     {
@@ -564,7 +564,7 @@
         "name": "Arany kard",
         "image": "lib/assets/market_items/golden_sword.png",
         "description": "",
-        "price": 0,
+        "price": 530,
         "category": "weapon"
     },
     {
@@ -572,7 +572,7 @@
         "name": "Arany csizma",
         "image": "lib/assets/market_items/gold_boot_1.png",
         "description": "",
-        "price": 0,
+        "price": 570,
         "category": "boot"
     },
     {
@@ -580,7 +580,7 @@
         "name": "Fejleszett arany csizma",
         "image": "lib/assets/market_items/gold_boot_2.png",
         "description": "",
-        "price": 0,
+        "price": 860,
         "category": "armor"
     },
     {
@@ -588,7 +588,7 @@
         "name": "Arany mellvért",
         "image": "lib/assets/market_items/gold_chestplate_1.png",
         "description": "",
-        "price": 0,
+        "price": 860,
         "category": "armor"
     },
     {
@@ -596,7 +596,7 @@
         "name": "Fejleszett arany mellvért",
         "image": "lib/assets/market_items/gold_chestplate_2.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "armor"
     },
     {
@@ -604,7 +604,7 @@
         "name": "Arany kesztyű",
         "image": "lib/assets/market_items/gold_fist_1.png",
         "description": "",
-        "price": 0,
+        "price": 640,
         "category": "armor"
     },
     {
@@ -612,7 +612,7 @@
         "name": "Fejleszett arany kesztyű",
         "image": "lib/assets/market_items/gold_fist_2.png",
         "description": "",
-        "price": 0,
+        "price": 670,
         "category": "armor"
     },
     {
@@ -620,7 +620,7 @@
         "name": "Arany sisak",
         "image": "lib/assets/market_items/gold_helmet_1.png",
         "description": "",
-        "price": 0,
+        "price": 860,
         "category": "armor"
     },
     {
@@ -628,7 +628,7 @@
         "name": "Fejlesztett Arany sisak",
         "image": "lib/assets/market_items/gold_helmet_2.png",
         "description": "",
-        "price": 0,
+        "price": 680,
         "category": "armor"
     },
     {
@@ -636,7 +636,7 @@
         "name": "Arany rúd",
         "image": "lib/assets/market_items/gold_rod.png",
         "description": "",
-        "price": 0,
+        "price": 740,
         "category": "ore"
     },
     {
@@ -644,7 +644,7 @@
         "name": "Aranyalma",
         "image": "lib/assets/market_items/green_apple.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "food"
     },
     {
@@ -652,7 +652,7 @@
         "name": "Kék kalap",
         "image": "lib/assets/market_items/hat_blue.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -660,7 +660,7 @@
         "name": "Barna kalap",
         "image": "lib/assets/market_items/hat_brown.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -668,7 +668,7 @@
         "name": "Zöld Kalap",
         "image": "lib/assets/market_items/hat_green.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -676,7 +676,7 @@
         "name": "Rózsaszín kalap",
         "image": "lib/assets/market_items/hat_pink.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -684,7 +684,7 @@
         "name": "Lila kalap",
         "image": "lib/assets/market_items/hat_purple.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -692,7 +692,7 @@
         "name": "Piros kalap",
         "image": "lib/assets/market_items/hat_red.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -700,7 +700,7 @@
         "name": "Fehér kalap",
         "image": "lib/assets/market_items/hat_white.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -708,7 +708,7 @@
         "name": "Sárga kalap",
         "image": "lib/assets/market_items/hat_yellow.png",
         "description": "",
-        "price": 0,
+        "price": 300,
         "category": "cosmetic"
     },
     {
@@ -716,7 +716,7 @@
         "name": "Életerő bájital (nagy)",
         "image": "lib/assets/market_items/health_large.png",
         "description": "",
-        "price": 0,
+        "price": 740,
         "category": "potion"
     },
     {
@@ -724,7 +724,7 @@
         "name": "Életerő bájital (közepes)",
         "image": "lib/assets/market_items/health_medium.png",
         "description": "",
-        "price": 0,
+        "price": 700,
         "category": "potion"
     },
     {
@@ -732,7 +732,7 @@
         "name": "Életerő bájital (kicsi)",
         "image": "lib/assets/market_items/health_small.png",
         "description": "",
-        "price": 0,
+        "price": 640,
         "category": "potion"
     },
     {
@@ -740,7 +740,7 @@
         "name": "Szív",
         "image": "lib/assets/market_items/heart.png",
         "description": "",
-        "price": 0,
+        "price": 1200,
         "category": "heal"
     },
     {
@@ -748,7 +748,7 @@
         "name": "Méz",
         "image": "lib/assets/market_items/honey.png",
         "description": "",
-        "price": 0,
+        "price": 60,
         "category": "food"
     },
     {
@@ -764,7 +764,7 @@
         "name": "Vas csizma",
         "image": "lib/assets/market_items/iron_boot_1.png",
         "description": "",
-        "price": 0,
+        "price": 350,
         "category": "boot"
     },
     {
@@ -772,7 +772,7 @@
         "name": "Fejlesztett Vas csizma",
         "image": "lib/assets/market_items/iron_boot_2.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "armor"
     },
     {
@@ -780,7 +780,7 @@
         "name": "Vas mellvért",
         "image": "lib/assets/market_items/iron_chestplate_1.png",
         "description": "",
-        "price": 0,
+        "price": 570,
         "category": "armor"
     },
     {
@@ -788,7 +788,7 @@
         "name": "Fejlesztet vas mellvért",
         "image": "lib/assets/market_items/iron_chestplate_2.png",
         "description": "",
-        "price": 0,
+        "price": 740,
         "category": "armor"
     },
     {
@@ -796,7 +796,7 @@
         "name": "Vas kesztyű",
         "image": "lib/assets/market_items/iron_fist_1.png",
         "description": "",
-        "price": 0,
+        "price": 640,
         "category": "armor"
     },
     {
@@ -804,7 +804,7 @@
         "name": "Fejleszett vas kesztyű",
         "image": "lib/assets/market_items/iron_fist_2.png",
         "description": "",
-        "price": 0,
+        "price": 680,
         "category": "armor"
     },
     {
@@ -812,7 +812,7 @@
         "name": "Vas kalapács",
         "image": "lib/assets/market_items/iron_hammer.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "weapon"
     },
     {
@@ -820,7 +820,7 @@
         "name": "Vas sisak",
         "image": "lib/assets/market_items/iron_helmet_1.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "armor"
     },
     {
@@ -828,7 +828,7 @@
         "name": "Fejleszett vas sisak",
         "image": "lib/assets/market_items/iron_helmet_2.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "armor"
     },
     {
@@ -836,7 +836,7 @@
         "name": "Vas nyaklánc",
         "image": "lib/assets/market_items/iron_necklace.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "loot"
     },
     {
@@ -844,7 +844,7 @@
         "name": "Vasrúd",
         "image": "lib/assets/market_items/iron_rod.png",
         "description": "",
-        "price": 0,
+        "price": 530,
         "category": "ore"
     },
     {
@@ -852,7 +852,7 @@
         "name": "Sarló",
         "image": "lib/assets/market_items/iron_saber.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "tool"
     },
     {
@@ -860,7 +860,7 @@
         "name": "Vas pajzs",
         "image": "lib/assets/market_items/iron_shield.png",
         "description": "",
-        "price": 0,
+        "price": 690,
         "category": "armor"
     },
     {
@@ -868,7 +868,7 @@
         "name": "Vastalizmán",
         "image": "lib/assets/market_items/iron_talisman.png",
         "description": "",
-        "price": 0,
+        "price": 740,
         "category": "loot"
     },
     {
@@ -876,7 +876,7 @@
         "name": "Levél",
         "image": "lib/assets/market_items/letter.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "misc"
     },
     {
@@ -884,7 +884,7 @@
         "name": "Lucius mágikus könyve",
         "image": "lib/assets/market_items/lucius_magical_grimoire.png",
         "description": "",
-        "price": 0,
+        "price": 560,
         "category": "magic"
     },
     {
@@ -892,7 +892,7 @@
         "name": "Mágiamagazin",
         "image": "lib/assets/market_items/magia_magazin.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "magic"
     },
     {
@@ -900,7 +900,7 @@
         "name": "Magnus Ősi Kódexe",
         "image": "lib/assets/market_items/magnus_ancient_codex.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "magic"
     },
     {
@@ -908,7 +908,7 @@
         "name": "Marhahús",
         "image": "lib/assets/market_items/meat.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "food"
     },
     {
@@ -916,7 +916,7 @@
         "name": "Elsősegély csomag",
         "image": "lib/assets/market_items/medkit.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "heal"
     },
     {
@@ -924,7 +924,7 @@
         "name": "Nebulon",
         "image": "lib/assets/market_items/nebulon.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "ore"
     },
     {
@@ -932,7 +932,7 @@
         "name": "Nebulon fejsze",
         "image": "lib/assets/market_items/nebulon_axe.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "weapon"
     },
     {
@@ -940,7 +940,7 @@
         "name": "Hírviveny",
         "image": "lib/assets/market_items/news_letter.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "misc"
     },
     {
@@ -948,7 +948,7 @@
         "name": "Makk",
         "image": "lib/assets/market_items/nut.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "food"
     },
     {
@@ -956,7 +956,7 @@
         "name": "Onüx",
         "image": "lib/assets/market_items/onyx.png",
         "description": "",
-        "price": 0,
+        "price": 690,
         "category": "ore"
     },
     {
@@ -972,7 +972,7 @@
         "name": "Onüx csizma",
         "image": "lib/assets/market_items/onyx_boot_1.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "armor"
     },
     {
@@ -980,7 +980,7 @@
         "name": "Fejleszett Onüx csizma",
         "image": "lib/assets/market_items/onyx_boot_2.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "armor"
     },
     {
@@ -988,7 +988,7 @@
         "name": "Onüx mellvért",
         "image": "lib/assets/market_items/onyx_chestplate_1.png",
         "description": "",
-        "price": 0,
+        "price": 370,
         "category": "armor"
     },
     {
@@ -996,7 +996,7 @@
         "name": "Fejlesztet Onüx mellvért",
         "image": "lib/assets/market_items/onyx_chestplate_2.png",
         "description": "",
-        "price": 0,
+        "price": 480,
         "category": "armor"
     },
     {
@@ -1004,7 +1004,7 @@
         "name": "Onüx kesztyű",
         "image": "lib/assets/market_items/onyx_fist_1.png",
         "description": "",
-        "price": 0,
+        "price": 690,
         "category": "armor"
     },
     {
@@ -1012,7 +1012,7 @@
         "name": "Fejlesztett onüx kesztyű",
         "image": "lib/assets/market_items/onyx_fist_2.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "armor"
     },
     {
@@ -1020,7 +1020,7 @@
         "name": "Onüx kalapács",
         "image": "lib/assets/market_items/onyx_hammer.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "weapon"
     },
     {
@@ -1028,7 +1028,7 @@
         "name": "Onüx sisak",
         "image": "lib/assets/market_items/onyx_helmet_1.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "armor"
     },
     {
@@ -1036,7 +1036,7 @@
         "name": "Fejlesztett Onüx sisak",
         "image": "lib/assets/market_items/onyx_helmet_2.png",
         "description": "",
-        "price": 0,
+        "price": 570,
         "category": "armor"
     },
     {
@@ -1044,7 +1044,7 @@
         "name": "Onüx kard",
         "image": "lib/assets/market_items/onyx_sword.png",
         "description": "",
-        "price": 0,
+        "price": 450,
         "category": "weapon"
     },
     {
@@ -1052,7 +1052,7 @@
         "name": "Orion",
         "image": "lib/assets/market_items/orion.png",
         "description": "",
-        "price": 0,
+        "price": 240,
         "category": "ore"
     },
     {
@@ -1060,7 +1060,7 @@
         "name": "Papírdarab",
         "image": "lib/assets/market_items/paper_piece.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "misc"
     },
     {
@@ -1068,7 +1068,7 @@
         "name": "Méreg bájital (nagy)",
         "image": "lib/assets/market_items/poison_large.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "potion"
     },
     {
@@ -1076,7 +1076,7 @@
         "name": "Méreg bájital (közepes)",
         "image": "lib/assets/market_items/poison_medium.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "potion"
     },
     {
@@ -1084,7 +1084,7 @@
         "name": "Méreg bájital (kicsi)",
         "image": "lib/assets/market_items/poison_small.png",
         "description": "",
-        "price": 0,
+        "price": 140,
         "category": "potion"
     },
     {
@@ -1092,7 +1092,7 @@
         "name": "Pityóka",
         "image": "lib/assets/market_items/potato.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "food"
     },
     {
@@ -1100,7 +1100,7 @@
         "name": "Razor kardja",
         "image": "lib/assets/market_items/razor_sword.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "weapon"
     },
     {
@@ -1108,7 +1108,7 @@
         "name": "Piros alma",
         "image": "lib/assets/market_items/red_apple.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "food"
     },
     {
@@ -1116,7 +1116,7 @@
         "name": "Piros fúró",
         "image": "lib/assets/market_items/red_drill.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "tool"
     },
     {
@@ -1124,7 +1124,7 @@
         "name": "Piros gomba",
         "image": "lib/assets/market_items/red_fungus.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "food"
     },
     {
@@ -1132,7 +1132,7 @@
         "name": "Tojás",
         "image": "lib/assets/market_items/regular_egg.png",
         "description": "Egy csirke adományozta.",
-        "price": 0,
+        "price": 140,
         "category": "food"
     },
     {
@@ -1140,7 +1140,7 @@
         "name": "Sima kulcs",
         "image": "lib/assets/market_items/regular_key.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "loot"
     },
     {
@@ -1172,7 +1172,7 @@
         "name": "Só",
         "image": "lib/assets/market_items/salt.png",
         "description": "",
-        "price": 0,
+        "price": 10,
         "category": "food"
     },
     {
@@ -1180,7 +1180,7 @@
         "name": "Szelenit",
         "image": "lib/assets/market_items/selenite.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "ore"
     },
     {
@@ -1188,7 +1188,7 @@
         "name": "Koponya",
         "image": "lib/assets/market_items/skull.png",
         "description": "",
-        "price": 0,
+        "price": 880,
         "category": "misc"
     },
     {
@@ -1196,7 +1196,7 @@
         "name": "Havas golyó",
         "image": "lib/assets/market_items/snowy_ball.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "weapon"
     },
     {
@@ -1204,7 +1204,7 @@
         "name": "Starshatter Kard",
         "image": "lib/assets/market_items/starshatter_sword.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "weapon"
     },
     {
@@ -1220,7 +1220,7 @@
         "name": "Technorite",
         "image": "lib/assets/market_items/technorite.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "ore"
     },
     {
@@ -1228,7 +1228,7 @@
         "name": "Technorite fejsze",
         "image": "lib/assets/market_items/technorite_axe.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "weapon"
     },
     {
@@ -1236,7 +1236,7 @@
         "name": "Technorite csizma",
         "image": "lib/assets/market_items/technorite_boot_1.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "armor"
     },
     {
@@ -1244,7 +1244,7 @@
         "name": "Fejlesztett Technorite csizma",
         "image": "lib/assets/market_items/technorite_boot_2.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "armor"
     },
     {
@@ -1252,7 +1252,7 @@
         "name": "Technorite íjj",
         "image": "lib/assets/market_items/technorite_bow.png",
         "description": "",
-        "price": 0,
+        "price": 140,
         "category": "weapon"
     },
     {
@@ -1260,7 +1260,7 @@
         "name": "Technorite mellvért",
         "image": "lib/assets/market_items/technorite_chestplate_1.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "armor"
     },
     {
@@ -1268,7 +1268,7 @@
         "name": "Fejlesztet Technorite mellvért",
         "image": "lib/assets/market_items/technorite_chestplate_2.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "armor"
     },
     {
@@ -1276,7 +1276,7 @@
         "name": "Technorite kesztyű",
         "image": "lib/assets/market_items/technorite_fist_1.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "armor"
     },
     {
@@ -1284,7 +1284,7 @@
         "name": "Fejlesztett Technorite kesztyű",
         "image": "lib/assets/market_items/technorite_fist_2.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "armor"
     },
     {
@@ -1292,7 +1292,7 @@
         "name": "Technorite kalapács",
         "image": "lib/assets/market_items/technorite_hammer.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "weapon"
     },
     {
@@ -1300,7 +1300,7 @@
         "name": "Technorite sisak",
         "image": "lib/assets/market_items/technorite_helmet_1.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "armor"
     },
     {
@@ -1308,7 +1308,7 @@
         "name": "Fejlesztett Technorite sisak",
         "image": "lib/assets/market_items/technorite_helmet_2.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "armor"
     },
     {
@@ -1316,7 +1316,7 @@
         "name": "Technorite nyaklánc",
         "image": "lib/assets/market_items/technorite_necklace.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "loot"
     },
     {
@@ -1324,7 +1324,7 @@
         "name": "Technorite rúd",
         "image": "lib/assets/market_items/technorite_rod.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "ore"
     },
     {
@@ -1332,7 +1332,7 @@
         "name": "Technorite pajzs",
         "image": "lib/assets/market_items/technorite_shield.png",
         "description": "",
-        "price": 0,
+        "price": 240,
         "category": "armor"
     },
     {
@@ -1540,7 +1540,7 @@
         "name": "XP Könyv 30",
         "image": "lib/assets/market_items/xpbook-30.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "xp"
     },
     {
@@ -1548,7 +1548,7 @@
         "name": "XP Könyv 50",
         "image": "lib/assets/market_items/xpbook50.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "xp"
     },
     {
@@ -1556,7 +1556,7 @@
         "name": "XP Könyv 10",
         "image": "lib/assets/market_items/xpbook_10.png",
         "description": "",
-        "price": 0,
+        "price": 140,
         "category": "xp"
     },
     {
@@ -1564,7 +1564,7 @@
         "name": "XP Könyv 100",
         "image": "lib/assets/market_items/xpbook_100.png",
         "description": "",
-        "price": 0,
+        "price": 250,
         "category": "xp"
     },
     {
@@ -1572,7 +1572,7 @@
         "name": "XP Könyv 20",
         "image": "lib/assets/market_items/xpbook_20.png",
         "description": "",
-        "price": 0,
+        "price": 360,
         "category": "xp"
     },
     {
@@ -1580,7 +1580,7 @@
         "name": "XP Könyv 40",
         "image": "lib/assets/market_items/xpbook_40.png",
         "description": "",
-        "price": 0,
+        "price": 470,
         "category": "xp"
     },
     {
@@ -1588,7 +1588,7 @@
         "name": "XP Bájital (nagy)",
         "image": "lib/assets/market_items/xp_large.png",
         "description": "",
-        "price": 0,
+        "price": 580,
         "category": "potion"
     },
     {
@@ -1596,7 +1596,7 @@
         "name": "XP Bájital (közepes)",
         "image": "lib/assets/market_items/xp_medium.png",
         "description": "",
-        "price": 0,
+        "price": 690,
         "category": "potion"
     },
     {
@@ -1604,7 +1604,7 @@
         "name": "XP Bájital (kicsi)",
         "image": "lib/assets/market_items/xp_small.png",
         "description": "",
-        "price": 0,
+        "price": 700,
         "category": "potion"
     },
     {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gif/gif.dart';
 import 'package:habiquest/pages/habit-todo/habit-edit.dart';
 import 'package:habiquest/components/HabitCard.dart';
 import 'package:habiquest/pages/habit-todo/habit-add.dart';
+import 'package:habiquest/pages/statistics_page.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class HabitPage extends StatefulWidget {
@@ -35,7 +37,26 @@ class _HabitPageState extends State<HabitPage> {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No habits found.'));
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Gif(
+                  width: 200,
+                  height: 200,
+                  autostart: Autostart.loop,
+                  image: AssetImage("lib/assets/knight_idle.gif"),
+                ),
+                Text(
+                  'Még nem adtál hozzá szokást!',
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ));
           }
 
           final habits = snapshot.data!.docs;
@@ -47,8 +68,13 @@ class _HabitPageState extends State<HabitPage> {
               final habitTitle = habitData['cim'] ?? 'Untitled';
               final habitId = habits[index].id;
               final habitState = habitData['kesz'];
+              final habitDifficulty = habitData['nehezseg'];
               return HabitTile(
-                  title: habitTitle, id: habitId, state: habitState);
+                title: habitTitle,
+                id: habitId,
+                state: habitState,
+                difficulty: habitDifficulty,
+              );
             },
           );
         },

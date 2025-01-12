@@ -35,7 +35,7 @@ class _HoldingPageState extends State<HoldingPage> {
   String _getPageTitle(PageType page) {
     switch (page) {
       case PageType.dashboard:
-        return "Dashboard";
+        return "HabiQuest";
       case PageType.market:
         return "Piactér";
       case PageType.statistics:
@@ -179,7 +179,7 @@ class _HoldingPageState extends State<HoldingPage> {
               selected: _selectedPage == PageType.dashboard,
               selectedColor: Theme.of(context).colorScheme.secondary,
               leading: const Icon(LucideIcons.layoutDashboard),
-              title: const Text("Dashboard"),
+              title: const Text("Főoldal"),
             ),
             ListTile(
               onTap: () {
@@ -203,7 +203,7 @@ class _HoldingPageState extends State<HoldingPage> {
               selected: _selectedPage == PageType.statistics,
               selectedColor: Theme.of(context).colorScheme.secondary,
               leading: const Icon(LucideIcons.areaChart),
-              title: const Text("Statistics"),
+              title: const Text("Statisztikák"),
             ),
           ],
         ),
