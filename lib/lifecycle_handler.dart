@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habiquest/common.dart';
+import 'package:habiquest/daily_gift.dart';
 
 class LifecycleHandler extends StatefulWidget {
   final Widget child;
@@ -34,6 +35,7 @@ class _LifecycleHandlerState extends State<LifecycleHandler> with WidgetsBinding
       printMessage("App is in the background.");
     } else if (state == AppLifecycleState.resumed) {
       printMessage("App is back in the foreground.");
+      addResume();
     }
   }
 

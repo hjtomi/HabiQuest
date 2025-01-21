@@ -1,3 +1,5 @@
+import 'package:habiquest/common.dart';
+import 'package:habiquest/daily_gift.dart';
 import 'package:habiquest/drawer_page.dart';
 import 'package:habiquest/skin.dart';
 import 'auth.dart';
@@ -21,6 +23,9 @@ class _WidgetTreeState extends State<WidgetTree> {
       stream: Auth().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          printMessage("LOGIN");
+          addLogin();
+
           final user = snapshot.data;
 
           // Listen for real-time updates to the user's Firestore document
