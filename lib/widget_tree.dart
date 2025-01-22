@@ -25,7 +25,8 @@ class _WidgetTreeState extends State<WidgetTree> {
         if (snapshot.hasData) {
           printMessage("LOGIN");
           addLogin();
-
+          addResume();
+          
           final user = snapshot.data;
 
           // Listen for real-time updates to the user's Firestore document

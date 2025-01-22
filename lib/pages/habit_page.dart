@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gif/gif.dart';
+import 'package:habiquest/daily_gift.dart';
 import 'package:habiquest/pages/habit-todo/habit-edit.dart';
 import 'package:habiquest/components/HabitCard.dart';
 import 'package:habiquest/pages/habit-todo/habit-add.dart';
@@ -84,11 +85,12 @@ class _HabitPageState extends State<HabitPage> {
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
         child: const Icon(LucideIcons.plus),
         onPressed: () {
-          Navigator.of(context).push(
+          checkDailygift(context);
+          /*Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const HabitAdd(),
             ),
-          );
+          );*/
         },
       ),
     );
