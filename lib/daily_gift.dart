@@ -96,20 +96,18 @@ void showDailyGifts(BuildContext context, int level) {
                 color: Colors.grey,
               ),
             ),
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Prize day: $level"),
-                  ElevatedButton(
-                    onPressed: () {
-                      overlayEntry.remove();
-                    },
-                    child: Text("Okay"),
-                  )
-                ],
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("Prize day: $level"),
+                ElevatedButton(
+                  onPressed: () {
+                    overlayEntry.remove();
+                  },
+                  child: Text("Okay"),
+                )
+              ],
             ),
             // Block all interactions with a gesture detector
             Positioned.fill(
