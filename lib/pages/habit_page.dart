@@ -85,7 +85,7 @@ class _HabitPageState extends State<HabitPage> {
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
         child: const Icon(LucideIcons.plus),
         onPressed: () {
-          checkDailygift(context);
+          showDailyGifts(context, 1);
           /*Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const HabitAdd(),

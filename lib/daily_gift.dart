@@ -77,58 +77,127 @@ Future<void> addLogin() async {
 }
 
 void showDailyGifts(BuildContext context, int level) {
+  const double hpadding = 20;
+  const double vpadding = 40;
+
   final overlay = Overlay.of(context);
   late OverlayEntry overlayEntry;
   overlayEntry = OverlayEntry(
     builder: (context) {
-      return Material(
-        color: Colors.black54,
-        child: Stack(
-          alignment: Alignment.center,
-          fit: StackFit.expand,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 200
+      return SafeArea(
+        child: Material(
+          color: Colors.black54,
+          child: Stack(
+            alignment: Alignment.center,
+            fit: StackFit.expand,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: hpadding,
+                  vertical: vpadding
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: Color.fromRGBO(51, 51, 51, 1),
+                  ),
+                ),
               ),
-              child: Container(
-                color: Colors.grey,
+              GridView.count(
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: hpadding + 10,
+                  vertical: vpadding + 10,
+                ),
+                crossAxisCount: 4,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: [
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                  DailyGift(overlayEntry: overlayEntry),
+                ],
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Prize day: $level"),
-                ElevatedButton(
-                  onPressed: () {
+              // Block all interactions with a gesture detector
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () {
+                    FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(Auth().currentUser!.uid)
+                    .collection("dailies")
+                    .add({
+                      "date": DateTime.now(),
+                    });
                     overlayEntry.remove();
-                  },
-                  child: Text("Okay"),
-                )
-              ],
-            ),
-            // Block all interactions with a gesture detector
-            Positioned.fill(
-              child: GestureDetector(
-                onTap: () {
-                  FirebaseFirestore.instance
-                  .collection("users")
-                  .doc(Auth().currentUser!.uid)
-                  .collection("dailies")
-                  .add({
-                    "date": DateTime.now(),
-                  });
-                  overlayEntry.remove();
-                }, // Prevent interaction with background
+                  }, // Prevent interaction with background
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     },
   );
 
   overlay.insert(overlayEntry);
+}
+
+class DailyGift extends StatelessWidget {
+  const DailyGift({
+    super.key,
+    required this.overlayEntry,
+  });
+
+  final OverlayEntry overlayEntry;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(51, 51, 51, 1),
+        border: Border.all(
+          color: Colors.grey,
+          width: 5.0
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      ),
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(Icons.gif_outlined),
+          Text("10")
+        ]
+      )
+    );
+  }
 }
