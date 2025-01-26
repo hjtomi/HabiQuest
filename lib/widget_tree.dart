@@ -24,8 +24,11 @@ class _WidgetTreeState extends State<WidgetTree> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           printMessage("LOGIN");
-          addLogin();
-          addResume();
+          addLogin(context);
+          addResume(context);
+          Future.delayed(const Duration(seconds: 2), () {
+            checkDailygift(context);
+          });
           
           final user = snapshot.data;
 

@@ -35,7 +35,8 @@ class _LifecycleHandlerState extends State<LifecycleHandler> with WidgetsBinding
       printMessage("App is in the background.");
     } else if (state == AppLifecycleState.resumed) {
       printMessage("App is back in the foreground.");
-      addResume();
+      addResume(context);
+      checkDailygift(context);
     }
   }
 

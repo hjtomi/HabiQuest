@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/common.dart';
 import 'package:time/time.dart';
@@ -6,43 +8,47 @@ import 'package:habiquest/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> checkDailygift(BuildContext context) async {
-  QuerySnapshot data = await FirebaseFirestore.instance
-    .collection("users")
-    .doc(Auth().currentUser!.uid)
-    .collection("dailies")
-    .orderBy("date", descending: true)
-    .get();
-  
-  if (context.mounted) {
-    if (data.docs.isEmpty) {
-      showDailyGifts(context, 1);
-    } else {
-      int dayCounter = 1;
-      var today = DateTime.now().date;
-      for (var element in data.docs) {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-        DateTime date = data["date"].toDate() as DateTime;
+  if (true) {
+    List<Item> itemData = await loadItems();
 
-        int napkulonbseg = DateTime(today.year, today.month, today.day)
-          .difference(DateTime(date.year, date.month, date.day)).inDays;
+    QuerySnapshot data = await FirebaseFirestore.instance
+      .collection("users")
+      .doc(Auth().currentUser!.uid)
+      .collection("dailies")
+      .orderBy("date", descending: true)
+      .get();
+    
+    if (context.mounted) {
+      if (data.docs.isEmpty) {
+        showDailyGifts(context, 1, itemData);
+      } else {
+        int dayCounter = 1;
+        var today = DateTime.now().date;
+        for (var element in data.docs) {
+          Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+          DateTime date = data["date"].toDate() as DateTime;
 
-        if (napkulonbseg == 0) {
-          // Ma már volt ajándékátvéve
-          return;
-        } else if (napkulonbseg > dayCounter) {
-          // Újrakezdődik az ajándékozás
-          showDailyGifts(context, dayCounter);
-          return;
-        } else if (napkulonbseg == dayCounter) {
-          dayCounter++;
+          int napkulonbseg = DateTime(today.year, today.month, today.day)
+            .difference(DateTime(date.year, date.month, date.day)).inDays;
+
+          if (napkulonbseg == 0) {
+            // Ma már volt ajándékátvéve
+            return;
+          } else if (napkulonbseg > dayCounter) {
+            // Újrakezdődik az ajándékozás
+            showDailyGifts(context, dayCounter, itemData);
+            return;
+          } else if (napkulonbseg == dayCounter) {
+            dayCounter++;
+          }
         }
+        showDailyGifts(context, dayCounter, itemData);
       }
-      showDailyGifts(context, dayCounter);
     }
   }
 }
 
-Future<void> addResume() async {
+Future<void> addResume(context) async {
   User? user = Auth().currentUser;
 
   if (user != null) {
@@ -59,7 +65,7 @@ Future<void> addResume() async {
   }
 }
 
-Future<void> addLogin() async {
+Future<void> addLogin(context) async {
   User? user = Auth().currentUser;
 
   if (user != null) {
@@ -76,7 +82,7 @@ Future<void> addLogin() async {
   }
 }
 
-void showDailyGifts(BuildContext context, int level) {
+void showDailyGifts(BuildContext context, int level, List<Item> itemData) {
   const double hpadding = 20;
   const double vpadding = 35;
 
@@ -91,21 +97,6 @@ void showDailyGifts(BuildContext context, int level) {
             alignment: Alignment.center,
             fit: StackFit.expand,
             children: [
-              // Block all interactions with a gesture detector
-              Positioned.fill(
-                child: GestureDetector(
-                  onTap: () {
-                    FirebaseFirestore.instance
-                    .collection("users")
-                    .doc(Auth().currentUser!.uid)
-                    .collection("dailies")
-                    .add({
-                      "date": DateTime.now(),
-                    });
-                    overlayEntry.remove();
-                  }, // Prevent interaction with background
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: hpadding,
@@ -128,11 +119,17 @@ void showDailyGifts(BuildContext context, int level) {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 children: [
-                  for (var i = 1; i < 31; i++)
+                  for (var i = 0; i < 30; i++)
                     DailyGift(
                       overlayEntry: overlayEntry,
-                      level: i,
-                      state: i < level ? "previous" : i == level ? "today" : "tomorrow"
+                      level: itemData[i].level,
+                      state: itemData[i].level < level
+                        ? "previous"
+                        : itemData[i].level == level
+                          ? "today"
+                          : "tomorrow",
+                      type: itemData[i].type,
+                      value: itemData[i].value,
                     )
                 ],
               ),
@@ -151,18 +148,30 @@ class DailyGift extends StatelessWidget {
     super.key,
     required this.overlayEntry,
     required this.level,
-    required this.state
+    required this.state,
+    required this.type,
+    required this.value
   });
 
   final OverlayEntry overlayEntry;
   final int level;
   final String state; // previous, today, following
+  final String type;
+  final int value;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (state == "today") {
+          addGift(type, value);
+          FirebaseFirestore.instance
+            .collection("users")
+            .doc(Auth().currentUser!.uid)
+            .collection("dailies")
+            .add({
+              "date": DateTime.now(),
+            });
           overlayEntry.remove();
         }
       },
@@ -187,8 +196,14 @@ class DailyGift extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.paid, color: Theme.of(context).colorScheme.tertiary,),
-                Text(level.toString()),
+                type == "money" 
+                  ? Icon(Icons.paid, color: Theme.of(context).colorScheme.tertiary,)
+                  : const ImageIcon(
+                    AssetImage("lib/assets/xp icon.png"),
+                    color: Colors.lightBlue,
+                    size: 20,
+                  ),
+                Text(value.toString()),
               ]
             )
           ),
@@ -223,4 +238,48 @@ class CrossPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+void addGift(String type, int amount) async {
+  if (type == "money") {
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid);
+    await FirebaseFirestore.instance.runTransaction((transaction) async {
+      final snapshot = await transaction.get(userDoc);
+      if (!snapshot.exists) {
+        printError("User document does not exist.");
+        return;
+      }
+
+      final currentBalance = snapshot.data()?['balance'] as int? ?? 0;
+      transaction.update(userDoc, {'balance': currentBalance + amount});
+    });
+  } else {
+    // KARAKTERFEJLŐDÉSRE VÁR (XP szerzés)
+  }
+}
+
+class Item {
+  final int level;
+  final String type;
+  final int value;
+
+  Item({
+    required this.level,
+    required this.type,
+    required this.value,
+  });
+
+  factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
+      level: json["level"],
+      type: json["type"],
+      value: json["value"]
+    );
+  }
+}
+
+Future<List<Item>> loadItems() async {
+  final String response = await rootBundle.loadString('lib/assets/dailyGifts.json');
+  final List<dynamic> data = json.decode(response);
+  return data.map((json) => Item.fromJson(json)).toList();
 }
