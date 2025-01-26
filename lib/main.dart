@@ -4,6 +4,7 @@ import 'package:habiquest/firebase/firebase_options.dart';
 import 'package:habiquest/utils/theme/AppTheme.dart';
 import 'package:habiquest/widget_tree.dart';
 import 'package:toastification/toastification.dart';
+import 'package:habiquest/lifecycle_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +13,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(const LifecycleHandler(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/statistics_page.dart';
 
-class ThemeColors {
-  static const Color primary = Color(0xff1D2B53);
-  static const Color secondary = Color(0xff7E2553);
-  static const Color tetriary = Color(0xffFF004D);
-  static const Color highlight = Color(0xffFAEF5D);
-}
-
-void printWarning(String text) {
+void printWarning(text) {
   print('\x1B[33m$text\x1B[0m');
 }
 
-void printError(String text) {
+void printError(text) {
   print('\x1B[31m$text\x1B[0m');
 }
 
-void printMessage(String text) {
+void printMessage(text) {
   print('\x1B[32m$text\x1B[0m');
 }
 

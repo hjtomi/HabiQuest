@@ -1,0 +1,152 @@
+[
+    {
+        "level": 1,
+        "type": "money",
+        "value": 10
+    },
+    {
+        "level": 2,
+        "type": "money",
+        "value": 20
+    },
+    {
+        "level": 3,
+        "type": "money",
+        "value": 30
+    },
+    {
+        "level": 4,
+        "type": "xp",
+        "value": 25
+    },
+    {
+        "level": 5,
+        "type": "money",
+        "value": 40
+    },
+    {
+        "level": 6,
+        "type": "money",
+        "value": 50
+    },
+    {
+        "level": 7,
+        "type": "money",
+        "value": 50
+    },
+    {
+        "level": 8,
+        "type": "xp",
+        "value": 50
+    },
+    {
+        "level": 9,
+        "type": "money",
+        "value": 50
+    },
+    {
+        "level": 10,
+        "type": "money",
+        "value": 100
+    },
+    {
+        "level": 11,
+        "type": "money",
+        "value": 75
+    },
+    {
+        "level": 12,
+        "type": "xp",
+        "value": 75
+    },
+    {
+        "level": 13,
+        "type": "money",
+        "value": 75
+    },
+    {
+        "level": 14,
+        "type": "money",
+        "value": 75
+    },
+    {
+        "level": 15,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 16,
+        "type": "xp",
+        "value": 100
+    },
+    {
+        "level": 17,
+        "type": "money",
+        "value": 100
+    },
+    {
+        "level": 18,
+        "type": "money",
+        "value": 100
+    },
+    {
+        "level": 19,
+        "type": "money",
+        "value": 100
+    },
+    {
+        "level": 20,
+        "type": "xp",
+        "value": 150
+    },
+    {
+        "level": 21,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 22,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 23,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 24,
+        "type": "xp",
+        "value": 200
+    },
+    {
+        "level": 25,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 26,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 27,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 28,
+        "type": "xp",
+        "value": 250
+    },
+    {
+        "level": 29,
+        "type": "money",
+        "value": 150
+    },
+    {
+        "level": 30,
+        "type": "money",
+        "value": 300
+    }
+]
