@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/utils/MarketJSONConverter.dart';
@@ -10,25 +11,64 @@ class MarketItem extends StatelessWidget {
     required this.item,
   });
 
-  Future<void> _updateBalance(int amount) async {
-    final userId = Auth().currentUser?.uid;
+  Future<void> confirmPurchase(Item item, int amount) async {
+    final String itemId = item.id.toString(); // Ensure item ID is a string
+    final String? userId = FirebaseAuth.instance.currentUser?.uid;
+
     if (userId == null) {
       print("User is not logged in.");
       return;
     }
 
-    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+    final DocumentReference userDoc =
+        FirebaseFirestore.instance.collection('users').doc(userId);
 
-    await FirebaseFirestore.instance.runTransaction((transaction) async {
-      final snapshot = await transaction.get(userDoc);
-      if (!snapshot.exists) {
-        print("User document does not exist.");
-        return;
-      }
+    try {
+      await FirebaseFirestore.instance.runTransaction((transaction) async {
+        final DocumentSnapshot snapshot = await transaction.get(userDoc);
 
-      final currentBalance = snapshot.data()?['balance'] as int? ?? 0;
-      transaction.update(userDoc, {'balance': currentBalance - amount});
-    });
+        if (!snapshot.exists) {
+          print("User document does not exist.");
+          return;
+        }
+
+        // Cast snapshot data to Map<String, dynamic>
+        final data = snapshot.data() as Map<String, dynamic>;
+        final int currentBalance =
+            data['balance'] ?? 0; // Safely access 'balance'
+
+        if (currentBalance < amount) {
+          print("Insufficient balance.");
+          return;
+        }
+
+        // Deduct the item's price from the user's balance
+        transaction.update(userDoc, {'balance': currentBalance - amount});
+
+        // Add the item to the user's inventory
+        final CollectionReference inventoryCollection =
+            userDoc.collection("inventory");
+
+        transaction.set(
+          inventoryCollection
+              .doc(item.id.toString()), // Use item ID as document ID
+          {
+            'name': item.name,
+            'description': item.description,
+            'image': item.image,
+            'price': item.price,
+            'category': item.category,
+            'quantity': 1, // You can customize this field as needed
+          },
+        );
+      });
+
+      print("Purchase confirmed, and item added to inventory.");
+    } catch (e) {
+      print("Error during transaction: $e");
+    } catch (e) {
+      print("Error during transaction: $e");
+    }
   }
 
   final Item item;
@@ -87,7 +127,7 @@ class MarketItem extends StatelessWidget {
                       SlideAction(
                         onSubmit: () {
                           Navigator.of(context).pop();
-                          _updateBalance(item.price);
+                          confirmPurchase(item, item.price);
                           return null;
                         },
                         outerColor: Theme.of(context).colorScheme.secondary,

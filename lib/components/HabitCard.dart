@@ -20,6 +20,7 @@ class HabitTile extends StatefulWidget {
 
 class _HabitTileState extends State<HabitTile> {
   late bool isOn; // State variable to track on/off status
+  @override
   void initState() {
     super.initState();
     isOn = widget.state; // Initialize the variable in initState

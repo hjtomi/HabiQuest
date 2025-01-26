@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:habiquest/pages/habit-todo/habit-add.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:habiquest/utils/calculateHabitMoney.dart';
+import 'package:habiquest/utils/theme/AppTheme.dart';
 
 Future<void> firestoreAddOrUpdateHabit(Map<String, dynamic> formData) async {
   User? user = FirebaseAuth.instance.currentUser;
@@ -37,7 +38,7 @@ Future<void> firestoreCompleteHabit(
   String userId = user?.uid ?? 'anonymous';
 
   if (updatedState) {
-    CalculateHabitCompletetionReward(difficulty: 0);
+    CalculateHabitCompletetionReward(difficulty: difficulty);
   }
 
   try {

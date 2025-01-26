@@ -24,7 +24,7 @@ class _HabitAddState extends State<HabitAdd> {
   final TextEditingController _megjegyzesController = TextEditingController();
   Difficulties _selectedDifficulty = Difficulties.moderate;
   Calendar _selectedFrequency = Calendar.daily;
-  int _repetitions = 1;
+  final int _repetitions = 1;
   DateTime? _startDate;
   final bool _isComplete = false;
   final int _streak = 0;
@@ -140,7 +140,7 @@ class _HabitAddState extends State<HabitAdd> {
       crossAxisAlignment: CrossAxisAlignment.stretch, // Ensure full width
       mainAxisAlignment: MainAxisAlignment.center, // Center vertically
       children: [
-        Text(
+        const Text(
           "Nehézség kiválasztása",
           textAlign: TextAlign.start, // Center-align the text
         ),
@@ -168,7 +168,7 @@ class _HabitAddState extends State<HabitAdd> {
       crossAxisAlignment: CrossAxisAlignment.stretch, // Ensure full width
       mainAxisAlignment: MainAxisAlignment.center, // Center vertically
       children: [
-        Text(
+        const Text(
           "Gyakorsiág kiválasztása",
           textAlign: TextAlign.start, // Center-align the text
         ),

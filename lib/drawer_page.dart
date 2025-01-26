@@ -3,11 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/pages/home_page.dart'; // Your Dashboard Page
+import 'package:habiquest/pages/inventory_page.dart';
 import 'package:habiquest/pages/market_page.dart';
 import 'package:habiquest/pages/statistics_page.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-enum PageType { dashboard, market, statistics }
+enum PageType { dashboard, market, statistics, inventory }
 
 class HoldingPage extends StatefulWidget {
   const HoldingPage({super.key});
@@ -28,6 +29,8 @@ class _HoldingPageState extends State<HoldingPage> {
         return const MarketPage();
       case PageType.statistics:
         return const StatisticsPage();
+      case PageType.inventory:
+        return const InventoryPage();
     }
   }
 
@@ -40,8 +43,8 @@ class _HoldingPageState extends State<HoldingPage> {
         return "Piactér";
       case PageType.statistics:
         return "Statisztikák";
-      default:
-        return "App";
+      case PageType.inventory:
+        return "Inventár";
     }
   }
 
@@ -204,6 +207,18 @@ class _HoldingPageState extends State<HoldingPage> {
               selectedColor: Theme.of(context).colorScheme.secondary,
               leading: const Icon(LucideIcons.areaChart),
               title: const Text("Statisztikák"),
+            ),
+            ListTile(
+              onTap: () {
+                setState(() {
+                  _selectedPage = PageType.inventory;
+                });
+                Navigator.pop(context);
+              },
+              selected: _selectedPage == PageType.inventory,
+              selectedColor: Theme.of(context).colorScheme.secondary,
+              leading: const Icon(LucideIcons.backpack),
+              title: const Text("Inventár"),
             ),
           ],
         ),

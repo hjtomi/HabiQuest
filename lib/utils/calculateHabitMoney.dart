@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:habiquest/auth.dart';
 import 'dart:math';
+
+import 'package:habiquest/utils/theme/AppTheme.dart';
 
 void CalculateHabitCompletetionReward({required int difficulty}) async {
   int amount = 0;
@@ -36,4 +38,12 @@ void CalculateHabitCompletetionReward({required int difficulty}) async {
     final currentBalance = snapshot.data()?['balance'] as int? ?? 0;
     transaction.update(userDoc, {'balance': currentBalance + amount});
   });
+
+  Fluttertoast.showToast(
+    msg: "+${amount}\$",
+    toastLength: Toast.LENGTH_SHORT,
+    textColor: AppTheme.darkTheme.colorScheme.tertiary,
+    fontSize: 20,
+    backgroundColor: AppTheme.darkTheme.colorScheme.secondary,
+  );
 }

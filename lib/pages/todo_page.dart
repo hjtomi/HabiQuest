@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:habiquest/pages/habit-todo/todo-add.dart';
-import 'package:habiquest/pages/habit-todo/todo-edit.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class TodoPage extends StatefulWidget {
@@ -127,11 +125,11 @@ class _TodoPageState extends State<TodoPage> {
                     TextFormField(
                       controller: taskController,
                       cursorColor: Theme.of(context).colorScheme.secondary,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Add meg az új feladatot",
                         border: InputBorder.none,
                         focusedBorder: InputBorder.none,
-                        contentPadding: const EdgeInsets.all(12.0),
+                        contentPadding: EdgeInsets.all(12.0),
                       ),
                     ),
                     const SizedBox(height: 16.0),
@@ -153,13 +151,13 @@ class _TodoPageState extends State<TodoPage> {
                             });
                           }
                         },
-                        child: const Text("Mentés"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Theme.of(context).colorScheme.secondary,
                           foregroundColor:
                               Theme.of(context).colorScheme.onSecondary,
                         ),
+                        child: const Text("Mentés"),
                       ),
                     ),
                     const SizedBox(height: 16.0),

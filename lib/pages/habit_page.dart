@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gif/gif.dart';
-import 'package:habiquest/pages/habit-todo/habit-edit.dart';
 import 'package:habiquest/components/HabitCard.dart';
 import 'package:habiquest/pages/habit-todo/habit-add.dart';
-import 'package:habiquest/pages/statistics_page.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class HabitPage extends StatefulWidget {
@@ -45,7 +43,7 @@ class _HabitPageState extends State<HabitPage> {
                   width: 200,
                   height: 200,
                   autostart: Autostart.loop,
-                  image: AssetImage("lib/assets/knight_idle.gif"),
+                  image: const AssetImage("lib/assets/knight_idle.gif"),
                 ),
                 Text(
                   'Még nem adtál hozzá szokást!',
