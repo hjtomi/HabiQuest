@@ -60,8 +60,7 @@ class Auth {
       if (userCredential.additionalUserInfo!.isNewUser ||
           userIdInFirestore == 'null') {
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
-          'username': googleUser.displayName ??
-              'New User', // Set a default username if available
+          'username': googleUser.displayName ?? 'New User', // Set a default username if available
           'email': googleUser.email,
           'createdAt': FieldValue.serverTimestamp(),
         });

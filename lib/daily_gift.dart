@@ -17,34 +17,46 @@ Future<void> checkDailygift(BuildContext context) async {
       .collection("dailies")
       .orderBy("date", descending: true)
       .get();
-    
-    if (context.mounted) {
-      if (data.docs.isEmpty) {
-        showDailyGifts(context, 1, itemData);
-      } else {
-        int dayCounter = 1;
-        var today = DateTime.now().date;
-        for (var element in data.docs) {
-          Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-          DateTime date = data["date"].toDate() as DateTime;
 
-          int napkulonbseg = DateTime(today.year, today.month, today.day)
-            .difference(DateTime(date.year, date.month, date.day)).inDays;
+    DocumentSnapshot? data2 = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(Auth().currentUser!.uid)
+      .get();
 
-          if (napkulonbseg == 0) {
-            // Ma már volt ajándékátvéve
-            return;
-          } else if (napkulonbseg > dayCounter) {
-            // Újrakezdődik az ajándékozás
-            showDailyGifts(context, dayCounter, itemData);
-            return;
-          } else if (napkulonbseg == dayCounter) {
-            dayCounter++;
+    Map<String, dynamic> data2map = data2.data() as Map<String, dynamic>;
+
+    if (data2map.containsKey('character')) {
+      printMessage('daily: karakter van');
+      if (context.mounted) {
+        if (data.docs.isEmpty) {
+          showDailyGifts(context, 1, itemData);
+        } else {
+          int dayCounter = 1;
+          var today = DateTime.now().date;
+          for (var element in data.docs) {
+            Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+            DateTime date = data["date"].toDate() as DateTime;
+
+            int napkulonbseg = DateTime(today.year, today.month, today.day)
+              .difference(DateTime(date.year, date.month, date.day)).inDays;
+
+            if (napkulonbseg == 0) {
+              // Ma már volt ajándékátvéve
+              return;
+            } else if (napkulonbseg > dayCounter) {
+              // Újrakezdődik az ajándékozás
+              showDailyGifts(context, dayCounter, itemData);
+              return;
+            } else if (napkulonbseg == dayCounter) {
+              dayCounter++;
+            }
           }
+          showDailyGifts(context, dayCounter, itemData);
         }
-        showDailyGifts(context, dayCounter, itemData);
       }
-    }
+    } else {
+      printMessage('daily: karakter nincs');
+    } 
   }
 }
 

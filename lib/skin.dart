@@ -61,6 +61,12 @@ class _CharacterSelectorState extends State<CharacterSelector> {
       // Reference the user's document in Firestore
       await _firestore.collection('users').doc(user!.uid).update({
         'character': characterValue,
+        'balance': characterValue == 1 ? 50 : 0,
+        'health': characterValue == 2 ? 200 : 100,
+        'defense': characterValue == 3 ? 50 : 25,
+        'attack': characterValue == 4 ? 20 : 10,
+        'level': 1,
+        'xp': 0,
       });
       print('Character updated successfully!');
       Navigator.of(context).pop();
