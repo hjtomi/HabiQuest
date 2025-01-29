@@ -1,6 +1,9 @@
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:habiquest/character_development.dart';
+import 'package:habiquest/common.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class TodoPage extends StatefulWidget {
@@ -74,6 +77,8 @@ class _TodoPageState extends State<TodoPage> {
                           .collection('todos')
                           .doc(todos[index].id)
                           .update({'kesz': value});
+                      
+                      if (value == true) {addXP((20 + Random().nextInt(5 + 10) - 5) * 2);}
                     },
                   ),
                   trailing: todoData['kesz']

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
+import 'package:habiquest/character_development.dart';
 import 'package:habiquest/utils/MarketJSONConverter.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
@@ -62,6 +63,8 @@ class MarketItem extends StatelessWidget {
           },
         );
       });
+
+      addXP((item.price / 20).round());
 
       switch(item.category) {
         case 'weapon':
