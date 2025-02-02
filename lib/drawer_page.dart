@@ -7,6 +7,7 @@ import 'package:habiquest/pages/inventory_page.dart';
 import 'package:habiquest/pages/market_page.dart';
 import 'package:habiquest/pages/statistics_page.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:habiquest/stat_card.dart';
 
 enum PageType { dashboard, market, statistics, inventory }
 
@@ -229,105 +230,13 @@ class _HoldingPageState extends State<HoldingPage> {
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-            child: Card(
-              color: Colors.grey[900],
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _character != null
-                      ? Image(
-                          fit: BoxFit.contain,
-                          width: 150,
-                          height: 150,
-                          image: AssetImage(
-                              'lib/assets/skins/skin-$_character.png'),
-                        )
-                      : const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(Icons.person, size: 100),
-                        ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Column(
-                              children: [
-                                const Row(
-                                  children: [
-                                    Text(
-                                      "Életerő",
-                                    ),
-                                  ],
-                                ),
-                                LinearProgressIndicator(
-                                  minHeight: 6,
-                                  value: 0.5, // Must be between 0.0 and 1.0
-                                  backgroundColor: Colors.black12,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Védelem",
-                                    ),
-                                  ],
-                                ),
-                                LinearProgressIndicator(
-                                  minHeight: 6,
-                                  value: 0.3, // Must be between 0.0 and 1.0
-                                  backgroundColor: Colors.black12,
-                                  color: Colors.green,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "TP",
-                                    ),
-                                  ],
-                                ),
-                                LinearProgressIndicator(
-                                    minHeight: 6,
-                                    value: 0.7, // Must be between 0.0 and 1.0
-                                    backgroundColor: Colors.black12,
-                                    color: Colors.blue),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: StatCard(character: _character),
           ),
           Expanded(
             child: _getPage(_selectedPage),
           ),
         ],
       ),
-
-      // Load the selected page dynamically
     );
   }
 }
