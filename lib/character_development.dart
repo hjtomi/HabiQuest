@@ -17,7 +17,7 @@ Future<void> addXP(int value) async {
     int afterXP = beforeXP + value;
     int level = data.data()!['level'];
 
-    await handleLevelUp(level, afterXP);
+    await handleLevelUp(level, afterXP, 0);
 
     Fluttertoast.showToast(
         msg: "+$value XP",
@@ -28,18 +28,22 @@ Future<void> addXP(int value) async {
     );
 }
 
-Future<void> handleLevelUp(currentLevel, afterXP) async {
+Future<void> handleLevelUp(currentLevel, afterXP, levelUpAmount) async {
+    // Level up amount gets incremented when the function recursively calls itselfs
     int neededXP = (sqrt(currentLevel) * 100).round();
     if (afterXP >= neededXP) {
         int overflowXP = afterXP - neededXP;
-        return handleLevelUp(currentLevel + 1, overflowXP);
+        return handleLevelUp(currentLevel + 1, overflowXP, levelUpAmount + 1);
     } else {
         await FirebaseFirestore.instance
         .collection('users')
         .doc(Auth().currentUser!.uid)
         .update({
             'xp': afterXP,
-            'level': currentLevel
+            'level': currentLevel,
+            'health': FieldValue.increment(20 * levelUpAmount),
+            'attack': FieldValue.increment(5 * levelUpAmount),
+            'defense': FieldValue.increment(2 * levelUpAmount),
         });
     }
 }
