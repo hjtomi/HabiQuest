@@ -68,19 +68,13 @@ class MarketItem extends StatelessWidget {
 
       switch(item.category) {
         case 'weapon':
-          FirebaseFirestore.instance.collection('users').doc(userId).update({
-            'attack': FieldValue.increment(item.price * 0.3)
-          });
+          addAttack(item.price * 0.3);
           break;
         case 'armor': 
-          FirebaseFirestore.instance.collection('users').doc(userId).update({
-            'defense': FieldValue.increment(item.price * 0.1)
-          });
+          addDefense(item.price * 0.1);
           break;
         case 'food':
-          FirebaseFirestore.instance.collection('users').doc(userId).update({
-            'health': FieldValue.increment(item.price)
-          });
+          addHealth(item.price);
           break;
       }
 
