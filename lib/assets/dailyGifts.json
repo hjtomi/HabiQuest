@@ -17,7 +17,7 @@
     {
         "level": 4,
         "type": "xp",
-        "value": 25
+        "value": 50
     },
     {
         "level": 5,
@@ -37,7 +37,7 @@
     {
         "level": 8,
         "type": "xp",
-        "value": 50
+        "value": 100
     },
     {
         "level": 9,
@@ -57,7 +57,7 @@
     {
         "level": 12,
         "type": "xp",
-        "value": 75
+        "value": 150
     },
     {
         "level": 13,
@@ -77,7 +77,7 @@
     {
         "level": 16,
         "type": "xp",
-        "value": 100
+        "value": 200
     },
     {
         "level": 17,
@@ -97,7 +97,7 @@
     {
         "level": 20,
         "type": "xp",
-        "value": 150
+        "value": 250
     },
     {
         "level": 21,
@@ -117,7 +117,7 @@
     {
         "level": 24,
         "type": "xp",
-        "value": 200
+        "value": 300
     },
     {
         "level": 25,
@@ -137,7 +137,7 @@
     {
         "level": 28,
         "type": "xp",
-        "value": 250
+        "value": 350
     },
     {
         "level": 29,

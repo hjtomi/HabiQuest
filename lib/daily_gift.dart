@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:habiquest/character_development.dart';
 import 'package:habiquest/common.dart';
 import 'package:time/time.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -266,7 +267,10 @@ void addGift(String type, int amount) async {
       transaction.update(userDoc, {'balance': currentBalance + amount});
     });
   } else {
-    // KARAKTERFEJLŐDÉSRE VÁR (XP szerzés)
+    Future.delayed(
+      const Duration(milliseconds: 750),
+      () {addXP(amount);}
+    );
   }
 }
 
