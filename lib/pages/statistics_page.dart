@@ -14,7 +14,7 @@ class StatisticsPage extends StatefulWidget {
 }
 
 Future<QuerySnapshot<Map<String, dynamic>>> getUserHabits() async {
-  await Future.delayed(const Duration(seconds: 3)); // Delay execution
+  await Future.delayed(const Duration(seconds: 1)); // Delay execution
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
       .collection('users')
@@ -25,24 +25,44 @@ Future<QuerySnapshot<Map<String, dynamic>>> getUserHabits() async {
   return snapshot; // Return the Firestore result
 }
 
+Future<Map<String, dynamic>> fetchData() async {
+  Future.delayed(const Duration(seconds: 1));
+  DocumentReference userDoc = await FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid);
+  var userData = await userDoc.get();
+  var habits = await userDoc.collection('habits').get();
+  var todos = await userDoc.collection('todos').orderBy('kesz').get();
+  var dailies = await userDoc.collection('dailies').orderBy('date').get();
+  var inventory = await userDoc.collection('inventory').orderBy('category').get();
+  var logins = await userDoc.collection('logins').orderBy('date').get();
+  var resumes = await userDoc.collection('resumes').orderBy('date').get();
+  return {
+    "userData": userData.data(),
+    "habits": habits.docs.map((doc) => doc.data()).toList(),
+    "todos": todos.docs.map((doc) => doc.data()).toList(),
+    "dailies": dailies.docs.map((doc) => doc.data()).toList(),
+    "inventory": inventory.docs.map((doc) => doc.data()).toList(),
+    "logins": logins.docs.map((doc) => doc.data()).toList(),
+    "resumes": resumes.docs.map((doc) => doc.data()).toList(),
+  };
+}
+
 class _StatisticsPageState extends State<StatisticsPage> {
   List<Widget> statisticsToShow = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder(
-      future: getUserHabits(),
+      body: FutureBuilder(
+      future: fetchData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final documents =
-              snapshot.data!.docs; // List of documents in the QuerySnapshot
-          List<int> difficulties = [0, 0, 0, 0];
-          for (int i = 0; i < documents.length; i++) {
-            difficulties[documents[i]['nehezseg'].round()]++;
-          }
-          statisticsToShow.add(HabitDifficulties(difficulties[0],
-              difficulties[1], difficulties[2], difficulties[3]));
+          final data = snapshot.data!;
+          printMessage("Snapshot: ${snapshot.data}");
+
+          statisticsToShow.add(
+            HabitDifficulties(data: data['habits']),
+          );
+
           return GridView.count(
             childAspectRatio: 0.7,
             crossAxisCount: 2,
@@ -55,8 +75,10 @@ class _StatisticsPageState extends State<StatisticsPage> {
           return const Text('There was an error :O');
         } else {
           return Center(
-              child: LoadingAnimationWidget.dotsTriangle(
-                  color: Colors.amber, size: 50));
+            child: LoadingAnimationWidget.dotsTriangle(
+              color: Colors.amber, size: 50
+            )
+          );
         }
       },
     ));
@@ -64,19 +86,25 @@ class _StatisticsPageState extends State<StatisticsPage> {
 }
 
 class HabitDifficulties extends StatelessWidget {
-  final int d1;
-  final int d2;
-  final int d3;
-  final int d4;
+  final List<Map<String, dynamic>> data;
 
-  HabitDifficulties(this.d1, this.d2, this.d3, this.d4, {super.key});
+  HabitDifficulties({super.key, required this.data});
 
   final double totalRadius = 80;
   final Color randomColor = Color.fromRGBO(
-      Random().nextInt(255), Random().nextInt(255), Random().nextInt(255), 1);
+    Random().nextInt(255), Random().nextInt(255), Random().nextInt(255), 1);
 
   @override
   Widget build(BuildContext context) {
+    List<int> difficulties = [0, 0, 0, 0];
+    for (int i = 0; i < data.length; i++) {
+      difficulties[data[i]['nehezseg'].round()]++;
+    }
+    int d1 = difficulties[0];
+    int d2 = difficulties[1];
+    int d3 = difficulties[2];
+    int d4 = difficulties[3];
+
     return Column(children: [
       const Padding(
         padding: EdgeInsets.only(
