@@ -94,9 +94,9 @@ class _HabitAddState extends State<HabitAdd> {
       case Calendar.daily:
         return 1;
       case Calendar.weekly:
-        return 7;
+        return 2;
       case Calendar.monthly:
-        return _daysInMonth(DateTime.now().month);
+        return 3;
     }
   }
 

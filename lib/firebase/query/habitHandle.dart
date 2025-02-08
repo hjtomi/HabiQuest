@@ -23,6 +23,7 @@ Future<void> firestoreAddOrUpdateHabit(Map<String, dynamic> formData) async {
       'kezdes': formData['kezdes'],
       'kesz': formData['kesz'],
       'streak': formData['streak'],
+      'completions': []
     });
   } catch (e) {
     print('Error adding or updating form data in Firestore: $e');
@@ -47,7 +48,10 @@ Future<void> firestoreCompleteHabit(
         .doc(userId)
         .collection('habits');
 
-    await collection.doc(habitId).update({'kesz': updatedState});
+    await collection.doc(habitId).update({
+      'kesz': updatedState,
+      if (updatedState) 'completions': FieldValue.arrayUnion([DateTime.now()])
+    });
   } catch (e) {
     print('Error adding or updating form data in Firestore: $e');
   }
