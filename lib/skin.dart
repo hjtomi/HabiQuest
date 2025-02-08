@@ -67,6 +67,7 @@ class _CharacterSelectorState extends State<CharacterSelector> {
         'defense': characterValue == 3 ? 20 : 10,
         'level': 1,
         'xp': 0,
+        'secondsInApp': 0,
       });
       print('Character updated successfully!');
       Navigator.of(context).pop();

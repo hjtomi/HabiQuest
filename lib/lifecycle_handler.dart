@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:habiquest/auth.dart';
 import 'package:habiquest/common.dart';
 import 'package:habiquest/daily_gift.dart';
+import 'package:habiquest/pages/statistics_page.dart';
 
 class LifecycleHandler extends StatefulWidget {
   final Widget child;
@@ -25,7 +28,7 @@ class _LifecycleHandlerState extends State<LifecycleHandler> with WidgetsBinding
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
     super.didChangeAppLifecycleState(state);
 
     // Handle app lifecycle changes
@@ -33,9 +36,19 @@ class _LifecycleHandlerState extends State<LifecycleHandler> with WidgetsBinding
       printMessage("App is inactive.");
     } else if (state == AppLifecycleState.paused) {
       printMessage("App is in the background.");
+      stopCounting();
+      if (timeFetched) {
+        FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid).update({
+          "secondsInApp": timeSpent
+        });
+        timeSpent = 0;
+        timeFetched = false;
+      }
     } else if (state == AppLifecycleState.resumed) {
       printMessage("App is back in the foreground.");
       addResume(context);
+      getSecondsInApp();
+      countSecondsInApp();
       checkDailygift(context);
     }
   }

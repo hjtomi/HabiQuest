@@ -5,12 +5,26 @@ import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
 import 'package:habiquest/common.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'dart:async';
 
-class StatisticsPage extends StatefulWidget {
-  const StatisticsPage({super.key});
+bool timeFetched = false;
+int timeSpent = 0;
+Timer? _timer;
+void countSecondsInApp() {
+  _timer?.cancel(); // Cancel existing timer if any
+  _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    timeSpent++;
+  });
+}
 
-  @override
-  State<StatisticsPage> createState() => _StatisticsPageState();
+void stopCounting() {
+  _timer?.cancel(); // Stop the timer when needed
+}
+
+void getSecondsInApp() async {
+  var qs = await FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid).get();
+  timeSpent = qs.data()!['secondsInApp'];
+  timeFetched = true;
 }
 
 Future<QuerySnapshot<Map<String, dynamic>>> getUserHabits() async {
@@ -21,7 +35,7 @@ Future<QuerySnapshot<Map<String, dynamic>>> getUserHabits() async {
       .doc(Auth().currentUser!.uid)
       .collection('habits')
       .get();
-  printMessage(snapshot.toString());
+
   return snapshot; // Return the Firestore result
 }
 
@@ -46,29 +60,86 @@ Future<Map<String, dynamic>> fetchData() async {
   };
 }
 
+class StatisticsPage extends StatefulWidget {
+  const StatisticsPage({super.key});
+
+  @override
+  State<StatisticsPage> createState() => _StatisticsPageState();
+}
+
 class _StatisticsPageState extends State<StatisticsPage> {
   List<Widget> statisticsToShow = [];
 
   @override
+  void initState() {
+    updateEachSecond();
+    super.initState();
+  }
+
+  void updateEachSecond() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String hours = (timeSpent / 3600).floor().toString().padLeft(2, "0");
+    String minutes = (timeSpent / 60).floor().toString().padLeft(2, "0");
+    String seconds = (timeSpent % 60).toString().padLeft(2, "0");
+
     return Scaffold(
       body: FutureBuilder(
       future: fetchData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data!;
-          printMessage("Snapshot: ${snapshot.data}");
 
-          statisticsToShow.add(
+          statisticsToShow.addAll([
             HabitDifficulties(data: data['habits']),
-          );
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+            HabitDifficulties(data: data['habits']),
+          ]);
 
-          return GridView.count(
-            childAspectRatio: 0.7,
-            crossAxisCount: 2,
-            crossAxisSpacing: 0,
-            mainAxisSpacing: 0,
-            children: statisticsToShow,
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+"""Applikációban eltöltött idő: $hours:$minutes:$seconds
+Niggerek száma: 2""",
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  childAspectRatio: 0.7,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 0,
+                  mainAxisSpacing: 0,
+                  children: statisticsToShow,
+                ),
+              ],
+            ),
           );
         } else if (snapshot.hasError) {
           // throw Exception(snapshot.error);

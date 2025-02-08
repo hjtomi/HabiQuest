@@ -1,6 +1,7 @@
 import 'package:habiquest/common.dart';
 import 'package:habiquest/daily_gift.dart';
 import 'package:habiquest/drawer_page.dart';
+import 'package:habiquest/pages/statistics_page.dart';
 import 'package:habiquest/skin.dart';
 import 'auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,6 +27,10 @@ class _WidgetTreeState extends State<WidgetTree> {
           printMessage("LOGIN");
           addLogin(context);
           addResume(context);
+
+          getSecondsInApp();
+          countSecondsInApp();
+
           Future.delayed(const Duration(seconds: 2), () {
             checkDailygift(context);
           });
