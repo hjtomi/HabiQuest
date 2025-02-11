@@ -6,6 +6,8 @@ import 'package:habiquest/auth.dart';
 import 'package:habiquest/common.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'dart:async';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 
 bool timeFetched = false;
 int timeSpent = 0;
@@ -94,26 +96,6 @@ class _StatisticsPageState extends State<StatisticsPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data!;
-
-          statisticsToShow.addAll([
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-            HabitDifficulties(data: data['habits']),
-          ]);
-
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,15 +110,23 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  childAspectRatio: 0.7,
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 0,
-                  mainAxisSpacing: 0,
-                  children: statisticsToShow,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    HabitDifficulties(habits: data['habits']),
+                    HabitDifficulties(habits: data['habits']),
+                  ]
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    MoneyChange()
+                  ]
+                )
               ],
             ),
           );
@@ -155,10 +145,33 @@ class _StatisticsPageState extends State<StatisticsPage> {
   }
 }
 
-class HabitDifficulties extends StatelessWidget {
-  final List<Map<String, dynamic>> data;
+class ChartTop extends StatelessWidget {
+  final String text;
 
-  HabitDifficulties({super.key, required this.data});
+  const ChartTop({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: const TextStyle(fontSize: 18, shadows: [
+        Shadow(
+          color: Colors.black,
+          offset: Offset(2.5, 2.5),
+        ),
+      ]),
+    );
+  }
+}
+
+class HabitDifficulties extends StatelessWidget {
+  final List<Map<String, dynamic>> habits;
+
+  HabitDifficulties({super.key, required this.habits});
 
   final double totalRadius = 80;
   final Color randomColor = Color.fromRGBO(
@@ -167,34 +180,21 @@ class HabitDifficulties extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<int> difficulties = [0, 0, 0, 0];
-    for (int i = 0; i < data.length; i++) {
-      difficulties[data[i]['nehezseg'].round()]++;
+    for (int i = 0; i < habits.length; i++) {
+      difficulties[habits[i]['nehezseg'].round()]++;
     }
     int d1 = difficulties[0];
     int d2 = difficulties[1];
     int d3 = difficulties[2];
     int d4 = difficulties[3];
 
-    return Column(children: [
-      const Padding(
-        padding: EdgeInsets.only(
-          left: 8,
-          top: 8,
-          right: 8,
-        ),
-        child: Text(
-          'Szokások száma nehézség szerint',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, shadows: [
-            Shadow(
-              color: Colors.black,
-              offset: Offset(2.5, 2.5),
-            ),
-          ]),
-        ),
-      ),
-      d1 + d2 + d3 + d4 > 0
-          ? Expanded(
+    return Column(
+      children: [
+        const ChartTop(text: "Szokások száma\nnehézség szerint"),
+        d1 + d2 + d3 + d4 > 0
+            ? SizedBox(
+              width: MediaQuery.sizeOf(context).width / 2,
+              height: 200,
               child: PieChart(PieChartData(
                 sections: [
                   PieChartSectionData(
@@ -226,17 +226,40 @@ class HabitDifficulties extends StatelessWidget {
                 centerSpaceRadius: totalRadius * 0.25,
               )),
             )
-          : const Expanded(
-              child: Center(
-                child: Text(
-                  'Add habit to show data',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
+            : const Expanded(
+                child: Center(
+                  child: Text(
+                    'Add habit to show data',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-              ),
+              )
+      ]
+    );
+  }
+}
+
+class MoneyChange extends StatelessWidget {
+  const MoneyChange({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const ChartTop(text: "Pénz összegének változása"),
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          height: 300,
+          child: LineChart(
+            LineChartData(
+
             )
-    ]);
+          ),
+        )
+      ],
+    );
   }
 }
