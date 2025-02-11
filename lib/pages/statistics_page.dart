@@ -87,7 +87,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
   @override
   Widget build(BuildContext context) {
     String hours = (timeSpent / 3600).floor().toString().padLeft(2, "0");
-    String minutes = (timeSpent / 60).floor().toString().padLeft(2, "0");
+    String minutes = (timeSpent % 3600 / 60).floor().toString().padLeft(2, "0");
     String seconds = (timeSpent % 60).toString().padLeft(2, "0");
 
     return Scaffold(
@@ -255,11 +255,95 @@ class MoneyChange extends StatelessWidget {
           height: 300,
           child: LineChart(
             LineChartData(
-
+              lineBarsData: [
+                LineChartBarData(
+                  barWidth: 4,
+                  isCurved: true,
+                  dotData: const FlDotData(
+                    show: false
+                  ),
+                  spots: [
+                    const FlSpot(0, 0),
+                    const FlSpot(1, 10),
+                    const FlSpot(2, 40),
+                    const FlSpot(3, 5),
+                    const FlSpot(4, 60),
+                    const FlSpot(5, 0),
+                    const FlSpot(6, 10),
+                    const FlSpot(7, 40),
+                    const FlSpot(8, 5),
+                    const FlSpot(9, 60),
+                    const FlSpot(10, 0),
+                    const FlSpot(11, 10),
+                    const FlSpot(12, 40),
+                    const FlSpot(13, 5),
+                    const FlSpot(14, 60),
+                  ],
+                  belowBarData: BarAreaData(
+                    show: true,
+                    color: const Color.fromARGB(58, 30, 202, 229)
+                  ),
+                  shadow: const Shadow(
+                    color: Colors.black,
+                    blurRadius: 4
+                  ),
+                  isStrokeCapRound: true,
+                )
+              ],
+              lineTouchData: const LineTouchData(enabled: false),
+              titlesData: const FlTitlesData(
+                topTitles: AxisTitles(
+                  axisNameWidget: SizedBox(height: 10),
+                  sideTitles: SideTitles(
+                    showTitles: false
+                  )
+                ),
+                rightTitles: AxisTitles(
+                  axisNameWidget: SizedBox(width: 15),
+                  sideTitles: SideTitles(
+                    showTitles: false
+                  )
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    reservedSize: 30,
+                    interval: 1,
+                    getTitlesWidget: bottomTitleWidgets,
+                  ),
+                ),
+              )
             )
           ),
         )
       ],
     );
   }
+}
+
+Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  const style = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+  );
+  Widget text;
+  switch (value.toInt()) {
+    case 4:
+      text = const Text('MAR', style: style);
+      break;
+    case 8:
+      text = const Text('JUN', style: style);
+      break;
+    case 12:
+      text = const Text('SEP', style: style);
+      break;
+    default:
+      text = const Text('', style: style);
+      break;
+  }
+
+  return SideTitleWidget(
+    meta: meta,
+    child: text,
+  );
 }
