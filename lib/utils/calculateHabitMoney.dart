@@ -28,6 +28,7 @@ void CalculateHabitCompletetionReward({required int difficulty}) async {
   }
 
   final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+  int currentBalance = 0;
 
   await FirebaseFirestore.instance.runTransaction((transaction) async {
     final snapshot = await transaction.get(userDoc);
@@ -36,8 +37,15 @@ void CalculateHabitCompletetionReward({required int difficulty}) async {
       return;
     }
 
-    final currentBalance = snapshot.data()?['balance'] as int? ?? 0;
+    currentBalance = snapshot.data()?['balance'] as int? ?? 0;
     transaction.update(userDoc, {'balance': currentBalance + amount});
+  });
+
+  await userDoc.update({
+    'moneyChange': FieldValue.arrayUnion([
+      DateTime.now(),
+      currentBalance + amount,
+    ])
   });
 
   addXP(amount * 2);

@@ -24,6 +24,8 @@ class MarketItem extends StatelessWidget {
     final DocumentReference userDoc =
         FirebaseFirestore.instance.collection('users').doc(userId);
 
+    int newBalance = 0;
+
     try {
       await FirebaseFirestore.instance.runTransaction((transaction) async {
         final DocumentSnapshot snapshot = await transaction.get(userDoc);
@@ -35,16 +37,16 @@ class MarketItem extends StatelessWidget {
 
         // Cast snapshot data to Map<String, dynamic>
         final data = snapshot.data() as Map<String, dynamic>;
-        final int currentBalance =
-            data['balance'] ?? 0; // Safely access 'balance'
+        final int currentBalance = data['balance'] ?? 0; // Safely access 'balance'
 
         if (currentBalance < amount) {
           print("Insufficient balance.");
           return;
         }
 
+        newBalance = currentBalance - amount;
         // Deduct the item's price from the user's balance
-        transaction.update(userDoc, {'balance': currentBalance - amount});
+        transaction.update(userDoc, {'balance': newBalance});
 
         // Add the item to the user's inventory
         final CollectionReference inventoryCollection =
@@ -62,6 +64,10 @@ class MarketItem extends StatelessWidget {
             'quantity': 1, // You can customize this field as needed
           },
         );
+      });
+
+      FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid).update({
+        'moneyChange': FieldValue.arrayUnion([DateTime.now(), newBalance])
       });
 
       addXP((item.price / 20).round());

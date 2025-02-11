@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/character_development.dart';
 import 'package:habiquest/common.dart';
+import 'package:habiquest/utils/calculateHabitMoney.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class TodoPage extends StatefulWidget {
@@ -78,7 +79,9 @@ class _TodoPageState extends State<TodoPage> {
                           .doc(todos[index].id)
                           .update({'kesz': value});
                       
-                      if (value == true) {addXP((20 + Random().nextInt(5 + 10) - 5) * 2);}
+                      if (value == true) {
+                        CalculateHabitCompletetionReward(difficulty: 1); // Csak pénz és XP-t ad - mindegy hogy habitra van kiépítve a függvény
+                      }
                     },
                   ),
                   trailing: todoData['kesz']

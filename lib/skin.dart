@@ -68,6 +68,7 @@ class _CharacterSelectorState extends State<CharacterSelector> {
         'level': 1,
         'xp': 0,
         'secondsInApp': 0,
+        'moneyChange': [DateTime.now(), characterValue == 1 ? 50 : 0],
       });
       print('Character updated successfully!');
       Navigator.of(context).pop();

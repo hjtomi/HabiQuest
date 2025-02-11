@@ -1,3 +1,4 @@
+import 'dart:isolate';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -6,7 +7,8 @@ import 'package:habiquest/auth.dart';
 import 'package:habiquest/common.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'dart:async';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import 'package:time/time.dart';
 
 
 bool timeFetched = false;
@@ -124,7 +126,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    MoneyChange()
+                    MoneyChange(userData: data['userData'])
                   ]
                 )
               ],
@@ -243,10 +245,28 @@ class HabitDifficulties extends StatelessWidget {
 }
 
 class MoneyChange extends StatelessWidget {
-  const MoneyChange({super.key});
+  final Map<String, dynamic> userData;
+
+  const MoneyChange({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
+    final List<FlSpot> spots = [];
+    final List<Timestamp> dates = [];
+    List<int> values = [];
+    // Csökkenő for loop
+    for(int i = 0; i < userData['moneyChange'].length; i++) {
+      if (i % 2 == 0) {
+        dates.add(userData['moneyChange'][i]);
+      } else if (i % 2 == 1) {
+        values.add(userData['moneyChange'][i]);
+      }
+    }
+
+    for(int i = 0; i < dates.length; i++) {
+      spots.add(FlSpot(dates[i].millisecondsSinceEpoch.toDouble(), values[i].toDouble()));
+    }
+
     return Column(
       children: [
         const ChartTop(text: "Pénz összegének változása"),
@@ -258,27 +278,20 @@ class MoneyChange extends StatelessWidget {
               lineBarsData: [
                 LineChartBarData(
                   barWidth: 4,
-                  isCurved: true,
+                  isCurved: false,
+                  isStepLineChart: true,
+                  lineChartStepData: LineChartStepData(stepDirection: 0),
                   dotData: const FlDotData(
                     show: false
                   ),
-                  spots: [
-                    const FlSpot(0, 0),
-                    const FlSpot(1, 10),
-                    const FlSpot(2, 40),
-                    const FlSpot(3, 5),
-                    const FlSpot(4, 60),
-                    const FlSpot(5, 0),
-                    const FlSpot(6, 10),
-                    const FlSpot(7, 40),
-                    const FlSpot(8, 5),
-                    const FlSpot(9, 60),
-                    const FlSpot(10, 0),
-                    const FlSpot(11, 10),
-                    const FlSpot(12, 40),
-                    const FlSpot(13, 5),
-                    const FlSpot(14, 60),
-                  ],
+                  spots: spots,/*[
+                    FlSpot(0, 1),
+                    FlSpot(1, 2),
+                    FlSpot(2, 3),
+                    FlSpot(2.33, 4),
+                    FlSpot(2.66, 1),
+                    FlSpot(3, 5),
+                  ],*/
                   belowBarData: BarAreaData(
                     show: true,
                     color: const Color.fromARGB(58, 30, 202, 229)
@@ -308,7 +321,6 @@ class MoneyChange extends StatelessWidget {
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 30,
-                    interval: 1,
                     getTitlesWidget: bottomTitleWidgets,
                   ),
                 ),
@@ -341,6 +353,8 @@ Widget bottomTitleWidgets(double value, TitleMeta meta) {
       text = const Text('', style: style);
       break;
   }
+
+  text = Text("${DateTime.fromMillisecondsSinceEpoch(value.round()).day}");
 
   return SideTitleWidget(
     meta: meta,
