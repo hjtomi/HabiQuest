@@ -121,8 +121,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-"""Applikációban eltöltött idő: $hours:$minutes:$seconds
-Niggerek száma: 2""",
+                    """Applikációban eltöltött idő: $hours:$minutes:$seconds""",
                     style: const TextStyle(
                       fontSize: 12,
                     ),
