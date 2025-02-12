@@ -1,4 +1,3 @@
-import 'dart:isolate';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -7,7 +6,6 @@ import 'package:habiquest/auth.dart';
 import 'package:habiquest/common.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'dart:async';
-
 import 'package:time/time.dart';
 
 
@@ -251,47 +249,50 @@ class MoneyChange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<FlSpot> spots = [];
     final List<Timestamp> dates = [];
     List<int> values = [];
-    // Csökkenő for loop
     for(int i = 0; i < userData['moneyChange'].length; i++) {
-      if (i % 2 == 0) {
-        dates.add(userData['moneyChange'][i]);
-      } else if (i % 2 == 1) {
+      if (i % 2 == 0) { // Date
+        if (i == 0) {
+          dates.add(userData['moneyChange'][i]);
+        } else if (dates[dates.length-1].toDate().isAtSameDayAs(userData['moneyChange'][i].toDate())) {
+          dates.removeLast();
+          values.removeLast();
+          dates.add(userData['moneyChange'][i]);
+        } else {
+          dates.add(userData['moneyChange'][i]);
+        }
+      } else if (i % 2 == 1) { // Value
         values.add(userData['moneyChange'][i]);
       }
     }
 
+    final List<FlSpot> spots = [];
     for(int i = 0; i < dates.length; i++) {
-      spots.add(FlSpot(dates[i].millisecondsSinceEpoch.toDouble(), values[i].toDouble()));
+      //spots.add(FlSpot(dates[i].toDate().day.toDouble(), values[i].toDouble()));
+      spots.add(FlSpot(dates[i].toDate().millisecondsSinceEpoch.toDouble(), values[i].toDouble()));
     }
 
     return Column(
       children: [
-        const ChartTop(text: "Pénz összegének változása"),
+        const ChartTop(text: "Pénz összegének változása\nnaponta"),
         SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: 300,
           child: LineChart(
             LineChartData(
+              minY: 0,
+              maxY: (values.reduce(max).toDouble() ~/ 100) * 100 + 100,
               lineBarsData: [
                 LineChartBarData(
                   barWidth: 4,
                   isCurved: false,
                   isStepLineChart: true,
-                  lineChartStepData: LineChartStepData(stepDirection: 0),
+                  lineChartStepData: const LineChartStepData(stepDirection: 0),
                   dotData: const FlDotData(
                     show: false
                   ),
-                  spots: spots,/*[
-                    FlSpot(0, 1),
-                    FlSpot(1, 2),
-                    FlSpot(2, 3),
-                    FlSpot(2.33, 4),
-                    FlSpot(2.66, 1),
-                    FlSpot(3, 5),
-                  ],*/
+                  spots: spots,
                   belowBarData: BarAreaData(
                     show: true,
                     color: const Color.fromARGB(58, 30, 202, 229)
@@ -318,10 +319,9 @@ class MoneyChange extends StatelessWidget {
                   )
                 ),
                 bottomTitles: AxisTitles(
+                  axisNameWidget: SizedBox(height: 20),
                   sideTitles: SideTitles(
-                    showTitles: true,
-                    reservedSize: 30,
-                    getTitlesWidget: bottomTitleWidgets,
+                    showTitles: false,
                   ),
                 ),
               )
@@ -339,20 +339,6 @@ Widget bottomTitleWidgets(double value, TitleMeta meta) {
     fontSize: 16,
   );
   Widget text;
-  switch (value.toInt()) {
-    case 4:
-      text = const Text('MAR', style: style);
-      break;
-    case 8:
-      text = const Text('JUN', style: style);
-      break;
-    case 12:
-      text = const Text('SEP', style: style);
-      break;
-    default:
-      text = const Text('', style: style);
-      break;
-  }
 
   text = Text("${DateTime.fromMillisecondsSinceEpoch(value.round()).day}");
 
