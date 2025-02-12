@@ -116,7 +116,11 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     HabitDifficulties(habits: data['habits']),
-                    HabitDifficulties(habits: data['habits']),
+                    StatRatio(
+                      health: data['userData']['health'].round(),
+                      attack: data['userData']['attack'].round(),
+                      defense: data['userData']['defense'].round(),
+                    )
                   ]
                 ),
                 Row(
@@ -126,7 +130,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   children: [
                     MoneyChange(userData: data['userData'])
                   ]
-                )
+                ),
               ],
             ),
           );
@@ -164,6 +168,104 @@ class ChartTop extends StatelessWidget {
           offset: Offset(2.5, 2.5),
         ),
       ]),
+    );
+  }
+}
+
+class StatRatio extends StatelessWidget {
+  final int health;
+  final int attack;
+  final int defense;
+
+  const StatRatio({super.key, required this.health, required this.attack, required this.defense});
+
+  @override
+  Widget build(BuildContext context) {
+    double healthRatio = health / 100;
+    double attackRatio = attack / 25;
+    double defenseRatio = defense / 10;
+    double maxRatioValue = [healthRatio, attackRatio, defenseRatio].reduce(max) * 1.4;
+    return Column(
+      children: [
+        const ChartTop(text: "Karaktered\nerősségei"),
+        Center(
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width / 2,
+            height: 200,
+            child: RadarChart(
+              RadarChartData(
+                dataSets: [
+                  RadarDataSet(
+                    dataEntries: [
+                      RadarEntry(value: health / 100),
+                      RadarEntry(value: attack / 25),
+                      RadarEntry(value: defense / 10),
+                    ],
+                    fillColor: Colors.red.withAlpha(100),
+                    borderColor: Colors.red.withAlpha(220),
+                    borderWidth: 3,
+                    entryRadius: 0.0,
+                  ),
+                  RadarDataSet(
+                    dataEntries: [
+                      const RadarEntry(value: 1),
+                      const RadarEntry(value: 1),
+                      const RadarEntry(value: 1),
+                    ],
+                    fillColor: Colors.transparent,
+                    borderColor: Colors.transparent,
+                    borderWidth: 0,
+                    entryRadius: 0.0,
+                  ),
+                  RadarDataSet(
+                    dataEntries: [
+                      RadarEntry(value: maxRatioValue),
+                      RadarEntry(value: maxRatioValue),
+                      RadarEntry(value: maxRatioValue),
+                    ],
+                    fillColor: Colors.transparent,
+                    borderColor: Colors.transparent,
+                    borderWidth: 0,
+                    entryRadius: 0.0,
+                  ),
+                ],
+                radarBackgroundColor: Colors.grey.withAlpha(100),
+                radarShape: RadarShape.polygon,
+                radarBorderData: const BorderSide(
+                  color: Colors.black,
+                  width: 3,
+                ),
+                getTitle: (index, angle) {
+                  switch (index) {
+                    case 0:
+                      return RadarChartTitle(text: 'Életerő', angle: angle, positionPercentageOffset: 0.05);
+                    case 2:
+                      return const RadarChartTitle(text: '            Védekezés', positionPercentageOffset: 0.2);
+                    case 1:
+                      return const RadarChartTitle(text: 'Támadás                 -', positionPercentageOffset: 0.2);
+                    default:
+                      return const RadarChartTitle(text: '');
+                  }
+                },
+                titleTextStyle: const TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+                titlePositionPercentageOffset: 0.7,
+                tickCount: 4,
+                ticksTextStyle: const TextStyle(
+                  color: Colors.transparent
+                ),
+                tickBorderData: BorderSide(
+                  color: Colors.black.withAlpha(200)
+                ),
+                gridBorderData: BorderSide(
+                  color: Colors.black.withAlpha(150)
+                ),
+              )
+            ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -340,7 +442,7 @@ Widget bottomTitleWidgets(double value, TitleMeta meta) {
   );
   Widget text;
 
-  text = Text("${DateTime.fromMillisecondsSinceEpoch(value.round()).day}");
+  text = Text("${DateTime.fromMillisecondsSinceEpoch(value.round()).day}", style: style,);
 
   return SideTitleWidget(
     meta: meta,

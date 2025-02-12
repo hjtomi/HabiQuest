@@ -30,7 +30,6 @@ class _StatCardState extends State<StatCard> {
         if (!snapshot.hasData) return const CircularProgressIndicator();
 
         var data = snapshot.data!.data() as Map<String, dynamic>;
-        printMessage(data);
 
         return Card(
           color: Colors.grey[900],
