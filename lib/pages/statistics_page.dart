@@ -131,6 +131,14 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     MoneyChange(userData: data['userData'])
                   ]
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ItemCategories(inventory: data['inventory'])
+                  ]
+                ),
               ],
             ),
           );
@@ -448,4 +456,207 @@ Widget bottomTitleWidgets(double value, TitleMeta meta) {
     meta: meta,
     child: text,
   );
+}
+
+class ItemCategories extends StatelessWidget {
+  final List<Map<String, dynamic>> inventory;
+
+  const ItemCategories({super.key, required this.inventory});
+
+  @override
+  Widget build(BuildContext context) {
+    List<double> categories = [0, 0, 0, 0, 0, 0];
+    for (int i = 0; i < inventory.length; i++) {
+      switch(inventory[i]['category']) {
+        case "weapon": categories[0]++;
+        case "armor": categories[1]++;
+        case "food": categories[2]++;
+        case "cosmetic": categories[3]++;
+        case "potion": categories[4]++;
+        case "misc": categories[5]++;
+      }
+    }
+    return Column(
+      children: [
+        const ChartTop(text: "Tárgyaid száma\nketegóriánként"),
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          height: 300,
+          child: BarChart(
+            BarChartData(
+              barGroups: [
+                BarChartGroupData( // Fegyver
+                  x: 0,
+                  barRods: [
+                    BarChartRodData(
+                      toY: categories[0],
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.red,
+                          Colors.pink
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      width: 20,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: Colors.black
+                      )
+                    ),
+                  ]
+                ),
+                BarChartGroupData( // Páncél
+                  x: 1,
+                  barRods: [
+                    BarChartRodData(
+                      toY: categories[1],
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.orange,
+                          Colors.deepOrange
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      width: 20,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: Colors.black
+                      )
+                    ),
+                  ]
+                ),
+                BarChartGroupData( // Étel
+                  x: 2,
+                  barRods: [
+                    BarChartRodData(
+                      toY: categories[2],
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.yellow,
+                          Colors.orangeAccent
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      width: 20,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: Colors.black
+                      )
+                    ),
+                  ]
+                ),
+                BarChartGroupData( // Kozmetika
+                  x: 3,
+                  barRods: [
+                    BarChartRodData(
+                      toY: categories[3],
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.lightGreen,
+                          Colors.green
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      width: 20,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: Colors.black
+                      )
+                    ),
+                  ]
+                ),
+                BarChartGroupData( // Bájital
+                  x: 4,
+                  barRods: [
+                    BarChartRodData(
+                      toY: categories[4],
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.blue,
+                          Colors.lightBlueAccent
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      width: 20,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: Colors.black
+                      )
+                    ),
+                  ]
+                ),
+                BarChartGroupData( // Egyéb
+                  x: 5,
+                  barRods: [
+                    BarChartRodData(
+                      toY: categories[5],
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.blueGrey,
+                          Colors.grey
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      width: 20,
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: Colors.black
+                      )
+                    ),
+                  ]
+                ),
+              ],
+              maxY: categories.reduce(max) + 1,
+              alignment: BarChartAlignment.spaceEvenly,
+              titlesData: FlTitlesData(
+                topTitles: const AxisTitles(
+                  axisNameWidget: SizedBox(
+                    height: 15,
+                  )
+                ),
+                bottomTitles: AxisTitles(
+                  axisNameWidget: const SizedBox(
+                    height: 20,
+                  ),
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    getTitlesWidget: (double value, meta) {
+                      TextStyle style = const TextStyle(fontSize: 8.5);
+                      switch(value) {
+                        case 0: return Text("Fegyver", style: style);
+                        case 1: return Text("Páncél", style: style);
+                        case 2: return Text("Étel", style: style);
+                        case 3: return Text("Kozemtika", style: style);
+                        case 4: return Text("Bájital", style: style);
+                        case 5: return Text("Egyéb", style: style);
+                      }
+                      return const Text("FAIL");
+                    },
+                  )
+                ),
+                rightTitles: const AxisTitles(
+                  axisNameWidget: SizedBox(width: 20),
+                  sideTitles: SideTitles(
+                    showTitles: false
+                  )
+                )
+              )
+            ),
+          ),
+        )
+      ],
+    );
+  }
 }
