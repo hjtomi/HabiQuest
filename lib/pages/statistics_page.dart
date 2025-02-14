@@ -6,7 +6,7 @@ import 'package:habiquest/auth.dart';
 import 'package:habiquest/common.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'dart:async';
-import 'package:time/time.dart';
+import 'package:intl/intl.dart';
 
 
 bool timeFetched = false;
@@ -289,19 +289,18 @@ class HabitDifficulties extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<int> difficulties = [0, 0, 0, 0];
+    List<int> difficulties = [0, 0, 0];
     for (int i = 0; i < habits.length; i++) {
       difficulties[habits[i]['nehezseg'].round()]++;
     }
     int d1 = difficulties[0];
     int d2 = difficulties[1];
     int d3 = difficulties[2];
-    int d4 = difficulties[3];
 
     return Column(
       children: [
         const ChartTop(text: "Szokások száma\nnehézség szerint"),
-        d1 + d2 + d3 + d4 > 0
+        d1 + d2 + d3 > 0
             ? SizedBox(
               width: MediaQuery.sizeOf(context).width / 2,
               height: 200,
@@ -309,49 +308,60 @@ class HabitDifficulties extends StatelessWidget {
                 sections: [
                   PieChartSectionData(
                     value: d1.toDouble(),
-                    color: Colors.green,
+                    color: Colors.yellow,
                     radius: totalRadius * 0.75,
                     title: d1.toString(),
+                    titleStyle: const TextStyle(color: Colors.black),
                   ),
                   PieChartSectionData(
                     value: d2.toDouble(),
-                    color: Colors.yellow,
+                    color: Colors.orange,
                     radius: totalRadius * 0.75,
                     title: d2.toString(),
                     titleStyle: const TextStyle(color: Colors.black),
                   ),
                   PieChartSectionData(
                     value: d3.toDouble(),
-                    color: Colors.orange,
-                    radius: totalRadius * 0.75,
-                    title: d3.toString(),
-                  ),
-                  PieChartSectionData(
-                    value: d4.toDouble(),
                     color: Colors.red,
                     radius: totalRadius * 0.75,
-                    title: d4.toString(),
+                    title: d3.toString(),
+                    titleStyle: const TextStyle(color: Colors.black),
                   ),
                 ],
                 centerSpaceRadius: totalRadius * 0.25,
               )),
             )
-            : const Expanded(
-                child: Center(
-                  child: Text(
-                    'Add habit to show data',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+            : SizedBox(
+              width: MediaQuery.sizeOf(context).width / 2,
+              height: 200,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                  right: 20,
+                  bottom: 60,
+                ),
+                child: Card(
+                  color: Colors.yellow.shade800,
+                  child: const Center(
+                    child: Text(
+                      "!!!\nAdj hozzá szokást\n!!!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                      )
+                    )
                   ),
                 ),
-              )
+              ),
+            )
       ]
     );
   }
 }
 
+Duration firstLastDifference = const Duration(seconds: 1);
 class MoneyChange extends StatelessWidget {
   final Map<String, dynamic> userData;
 
@@ -359,28 +369,28 @@ class MoneyChange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Timestamp> dates = [];
-    List<int> values = [];
-    for(int i = 0; i < userData['moneyChange'].length; i++) {
-      if (i % 2 == 0) { // Date
-        if (i == 0) {
-          dates.add(userData['moneyChange'][i]);
-        } else if (dates[dates.length-1].toDate().isAtSameDayAs(userData['moneyChange'][i].toDate())) {
-          dates.removeLast();
-          values.removeLast();
-          dates.add(userData['moneyChange'][i]);
-        } else {
-          dates.add(userData['moneyChange'][i]);
-        }
-      } else if (i % 2 == 1) { // Value
-        values.add(userData['moneyChange'][i]);
-      }
-    }
 
-    final List<FlSpot> spots = [];
-    for(int i = 0; i < dates.length; i++) {
-      //spots.add(FlSpot(dates[i].toDate().day.toDouble(), values[i].toDouble()));
-      spots.add(FlSpot(dates[i].toDate().millisecondsSinceEpoch.toDouble(), values[i].toDouble()));
+    List<FlSpot> flspots = [];
+    if (userData.containsKey("moneyChange")) {
+      final List<(DateTime, int)> spots = [];
+      DateTime temp = DateTime(2000);
+      for(int i = 0; i < userData['moneyChange'].length; i++) {
+        if (i % 2 == 0) { // Date
+          temp = userData['moneyChange'][i].toDate();
+        } else if (i % 2 == 1) { // Value
+          spots.add((temp, userData['moneyChange'][i]));
+        }
+      }
+
+      firstLastDifference = spots[spots.length - 1].$1.difference(spots[0].$1);
+
+      for(int i = 0; i < spots.length; i++) {
+        flspots.add(FlSpot(spots[i].$1.millisecondsSinceEpoch.toDouble(), spots[i].$2.toDouble()));
+      }
+
+      if (flspots.length > 30) {
+        flspots = flspots.sublist(flspots.length - 30);
+      }
     }
 
     return Column(
@@ -392,7 +402,6 @@ class MoneyChange extends StatelessWidget {
           child: LineChart(
             LineChartData(
               minY: 0,
-              maxY: (values.reduce(max).toDouble() ~/ 100) * 100 + 100,
               lineBarsData: [
                 LineChartBarData(
                   barWidth: 4,
@@ -402,10 +411,17 @@ class MoneyChange extends StatelessWidget {
                   dotData: const FlDotData(
                     show: false
                   ),
-                  spots: spots,
+                  spots: flspots,
                   belowBarData: BarAreaData(
                     show: true,
-                    color: const Color.fromARGB(58, 30, 202, 229)
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blue.withAlpha(50),
+                        Colors.blue.withAlpha(100)
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    )
                   ),
                   shadow: const Shadow(
                     color: Colors.black,
@@ -429,11 +445,14 @@ class MoneyChange extends StatelessWidget {
                   )
                 ),
                 bottomTitles: AxisTitles(
-                  axisNameWidget: SizedBox(height: 20),
                   sideTitles: SideTitles(
-                    showTitles: false,
-                  ),
-                ),
+                    minIncluded: false,
+                    maxIncluded: false,
+                    reservedSize: 70,
+                    showTitles: true,
+                    getTitlesWidget: moneyChangeTitles,
+                  )
+                )
               )
             )
           ),
@@ -443,18 +462,22 @@ class MoneyChange extends StatelessWidget {
   }
 }
 
-Widget bottomTitleWidgets(double value, TitleMeta meta) {
-  const style = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  );
-  Widget text;
+Widget moneyChangeTitles(double value, TitleMeta meta) {
+  Text text;
 
-  text = Text("${DateTime.fromMillisecondsSinceEpoch(value.round()).day}", style: style,);
+  DateTime date = DateTime.fromMillisecondsSinceEpoch(value.round());
+
+  if (firstLastDifference.inDays < 1) {
+    text = Text("${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}");
+  } else if (firstLastDifference.inDays < 31) {
+    text = Text("${DateFormat('EEE').format(date)} ${date.hour}h");
+  } else {
+    text = Text("${date.month}/${date.day}");
+  }
 
   return SideTitleWidget(
     meta: meta,
-    child: text,
+    child: Transform.rotate(angle: -45 * 3.14 / 180, child: text), 
   );
 }
 

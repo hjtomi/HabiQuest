@@ -1,0 +1,2 @@
+C:/Users/flutterdev/Coding/HabiQuest/android/app/.cxx/Debug/691o6h4x/x86/CMakeFiles/edit_cache.dir
+C:/Users/flutterdev/Coding/HabiQuest/android/app/.cxx/Debug/691o6h4x/x86/CMakeFiles/rebuild_cache.dir
