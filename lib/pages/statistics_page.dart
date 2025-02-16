@@ -395,7 +395,7 @@ class MoneyChange extends StatelessWidget {
 
     return Column(
       children: [
-        const ChartTop(text: "Pénz összegének változása\nnaponta"),
+        const ChartTop(text: "Pénz összegének változása"),
         SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: 300,
