@@ -18,19 +18,23 @@ class StatCard extends StatefulWidget {
 
 class _StatCardState extends State<StatCard> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-      stream: FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid).snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(Auth().currentUser!.uid)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return const CircularProgressIndicator();
 
-        var data = snapshot.data!.data() as Map<String, dynamic>;
-        printMessage(data);
+        var data = snapshot.data!.data() ?? {};
+
+        // Ensure all numerical values have defaults
+        int level = (data['level'] ?? 1) as int;
+        int xp = (data['xp'] ?? 0) as int;
+        int health = (data['health'] ?? 100) as int;
+        int attack = (data['attack'] ?? 10) as int;
+        int defense = (data['defense'] ?? 5) as int;
 
         return Card(
           color: Colors.grey[900],
@@ -44,7 +48,7 @@ class _StatCardState extends State<StatCard> {
                       width: 150,
                       height: 150,
                       image: AssetImage(
-                          'lib/assets/skins/skin-${data['character']}.png'),
+                          'lib/assets/skins/skin-${data['character'] ?? 'default'}.png'),
                     )
                   : const Padding(
                       padding: EdgeInsets.all(8.0),
@@ -63,28 +67,29 @@ class _StatCardState extends State<StatCard> {
                             Row(
                               children: [
                                 Text(
-                                  "Level ${data['level']}",
+                                  "Level $level",
                                 ),
                               ],
                             ),
                             TweenAnimationBuilder<double>(
-                              tween: Tween(begin: 0.0, end: data['xp'] / (sqrt(data['level']) * 100).round()),
+                              tween: Tween(
+                                  begin: 0.0,
+                                  end: xp / (sqrt(level) * 100).round()),
                               duration: const Duration(milliseconds: 100),
-                              builder: (context, ainmatedValue, child) {
+                              builder: (context, animatedValue, child) {
                                 return LinearProgressIndicator(
                                   minHeight: 6,
-                                  value: ainmatedValue, // Must be between 0.0 and 1.0
+                                  value:
+                                      animatedValue, // Must be between 0.0 and 1.0
                                   backgroundColor: Colors.black12,
                                   color: Colors.blue,
                                 );
-                              }
+                              },
                             ),
                             Text(
-                              '${data['xp']} / ${(sqrt(data['level']) * 100).round()}',
+                              '$xp / ${(sqrt(level) * 100).round()}',
                               style: TextStyle(
-                                color: Colors.grey[400],
-                                fontSize: 8
-                              ),
+                                  color: Colors.grey[400], fontSize: 8),
                             )
                           ],
                         ),
@@ -97,18 +102,17 @@ class _StatCardState extends State<StatCard> {
                               text: TextSpan(
                                 style: const TextStyle(color: Colors.green),
                                 children: [
+                                  TextSpan(text: 'Életerő: ${health.round()}'),
                                   TextSpan(
-                                    text: 'Életerő: ${data['health'].round()}'
+                                    text:
+                                        '   /   ${((health + 1) / 500).ceil() * 500}',
+                                    style: TextStyle(color: Colors.grey[700]),
                                   ),
-                                  TextSpan(
-                                    text: '   /   ${((data['health'] + 1) / 500).ceil() * 500}',
-                                    style: TextStyle(color: Colors.grey[700])
-                                  ),
-                                ]
+                                ],
                               ),
                             )
                           ],
-                        )
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -118,18 +122,17 @@ class _StatCardState extends State<StatCard> {
                               text: TextSpan(
                                 style: const TextStyle(color: Colors.red),
                                 children: [
+                                  TextSpan(text: 'Támadás: ${attack.round()}'),
                                   TextSpan(
-                                    text: 'Támadás: ${data['attack'].round()}'
+                                    text:
+                                        '   /   ${((attack + 1) / 100).ceil() * 100}',
+                                    style: TextStyle(color: Colors.grey[700]),
                                   ),
-                                  TextSpan(
-                                    text: '   /   ${((data['attack'] + 1) / 100).ceil() * 100}',
-                                    style: TextStyle(color: Colors.grey[700])
-                                  ),
-                                ]
+                                ],
                               ),
                             )
                           ],
-                        )
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -137,20 +140,20 @@ class _StatCardState extends State<StatCard> {
                           children: [
                             RichText(
                               text: TextSpan(
-                                style: const TextStyle(color: Colors.orangeAccent),
+                                style:
+                                    const TextStyle(color: Colors.orangeAccent),
                                 children: [
+                                  TextSpan(text: 'Védelem: ${defense.round()}'),
                                   TextSpan(
-                                    text: 'Védelem: ${data['defense'].round()}'
+                                    text:
+                                        '   /   ${((defense + 1) / 50).ceil() * 50}',
+                                    style: TextStyle(color: Colors.grey[700]),
                                   ),
-                                  TextSpan(
-                                    text: '   /   ${((data['defense'] + 1) / 50).ceil() * 50}',
-                                    style: TextStyle(color: Colors.grey[700])
-                                  ),
-                                ]
+                                ],
                               ),
                             )
                           ],
-                        )
+                        ),
                       ),
                     ],
                   ),
@@ -159,7 +162,7 @@ class _StatCardState extends State<StatCard> {
             ],
           ),
         );
-      }
+      },
     );
   }
 }
