@@ -29,7 +29,7 @@ class _CharacterSelectorState extends State<CharacterSelector> {
     'Bár külsőre törékenynek tűnik, ereje hatalmas, és minden varázslata az univerzum titkos szöveteiből merít.',
     'Egy önállóan gondolkodó kőgólem, akit a föld szívéből fakadó energiák tartanak életben.',
     'A rettenthetetlen harci bika, egy letűnt törzs szellemi vezére, aki az ősök harci technikáit és bölcsességét örökölte.',
-    'Mélyén szunnyadt évszázadokig, míg a világ kétségbeesése fel nem ébresztette. Létezése egyszerre áldás és átok...',
+    'Mélyen szunnyadt évszázadokig, míg a világ kétségbeesése fel nem ébresztette. Létezése egyszerre áldás és átok...',
   ];
 
   int currentIndex = 0;
@@ -79,7 +79,7 @@ class _CharacterSelectorState extends State<CharacterSelector> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Válaszd ki a karakteredet'),
+        title: const Text('Válaszd ki a karakteredet!'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32.0),

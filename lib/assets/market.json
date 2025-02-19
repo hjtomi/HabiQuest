@@ -169,7 +169,7 @@
     },
     {
         "id": 22,
-        "name": "Kék köppeny",
+        "name": "Kék köpeny",
         "image": "lib/assets/market_items/coat_blue.png",
         "description": "",
         "price": 90,
@@ -177,7 +177,7 @@
     },
     {
         "id": 23,
-        "name": "Barna köppeny",
+        "name": "Barna köpeny",
         "image": "lib/assets/market_items/coat_brown.png",
         "description": "",
         "price": 90,
@@ -185,7 +185,7 @@
     },
     {
         "id": 24,
-        "name": "Zöld köppeny",
+        "name": "Zöld köpeny",
         "image": "lib/assets/market_items/coat_green.png",
         "description": "",
         "price": 90,
@@ -193,7 +193,7 @@
     },
     {
         "id": 25,
-        "name": "Rózsaszín köppeny",
+        "name": "Rózsaszín köpeny",
         "image": "lib/assets/market_items/coat_pink.png",
         "description": "",
         "price": 90,
@@ -201,7 +201,7 @@
     },
     {
         "id": 26,
-        "name": "Lila köppeny",
+        "name": "Lila köpeny",
         "image": "lib/assets/market_items/coat_purple.png",
         "description": "",
         "price": 90,
@@ -209,7 +209,7 @@
     },
     {
         "id": 27,
-        "name": "Piros köppeny",
+        "name": "Piros köpeny",
         "image": "lib/assets/market_items/coat_red.png",
         "description": "",
         "price": 90,
@@ -217,7 +217,7 @@
     },
     {
         "id": 28,
-        "name": "Fehér köppeny",
+        "name": "Fehér köpeny",
         "image": "lib/assets/market_items/coat_white.png",
         "description": "",
         "price": 90,
@@ -225,7 +225,7 @@
     },
     {
         "id": 29,
-        "name": "Sárga köppeny",
+        "name": "Sárga köpeny",
         "image": "lib/assets/market_items/coat_yellow.png",
         "description": "",
         "price": 90,
@@ -259,7 +259,7 @@
         "id": 33,
         "name": "Bronz fejsze",
         "image": "lib/assets/market_items/copper_axe.png",
-        "description": "Fegyvernek nem a legerősebb de kezdésnek megteszi",
+        "description": "Fegyvernek nem a legerősebb, de kezdésnek megteszi",
         "price": 120,
         "category": "weapon"
     },
@@ -315,7 +315,7 @@
         "id": 40,
         "name": "Bronz kalapács",
         "image": "lib/assets/market_items/copper_hammer.png",
-        "description": "A bronz kalapács a gyengébb elenfelek ellen hatásos",
+        "description": "A bronz kalapács a gyengébb ellenfelek ellen hatásos",
         "price": 330,
         "category": "weapon"
     },
@@ -329,7 +329,7 @@
     },
     {
         "id": 42,
-        "name": "Fejlezstett bronz sisak",
+        "name": "Fejlesztett bronz sisak",
         "image": "lib/assets/market_items/copper_helmet_2.png",
         "description": "A bronz páncélzat kezdésnek jó védelmet biztosít",
         "price": 235,
@@ -441,7 +441,7 @@
     },
     {
         "id": 59,
-        "name": "Szenecse Bájital (nagy)",
+        "name": "Szerencse Bájital (nagy)",
         "image": "lib/assets/market_items/fortune_large.png",
         "description": "",
         "price": 90,
@@ -449,7 +449,7 @@
     },
     {
         "id": 60,
-        "name": "Szenecse Bájital (közepes)",
+        "name": "Szerencse Bájital (közepes)",
         "image": "lib/assets/market_items/fortune_medium.png",
         "description": "",
         "price": 80,
@@ -457,7 +457,7 @@
     },
     {
         "id": 61,
-        "name": "Szenecse Bájital (kicsi)",
+        "name": "Szerencse Bájital (kicsi)",
         "image": "lib/assets/market_items/fortune_small.png",
         "description": "",
         "price": 70,
@@ -625,7 +625,7 @@
     },
     {
         "id": 82,
-        "name": "Fejlesztett Arany sisak",
+        "name": "Fejlesztett arany sisak",
         "image": "lib/assets/market_items/gold_helmet_2.png",
         "description": "",
         "price": 680,
@@ -785,7 +785,7 @@
     },
     {
         "id": 102,
-        "name": "Fejlesztet vas mellvért",
+        "name": "Fejlesztett vas mellvért",
         "image": "lib/assets/market_items/iron_chestplate_2.png",
         "description": "",
         "price": 740,
@@ -993,7 +993,7 @@
     },
     {
         "id": 128,
-        "name": "Fejlesztet Onüx mellvért",
+        "name": "Fejlesztett Onüx mellvért",
         "image": "lib/assets/market_items/onyx_chestplate_2.png",
         "description": "",
         "price": 480,
@@ -1249,7 +1249,7 @@
     },
     {
         "id": 160,
-        "name": "Technorite íjj",
+        "name": "Technorite íj",
         "image": "lib/assets/market_items/technorite_bow.png",
         "description": "",
         "price": 140,
@@ -1265,7 +1265,7 @@
     },
     {
         "id": 162,
-        "name": "Fejlesztet Technorite mellvért",
+        "name": "Fejlesztett Technorite mellvért",
         "image": "lib/assets/market_items/technorite_chestplate_2.png",
         "description": "",
         "price": 580,
@@ -1363,7 +1363,7 @@
         "id": 174,
         "name": "Fejlesztett Topáz csizma",
         "image": "lib/assets/market_items/topaz_boot_2.png",
-        "description": "Ellítólag a közmondásban ilyen cipőt húz a nyúl.",
+        "description": "Állítólag a közmondásban ilyen cipőt húz a nyúl.",
         "price": 850,
         "category": "armor"
     },
@@ -1379,7 +1379,7 @@
         "id": 176,
         "name": "Fejlesztett Topáz mellvért",
         "image": "lib/assets/market_items/topaz_chestplate_2.png",
-        "description": "A szupertopadilis-surlódásnak köszönhetően, azelött megolvad a legtöbb fegyver, hogy érintkezésbe lépne vele.",
+        "description": "A szupertopadilis-súrlódásnak köszönhetően azelött megolvad a legtöbb fegyver, hogy érintkezésbe lépne vele.",
         "price": 970,
         "category": "armor"
     },
@@ -1403,7 +1403,7 @@
         "id": 179,
         "name": "Topáz sisak",
         "image": "lib/assets/market_items/topaz_helmet_1.png",
-        "description": "Aki ránéz, látás károsulást szenvedhet.",
+        "description": "Aki ránéz, látáskárosulást szenvedhet.",
         "price": 850,
         "category": "armor"
     },
@@ -1419,7 +1419,7 @@
         "id": 181,
         "name": "Tribol",
         "image": "lib/assets/market_items/tribol.png",
-        "description": "Mostmár nem mernek tribolt bányászni a bányákban történt démoni jelenségek miatt, ezért az ára folyton emelkedik.",
+        "description": "Most már nem mernek tribolt bányászni a bányákban történt démoni jelenségek miatt, ezért az ára folyton emelkedik.",
         "price": 1500,
         "category": "ore"
     },
@@ -1443,7 +1443,7 @@
         "id": 184,
         "name": "Fejlesztett Tribol csizma",
         "image": "lib/assets/market_items/tribol_boot_2.png",
-        "description": "Az ötvözött tribol csizma -10 killogrammot nyom, úgyhogy gyorsabban lehet benne futni. Vigyázz, nehogy elszáljon...",
+        "description": "Az ötvözött tribol csizma -10 killogrammot nyom, úgyhogy gyorsabban lehet benne futni. Vigyázz, nehogy elszálljon...",
         "price": 1600,
         "category": "armor"
     },
@@ -1483,7 +1483,7 @@
         "id": 189,
         "name": "Tribol kalapács",
         "image": "lib/assets/market_items/tribol_hammer.png",
-        "description": "Másodpercenként akár 10x is lesúlythatsz.",
+        "description": "Másodpercenként akár 10x is lesújthatsz.",
         "price": 1467,
         "category": "weapon"
     },
@@ -1507,7 +1507,7 @@
         "id": 192,
         "name": "Topáz kard",
         "image": "lib/assets/market_items/tropaz_sword.png",
-        "description": "Mestereink jelenleg is kutatják, hogy lehet topázból kardot készíteni... Ezt a pár darabor kerekedők hozták messzi földről.",
+        "description": "Mestereink jelenleg is kutatják, hogy lehet topázból kardot készíteni... Ezt a pár darabor kereskedők hozták messzi földről.",
         "price": 890,
         "category": "weapon"
     },

@@ -131,7 +131,7 @@ class _TodoPageState extends State<TodoPage> {
                       controller: taskController,
                       cursorColor: Theme.of(context).colorScheme.secondary,
                       decoration: const InputDecoration(
-                        hintText: "Add meg az új feladatot",
+                        hintText: "Add meg az új feladatot!",
                         border: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         contentPadding: EdgeInsets.all(12.0),
