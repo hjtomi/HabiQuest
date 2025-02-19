@@ -20,7 +20,7 @@ class HoldingPage extends StatefulWidget {
 }
 
 class _HoldingPageState extends State<HoldingPage> {
-  PageType _selectedPage = PageType.friends;
+  PageType _selectedPage = PageType.dashboard;
 
   // Map PageType to Widgets
   Widget _getPage(PageType page) {
@@ -225,18 +225,6 @@ class _HoldingPageState extends State<HoldingPage> {
               selectedColor: Theme.of(context).colorScheme.secondary,
               leading: const Icon(LucideIcons.backpack),
               title: const Text("Hátizsák"),
-            ),
-            ListTile(
-              onTap: () {
-                setState(() {
-                  _selectedPage = PageType.friends;
-                });
-                Navigator.pop(context);
-              },
-              selected: _selectedPage == PageType.friends,
-              selectedColor: Theme.of(context).colorScheme.secondary,
-              leading: const Icon(LucideIcons.users),
-              title: const Text("Barátok"),
             ),
             ListTile(
               onTap: () {

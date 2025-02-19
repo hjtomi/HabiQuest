@@ -30,11 +30,11 @@ class _StatCardState extends State<StatCard> {
         var data = snapshot.data!.data() ?? {};
 
         // Ensure all numerical values have defaults
-        int level = (data['level'] ?? 1) as int;
-        int xp = (data['xp'] ?? 0) as int;
-        int health = (data['health'] ?? 100) as int;
-        int attack = (data['attack'] ?? 10) as int;
-        int defense = (data['defense'] ?? 5) as int;
+        int level = (data['level'] ?? 1).toInt();
+        int xp = (data['xp'] ?? 0).toInt();
+        int health = (data['health'] ?? 100).toInt();
+        int attack = (data['attack'] ?? 10).toInt();
+        int defense = (data['defense'] ?? 5).toInt();
 
         return Card(
           color: Colors.grey[900],
@@ -67,7 +67,7 @@ class _StatCardState extends State<StatCard> {
                             Row(
                               children: [
                                 Text(
-                                  "Level $level",
+                                  "Szint: $level",
                                 ),
                               ],
                             ),
