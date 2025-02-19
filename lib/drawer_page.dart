@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habiquest/auth.dart';
+import 'package:habiquest/pages/friends-page.dart';
 import 'package:habiquest/pages/home_page.dart'; // Your Dashboard Page
 import 'package:habiquest/pages/inventory_page.dart';
 import 'package:habiquest/pages/market_page.dart';
@@ -9,7 +10,7 @@ import 'package:habiquest/pages/statistics_page.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:habiquest/stat_card.dart';
 
-enum PageType { dashboard, market, statistics, inventory }
+enum PageType { dashboard, market, statistics, inventory, friends }
 
 class HoldingPage extends StatefulWidget {
   const HoldingPage({super.key});
@@ -19,7 +20,7 @@ class HoldingPage extends StatefulWidget {
 }
 
 class _HoldingPageState extends State<HoldingPage> {
-  PageType _selectedPage = PageType.dashboard;
+  PageType _selectedPage = PageType.friends;
 
   // Map PageType to Widgets
   Widget _getPage(PageType page) {
@@ -32,6 +33,8 @@ class _HoldingPageState extends State<HoldingPage> {
         return const StatisticsPage();
       case PageType.inventory:
         return const InventoryPage();
+      case PageType.friends:
+        return const FriendsPage();
     }
   }
 
@@ -46,6 +49,8 @@ class _HoldingPageState extends State<HoldingPage> {
         return "Statisztikák";
       case PageType.inventory:
         return "Hátizsák";
+      case PageType.friends:
+        return "Barátok";
     }
   }
 
@@ -220,6 +225,30 @@ class _HoldingPageState extends State<HoldingPage> {
               selectedColor: Theme.of(context).colorScheme.secondary,
               leading: const Icon(LucideIcons.backpack),
               title: const Text("Hátizsák"),
+            ),
+            ListTile(
+              onTap: () {
+                setState(() {
+                  _selectedPage = PageType.friends;
+                });
+                Navigator.pop(context);
+              },
+              selected: _selectedPage == PageType.friends,
+              selectedColor: Theme.of(context).colorScheme.secondary,
+              leading: const Icon(LucideIcons.users),
+              title: const Text("Barátok"),
+            ),
+            ListTile(
+              onTap: () {
+                setState(() {
+                  _selectedPage = PageType.friends;
+                });
+                Navigator.pop(context);
+              },
+              selected: _selectedPage == PageType.friends,
+              selectedColor: Theme.of(context).colorScheme.secondary,
+              leading: const Icon(LucideIcons.users),
+              title: const Text("Barátok"),
             ),
           ],
         ),
