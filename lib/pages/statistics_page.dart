@@ -8,7 +8,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 
-
 bool timeFetched = false;
 int timeSpent = 0;
 Timer? _timer;
@@ -24,7 +23,10 @@ void stopCounting() {
 }
 
 void getSecondsInApp() async {
-  var qs = await FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid).get();
+  var qs = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(Auth().currentUser!.uid)
+      .get();
   timeSpent = qs.data()!['secondsInApp'];
   timeFetched = true;
 }
@@ -43,12 +45,15 @@ Future<QuerySnapshot<Map<String, dynamic>>> getUserHabits() async {
 
 Future<Map<String, dynamic>> fetchData() async {
   Future.delayed(const Duration(seconds: 1));
-  DocumentReference userDoc = await FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid);
+  DocumentReference userDoc = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(Auth().currentUser!.uid);
   var userData = await userDoc.get();
   var habits = await userDoc.collection('habits').get();
   var todos = await userDoc.collection('todos').orderBy('kesz').get();
   var dailies = await userDoc.collection('dailies').orderBy('date').get();
-  var inventory = await userDoc.collection('inventory').orderBy('category').get();
+  var inventory =
+      await userDoc.collection('inventory').orderBy('category').get();
   var logins = await userDoc.collection('logins').orderBy('date').get();
   var resumes = await userDoc.collection('resumes').orderBy('date').get();
   return {
@@ -91,7 +96,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
     String seconds = (timeSpent % 60).toString().padLeft(2, "0");
 
     return Scaffold(
-      body: FutureBuilder(
+        body: FutureBuilder(
       future: fetchData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -111,34 +116,27 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 ),
                 const SizedBox(height: 20),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    HabitDifficulties(habits: data['habits']),
-                    StatRatio(
-                      health: data['userData']['health'].round(),
-                      attack: data['userData']['attack'].round(),
-                      defense: data['userData']['defense'].round(),
-                    )
-                  ]
-                ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      HabitDifficulties(habits: data['habits']),
+                      StatRatio(
+                        health: data['userData']['health'].round(),
+                        attack: data['userData']['attack'].round(),
+                        defense: data['userData']['defense'].round(),
+                      )
+                    ]),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    MoneyChange(userData: data['userData'])
-                  ]
-                ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [MoneyChange(userData: data['userData'])]),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ItemCategories(inventory: data['inventory'])
-                  ]
-                ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [ItemCategories(inventory: data['inventory'])]),
               ],
             ),
           );
@@ -147,10 +145,8 @@ class _StatisticsPageState extends State<StatisticsPage> {
           return const Text('There was an error :O');
         } else {
           return Center(
-            child: LoadingAnimationWidget.dotsTriangle(
-              color: Colors.amber, size: 50
-            )
-          );
+              child: LoadingAnimationWidget.dotsTriangle(
+                  color: Colors.amber, size: 50));
         }
       },
     ));
@@ -185,14 +181,19 @@ class StatRatio extends StatelessWidget {
   final int attack;
   final int defense;
 
-  const StatRatio({super.key, required this.health, required this.attack, required this.defense});
+  const StatRatio(
+      {super.key,
+      required this.health,
+      required this.attack,
+      required this.defense});
 
   @override
   Widget build(BuildContext context) {
     double healthRatio = health / 100;
     double attackRatio = attack / 25;
     double defenseRatio = defense / 10;
-    double maxRatioValue = [healthRatio, attackRatio, defenseRatio].reduce(max) * 1.4;
+    double maxRatioValue =
+        [healthRatio, attackRatio, defenseRatio].reduce(max) * 1.4;
     return Column(
       children: [
         const ChartTop(text: "Karaktered\nerősségei"),
@@ -200,77 +201,74 @@ class StatRatio extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.sizeOf(context).width / 2,
             height: 200,
-            child: RadarChart(
-              RadarChartData(
-                dataSets: [
-                  RadarDataSet(
-                    dataEntries: [
-                      RadarEntry(value: health / 100),
-                      RadarEntry(value: attack / 25),
-                      RadarEntry(value: defense / 10),
-                    ],
-                    fillColor: Colors.red.withAlpha(100),
-                    borderColor: Colors.red.withAlpha(220),
-                    borderWidth: 3,
-                    entryRadius: 0.0,
-                  ),
-                  RadarDataSet(
-                    dataEntries: [
-                      const RadarEntry(value: 1),
-                      const RadarEntry(value: 1),
-                      const RadarEntry(value: 1),
-                    ],
-                    fillColor: Colors.transparent,
-                    borderColor: Colors.transparent,
-                    borderWidth: 0,
-                    entryRadius: 0.0,
-                  ),
-                  RadarDataSet(
-                    dataEntries: [
-                      RadarEntry(value: maxRatioValue),
-                      RadarEntry(value: maxRatioValue),
-                      RadarEntry(value: maxRatioValue),
-                    ],
-                    fillColor: Colors.transparent,
-                    borderColor: Colors.transparent,
-                    borderWidth: 0,
-                    entryRadius: 0.0,
-                  ),
-                ],
-                radarBackgroundColor: Colors.grey.withAlpha(100),
-                radarShape: RadarShape.polygon,
-                radarBorderData: const BorderSide(
-                  color: Colors.black,
-                  width: 3,
+            child: RadarChart(RadarChartData(
+              dataSets: [
+                RadarDataSet(
+                  dataEntries: [
+                    RadarEntry(value: health / 100),
+                    RadarEntry(value: attack / 25),
+                    RadarEntry(value: defense / 10),
+                  ],
+                  fillColor: Colors.red.withAlpha(100),
+                  borderColor: Colors.red.withAlpha(220),
+                  borderWidth: 3,
+                  entryRadius: 0.0,
                 ),
-                getTitle: (index, angle) {
-                  switch (index) {
-                    case 0:
-                      return RadarChartTitle(text: 'Életerő', angle: angle, positionPercentageOffset: 0.05);
-                    case 2:
-                      return const RadarChartTitle(text: '            Védekezés', positionPercentageOffset: 0.2);
-                    case 1:
-                      return const RadarChartTitle(text: 'Támadás                 -', positionPercentageOffset: 0.2);
-                    default:
-                      return const RadarChartTitle(text: '');
-                  }
-                },
-                titleTextStyle: const TextStyle(
-                  fontWeight: FontWeight.bold
+                RadarDataSet(
+                  dataEntries: [
+                    const RadarEntry(value: 1),
+                    const RadarEntry(value: 1),
+                    const RadarEntry(value: 1),
+                  ],
+                  fillColor: Colors.transparent,
+                  borderColor: Colors.transparent,
+                  borderWidth: 0,
+                  entryRadius: 0.0,
                 ),
-                titlePositionPercentageOffset: 0.7,
-                tickCount: 4,
-                ticksTextStyle: const TextStyle(
-                  color: Colors.transparent
+                RadarDataSet(
+                  dataEntries: [
+                    RadarEntry(value: maxRatioValue),
+                    RadarEntry(value: maxRatioValue),
+                    RadarEntry(value: maxRatioValue),
+                  ],
+                  fillColor: Colors.transparent,
+                  borderColor: Colors.transparent,
+                  borderWidth: 0,
+                  entryRadius: 0.0,
                 ),
-                tickBorderData: BorderSide(
-                  color: Colors.black.withAlpha(200)
-                ),
-                gridBorderData: BorderSide(
-                  color: Colors.black.withAlpha(150)
-                ),
-              )
-            ),
+              ],
+              radarBackgroundColor: Colors.grey.withAlpha(100),
+              radarShape: RadarShape.polygon,
+              radarBorderData: const BorderSide(
+                color: Colors.black,
+                width: 3,
+              ),
+              getTitle: (index, angle) {
+                switch (index) {
+                  case 0:
+                    return RadarChartTitle(
+                        text: 'Életerő',
+                        angle: angle,
+                        positionPercentageOffset: 0.05);
+                  case 2:
+                    return const RadarChartTitle(
+                        text: '            Védekezés',
+                        positionPercentageOffset: 0.2);
+                  case 1:
+                    return const RadarChartTitle(
+                        text: 'Támadás                 -',
+                        positionPercentageOffset: 0.2);
+                  default:
+                    return const RadarChartTitle(text: '');
+                }
+              },
+              titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
+              titlePositionPercentageOffset: 0.7,
+              tickCount: 4,
+              ticksTextStyle: const TextStyle(color: Colors.transparent),
+              tickBorderData: BorderSide(color: Colors.black.withAlpha(200)),
+              gridBorderData: BorderSide(color: Colors.black.withAlpha(150)),
+            )),
           ),
         )
       ],
@@ -285,7 +283,7 @@ class HabitDifficulties extends StatelessWidget {
 
   final double totalRadius = 80;
   final Color randomColor = Color.fromRGBO(
-    Random().nextInt(255), Random().nextInt(255), Random().nextInt(255), 1);
+      Random().nextInt(255), Random().nextInt(255), Random().nextInt(255), 1);
 
   @override
   Widget build(BuildContext context) {
@@ -297,11 +295,10 @@ class HabitDifficulties extends StatelessWidget {
     int d2 = difficulties[1];
     int d3 = difficulties[2];
 
-    return Column(
-      children: [
-        const ChartTop(text: "Szokások száma\nnehézség szerint"),
-        d1 + d2 + d3 > 0
-            ? SizedBox(
+    return Column(children: [
+      const ChartTop(text: "Szokások száma\nnehézség szerint"),
+      d1 + d2 + d3 > 0
+          ? SizedBox(
               width: MediaQuery.sizeOf(context).width / 2,
               height: 200,
               child: PieChart(PieChartData(
@@ -331,7 +328,7 @@ class HabitDifficulties extends StatelessWidget {
                 centerSpaceRadius: totalRadius * 0.25,
               )),
             )
-            : SizedBox(
+          : SizedBox(
               width: MediaQuery.sizeOf(context).width / 2,
               height: 200,
               child: Padding(
@@ -344,24 +341,20 @@ class HabitDifficulties extends StatelessWidget {
                 child: Card(
                   color: Colors.yellow.shade800,
                   child: const Center(
-                    child: Text(
-                      "!!!\nAdj hozzá szokást\n!!!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold
-                      )
-                    )
-                  ),
+                      child: Text("!!!\nAdj hozzá szokást\n!!!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold))),
                 ),
               ),
             )
-      ]
-    );
+    ]);
   }
 }
 
 Duration firstLastDifference = const Duration(seconds: 1);
+
 class MoneyChange extends StatelessWidget {
   final Map<String, dynamic> userData;
 
@@ -369,23 +362,25 @@ class MoneyChange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     List<FlSpot> flspots = [];
     if (userData.containsKey("moneyChange")) {
       final List<(DateTime, int)> spots = [];
       DateTime temp = DateTime(2000);
-      for(int i = 0; i < userData['moneyChange'].length; i++) {
-        if (i % 2 == 0) { // Date
+      for (int i = 0; i < userData['moneyChange'].length; i++) {
+        if (i % 2 == 0) {
+          // Date
           temp = userData['moneyChange'][i].toDate();
-        } else if (i % 2 == 1) { // Value
+        } else if (i % 2 == 1) {
+          // Value
           spots.add((temp, userData['moneyChange'][i]));
         }
       }
 
       firstLastDifference = spots[spots.length - 1].$1.difference(spots[0].$1);
 
-      for(int i = 0; i < spots.length; i++) {
-        flspots.add(FlSpot(spots[i].$1.millisecondsSinceEpoch.toDouble(), spots[i].$2.toDouble()));
+      for (int i = 0; i < spots.length; i++) {
+        flspots.add(FlSpot(spots[i].$1.millisecondsSinceEpoch.toDouble(),
+            spots[i].$2.toDouble()));
       }
 
       if (flspots.length > 30) {
@@ -399,8 +394,7 @@ class MoneyChange extends StatelessWidget {
         SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: 300,
-          child: LineChart(
-            LineChartData(
+          child: LineChart(LineChartData(
               minY: 0,
               lineBarsData: [
                 LineChartBarData(
@@ -408,54 +402,38 @@ class MoneyChange extends StatelessWidget {
                   isCurved: false,
                   isStepLineChart: true,
                   lineChartStepData: const LineChartStepData(stepDirection: 0),
-                  dotData: const FlDotData(
-                    show: false
-                  ),
+                  dotData: const FlDotData(show: false),
                   spots: flspots,
                   belowBarData: BarAreaData(
-                    show: true,
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue.withAlpha(50),
-                        Colors.blue.withAlpha(100)
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    )
-                  ),
-                  shadow: const Shadow(
-                    color: Colors.black,
-                    blurRadius: 4
-                  ),
+                      show: true,
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.blue.withAlpha(50),
+                          Colors.blue.withAlpha(100)
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      )),
+                  shadow: const Shadow(color: Colors.black, blurRadius: 4),
                   isStrokeCapRound: true,
                 )
               ],
               lineTouchData: const LineTouchData(enabled: false),
               titlesData: const FlTitlesData(
-                topTitles: AxisTitles(
-                  axisNameWidget: SizedBox(height: 10),
-                  sideTitles: SideTitles(
-                    showTitles: false
-                  )
-                ),
-                rightTitles: AxisTitles(
-                  axisNameWidget: SizedBox(width: 15),
-                  sideTitles: SideTitles(
-                    showTitles: false
-                  )
-                ),
-                bottomTitles: AxisTitles(
-                  sideTitles: SideTitles(
+                  topTitles: AxisTitles(
+                      axisNameWidget: SizedBox(height: 10),
+                      sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: AxisTitles(
+                      axisNameWidget: SizedBox(width: 15),
+                      sideTitles: SideTitles(showTitles: false)),
+                  bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
                     minIncluded: false,
                     maxIncluded: false,
                     reservedSize: 70,
                     showTitles: true,
                     getTitlesWidget: moneyChangeTitles,
-                  )
-                )
-              )
-            )
-          ),
+                  ))))),
         )
       ],
     );
@@ -468,7 +446,8 @@ Widget moneyChangeTitles(double value, TitleMeta meta) {
   DateTime date = DateTime.fromMillisecondsSinceEpoch(value.round());
 
   if (firstLastDifference.inDays < 1) {
-    text = Text("${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}");
+    text = Text(
+        "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}");
   } else if (firstLastDifference.inDays < 31) {
     text = Text("${DateFormat('EEE').format(date)} ${date.hour}h");
   } else {
@@ -477,7 +456,7 @@ Widget moneyChangeTitles(double value, TitleMeta meta) {
 
   return SideTitleWidget(
     meta: meta,
-    child: Transform.rotate(angle: -45 * 3.14 / 180, child: text), 
+    child: Transform.rotate(angle: -45 * 3.14 / 180, child: text),
   );
 }
 
@@ -490,193 +469,168 @@ class ItemCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     List<double> categories = [0, 0, 0, 0, 0, 0];
     for (int i = 0; i < inventory.length; i++) {
-      switch(inventory[i]['category']) {
-        case "weapon": categories[0]++;
-        case "armor": categories[1]++;
-        case "food": categories[2]++;
-        case "cosmetic": categories[3]++;
-        case "potion": categories[4]++;
-        case "misc": categories[5]++;
+      switch (inventory[i]['category']) {
+        case "weapon":
+          categories[0]++;
+        case "armor":
+          categories[1]++;
+        case "food":
+          categories[2]++;
+        case "cosmetic":
+          categories[3]++;
+        case "potion":
+          categories[4]++;
+        case "misc":
+          categories[5]++;
       }
     }
     return Column(
       children: [
-        const ChartTop(text: "Tárgyaid száma\nketegóriánként"),
+        const ChartTop(text: "Tárgyaid száma\nkategóriánként"),
         SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: 300,
           child: BarChart(
             BarChartData(
-              barGroups: [
-                BarChartGroupData( // Fegyver
-                  x: 0,
-                  barRods: [
-                    BarChartRodData(
-                      toY: categories[0],
-                      gradient: const LinearGradient(
-                        colors: [
-                          Colors.red,
-                          Colors.pink
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                      width: 20,
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      borderSide: const BorderSide(
-                        width: 1.5,
-                        color: Colors.black
-                      )
-                    ),
-                  ]
-                ),
-                BarChartGroupData( // Páncél
-                  x: 1,
-                  barRods: [
-                    BarChartRodData(
-                      toY: categories[1],
-                      gradient: const LinearGradient(
-                        colors: [
-                          Colors.orange,
-                          Colors.deepOrange
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                      width: 20,
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      borderSide: const BorderSide(
-                        width: 1.5,
-                        color: Colors.black
-                      )
-                    ),
-                  ]
-                ),
-                BarChartGroupData( // Étel
-                  x: 2,
-                  barRods: [
-                    BarChartRodData(
-                      toY: categories[2],
-                      gradient: const LinearGradient(
-                        colors: [
-                          Colors.yellow,
-                          Colors.orangeAccent
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                      width: 20,
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      borderSide: const BorderSide(
-                        width: 1.5,
-                        color: Colors.black
-                      )
-                    ),
-                  ]
-                ),
-                BarChartGroupData( // Kozmetika
-                  x: 3,
-                  barRods: [
-                    BarChartRodData(
-                      toY: categories[3],
-                      gradient: const LinearGradient(
-                        colors: [
-                          Colors.lightGreen,
-                          Colors.green
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                      width: 20,
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      borderSide: const BorderSide(
-                        width: 1.5,
-                        color: Colors.black
-                      )
-                    ),
-                  ]
-                ),
-                BarChartGroupData( // Bájital
-                  x: 4,
-                  barRods: [
-                    BarChartRodData(
-                      toY: categories[4],
-                      gradient: const LinearGradient(
-                        colors: [
-                          Colors.blue,
-                          Colors.lightBlueAccent
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                      width: 20,
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      borderSide: const BorderSide(
-                        width: 1.5,
-                        color: Colors.black
-                      )
-                    ),
-                  ]
-                ),
-                BarChartGroupData( // Egyéb
-                  x: 5,
-                  barRods: [
-                    BarChartRodData(
-                      toY: categories[5],
-                      gradient: const LinearGradient(
-                        colors: [
-                          Colors.blueGrey,
-                          Colors.grey
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                      width: 20,
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      borderSide: const BorderSide(
-                        width: 1.5,
-                        color: Colors.black
-                      )
-                    ),
-                  ]
-                ),
-              ],
-              maxY: categories.reduce(max) + 1,
-              alignment: BarChartAlignment.spaceEvenly,
-              titlesData: FlTitlesData(
-                topTitles: const AxisTitles(
-                  axisNameWidget: SizedBox(
-                    height: 15,
-                  )
-                ),
-                bottomTitles: AxisTitles(
-                  axisNameWidget: const SizedBox(
-                    height: 20,
-                  ),
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: (double value, meta) {
-                      TextStyle style = const TextStyle(fontSize: 8.5);
-                      switch(value) {
-                        case 0: return Text("Fegyver", style: style);
-                        case 1: return Text("Páncél", style: style);
-                        case 2: return Text("Étel", style: style);
-                        case 3: return Text("Kozemtika", style: style);
-                        case 4: return Text("Bájital", style: style);
-                        case 5: return Text("Egyéb", style: style);
-                      }
-                      return const Text("FAIL");
-                    },
-                  )
-                ),
-                rightTitles: const AxisTitles(
-                  axisNameWidget: SizedBox(width: 20),
-                  sideTitles: SideTitles(
-                    showTitles: false
-                  )
-                )
-              )
-            ),
+                barGroups: [
+                  BarChartGroupData(
+                      // Fegyver
+                      x: 0,
+                      barRods: [
+                        BarChartRodData(
+                            toY: categories[0],
+                            gradient: const LinearGradient(
+                              colors: [Colors.red, Colors.pink],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                            width: 20,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            borderSide: const BorderSide(
+                                width: 1.5, color: Colors.black)),
+                      ]),
+                  BarChartGroupData(
+                      // Páncél
+                      x: 1,
+                      barRods: [
+                        BarChartRodData(
+                            toY: categories[1],
+                            gradient: const LinearGradient(
+                              colors: [Colors.orange, Colors.deepOrange],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                            width: 20,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            borderSide: const BorderSide(
+                                width: 1.5, color: Colors.black)),
+                      ]),
+                  BarChartGroupData(
+                      // Étel
+                      x: 2,
+                      barRods: [
+                        BarChartRodData(
+                            toY: categories[2],
+                            gradient: const LinearGradient(
+                              colors: [Colors.yellow, Colors.orangeAccent],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                            width: 20,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            borderSide: const BorderSide(
+                                width: 1.5, color: Colors.black)),
+                      ]),
+                  BarChartGroupData(
+                      // Kozmetika
+                      x: 3,
+                      barRods: [
+                        BarChartRodData(
+                            toY: categories[3],
+                            gradient: const LinearGradient(
+                              colors: [Colors.lightGreen, Colors.green],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                            width: 20,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            borderSide: const BorderSide(
+                                width: 1.5, color: Colors.black)),
+                      ]),
+                  BarChartGroupData(
+                      // Bájital
+                      x: 4,
+                      barRods: [
+                        BarChartRodData(
+                            toY: categories[4],
+                            gradient: const LinearGradient(
+                              colors: [Colors.blue, Colors.lightBlueAccent],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                            width: 20,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            borderSide: const BorderSide(
+                                width: 1.5, color: Colors.black)),
+                      ]),
+                  BarChartGroupData(
+                      // Egyéb
+                      x: 5,
+                      barRods: [
+                        BarChartRodData(
+                            toY: categories[5],
+                            gradient: const LinearGradient(
+                              colors: [Colors.blueGrey, Colors.grey],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                            width: 20,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            borderSide: const BorderSide(
+                                width: 1.5, color: Colors.black)),
+                      ]),
+                ],
+                maxY: categories.reduce(max) + 1,
+                alignment: BarChartAlignment.spaceEvenly,
+                titlesData: FlTitlesData(
+                    topTitles: const AxisTitles(
+                        axisNameWidget: SizedBox(
+                      height: 15,
+                    )),
+                    bottomTitles: AxisTitles(
+                        axisNameWidget: const SizedBox(
+                          height: 20,
+                        ),
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          getTitlesWidget: (double value, meta) {
+                            TextStyle style = const TextStyle(fontSize: 8.5);
+                            switch (value) {
+                              case 0:
+                                return Text("Fegyver", style: style);
+                              case 1:
+                                return Text("Páncél", style: style);
+                              case 2:
+                                return Text("Étel", style: style);
+                              case 3:
+                                return Text("Kozemtika", style: style);
+                              case 4:
+                                return Text("Bájital", style: style);
+                              case 5:
+                                return Text("Egyéb", style: style);
+                            }
+                            return const Text("FAIL");
+                          },
+                        )),
+                    rightTitles: const AxisTitles(
+                        axisNameWidget: SizedBox(width: 20),
+                        sideTitles: SideTitles(showTitles: false)))),
           ),
         )
       ],

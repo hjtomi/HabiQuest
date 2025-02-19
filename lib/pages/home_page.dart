@@ -46,11 +46,11 @@ class _HomePageState extends State<HomePage> {
         destinations: const <Widget>[
           NavigationDestination(
             icon: Icon(LucideIcons.listChecks),
-            label: 'Habit',
+            label: 'Szokás',
           ),
           NavigationDestination(
             icon: Icon(LucideIcons.checkCircle),
-            label: 'Todo',
+            label: 'Teendő',
           ),
         ],
         selectedIndex: _dashboardSelectedIndex,

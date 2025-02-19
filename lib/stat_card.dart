@@ -25,140 +25,142 @@ class _StatCardState extends State<StatCard> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-      stream: FirebaseFirestore.instance.collection('users').doc(Auth().currentUser!.uid).snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return const CircularProgressIndicator();
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(Auth().currentUser!.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return const CircularProgressIndicator();
 
-        var data = snapshot.data!.data() as Map<String, dynamic>;
+          var data = snapshot.data!.data() as Map<String, dynamic>;
 
-        return Card(
-          color: Colors.grey[900],
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              widget._character != null
-                  ? Image(
-                      fit: BoxFit.contain,
-                      width: 150,
-                      height: 150,
-                      image: AssetImage(
-                          'lib/assets/skins/skin-${data['character']}.png'),
-                    )
-                  : const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.person, size: 100),
-                    ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Level ${data['level']}",
-                                ),
-                              ],
-                            ),
-                            TweenAnimationBuilder<double>(
-                              tween: Tween(begin: 0.0, end: data['xp'] / (sqrt(data['level']) * 100).round()),
-                              duration: const Duration(milliseconds: 100),
-                              builder: (context, ainmatedValue, child) {
-                                return LinearProgressIndicator(
-                                  minHeight: 6,
-                                  value: ainmatedValue, // Must be between 0.0 and 1.0
-                                  backgroundColor: Colors.black12,
-                                  color: Colors.blue,
-                                );
-                              }
-                            ),
-                            Text(
-                              '${data['xp']} / ${(sqrt(data['level']) * 100).round()}',
-                              style: TextStyle(
-                                color: Colors.grey[400],
-                                fontSize: 8
+          return Card(
+            color: Colors.grey[900],
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                widget._character != null
+                    ? Image(
+                        fit: BoxFit.contain,
+                        width: 150,
+                        height: 150,
+                        image: AssetImage(
+                            'lib/assets/skins/skin-${data['character']}.png'),
+                      )
+                    : const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(Icons.person, size: 100),
+                      ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Szint: ${data['level']}",
+                                  ),
+                                ],
                               ),
-                            )
-                          ],
+                              TweenAnimationBuilder<double>(
+                                  tween: Tween(
+                                      begin: 0.0,
+                                      end: data['xp'] /
+                                          (sqrt(data['level']) * 100).round()),
+                                  duration: const Duration(milliseconds: 100),
+                                  builder: (context, ainmatedValue, child) {
+                                    return LinearProgressIndicator(
+                                      minHeight: 6,
+                                      value:
+                                          ainmatedValue, // Must be between 0.0 and 1.0
+                                      backgroundColor: Colors.black12,
+                                      color: Colors.blue,
+                                    );
+                                  }),
+                              Text(
+                                '${data['xp']} / ${(sqrt(data['level']) * 100).round()}',
+                                style: TextStyle(
+                                    color: Colors.grey[400], fontSize: 8),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 4.0),
-                        child: Row(
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                style: const TextStyle(color: Colors.green),
-                                children: [
-                                  TextSpan(
-                                    text: 'Életerő: ${data['health'].round()}'
-                                  ),
-                                  TextSpan(
-                                    text: '   /   ${((data['health'] + 1) / 500).ceil() * 500}',
-                                    style: TextStyle(color: Colors.grey[700])
-                                  ),
-                                ]
-                              ),
-                            )
-                          ],
-                        )
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: Row(
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                style: const TextStyle(color: Colors.red),
-                                children: [
-                                  TextSpan(
-                                    text: 'Támadás: ${data['attack'].round()}'
-                                  ),
-                                  TextSpan(
-                                    text: '   /   ${((data['attack'] + 1) / 100).ceil() * 100}',
-                                    style: TextStyle(color: Colors.grey[700])
-                                  ),
-                                ]
-                              ),
-                            )
-                          ],
-                        )
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: Row(
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                style: const TextStyle(color: Colors.orangeAccent),
-                                children: [
-                                  TextSpan(
-                                    text: 'Védelem: ${data['defense'].round()}'
-                                  ),
-                                  TextSpan(
-                                    text: '   /   ${((data['defense'] + 1) / 50).ceil() * 50}',
-                                    style: TextStyle(color: Colors.grey[700])
-                                  ),
-                                ]
-                              ),
-                            )
-                          ],
-                        )
-                      ),
-                    ],
+                        Padding(
+                            padding: const EdgeInsets.only(bottom: 4.0),
+                            child: Row(
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      style:
+                                          const TextStyle(color: Colors.green),
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                'Életerő: ${data['health'].round()}'),
+                                        TextSpan(
+                                            text:
+                                                '   /   ${((data['health'] + 1) / 500).ceil() * 500}',
+                                            style: TextStyle(
+                                                color: Colors.grey[700])),
+                                      ]),
+                                )
+                              ],
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      style: const TextStyle(color: Colors.red),
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                'Támadás: ${data['attack'].round()}'),
+                                        TextSpan(
+                                            text:
+                                                '   /   ${((data['attack'] + 1) / 100).ceil() * 100}',
+                                            style: TextStyle(
+                                                color: Colors.grey[700])),
+                                      ]),
+                                )
+                              ],
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      style: const TextStyle(
+                                          color: Colors.orangeAccent),
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                'Védelem: ${data['defense'].round()}'),
+                                        TextSpan(
+                                            text:
+                                                '   /   ${((data['defense'] + 1) / 50).ceil() * 50}',
+                                            style: TextStyle(
+                                                color: Colors.grey[700])),
+                                      ]),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }
-    );
+              ],
+            ),
+          );
+        });
   }
 }

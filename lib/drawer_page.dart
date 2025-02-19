@@ -45,7 +45,7 @@ class _HoldingPageState extends State<HoldingPage> {
       case PageType.statistics:
         return "Statisztikák";
       case PageType.inventory:
-        return "Inventár";
+        return "Hátizsák";
     }
   }
 
@@ -219,7 +219,7 @@ class _HoldingPageState extends State<HoldingPage> {
               selected: _selectedPage == PageType.inventory,
               selectedColor: Theme.of(context).colorScheme.secondary,
               leading: const Icon(LucideIcons.backpack),
-              title: const Text("Inventár"),
+              title: const Text("Hátizsák"),
             ),
           ],
         ),
