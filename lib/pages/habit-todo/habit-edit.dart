@@ -231,9 +231,9 @@ class _HabitEditState extends State<HabitEdit> {
       case 1:
         return "Nem olyan nehéz";
       case 2:
-        return "Megeröltető";
+        return "Megerőltető";
       case 3:
-        return "Komfort zónán kívüli";
+        return "Komfortzónán kívüli";
       default:
         return "";
     }

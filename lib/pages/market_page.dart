@@ -49,7 +49,7 @@ class _MarketPageState extends State<MarketPage> {
                     icon: Icon(LucideIcons.shirt),
                   ),
                   Tab(
-                    text: "Egyébb",
+                    text: "Egyéb",
                     icon: Icon(LucideIcons.circleEllipsis),
                   ),
                 ]),

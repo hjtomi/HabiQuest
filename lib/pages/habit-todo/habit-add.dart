@@ -169,7 +169,7 @@ class _HabitAddState extends State<HabitAdd> {
       mainAxisAlignment: MainAxisAlignment.center, // Center vertically
       children: [
         const Text(
-          "Gyakorsiág kiválasztása",
+          "Gyakoriság kiválasztása",
           textAlign: TextAlign.start, // Center-align the text
         ),
         SegmentedButton<Calendar>(
